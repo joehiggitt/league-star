@@ -17,6 +17,16 @@
 
         $sql = "CREATE DATABASE IF NOT EXISTS loginTest";
         echo doSQL($conn, $sql);
+
+        $conn = connectDB();
+        $sql = "CREATE TABLE IF NOT EXISTS users (
+                    userId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                    user VARCHAR(30) NOT NULL UNIQUE,
+                    pass VARCHAR(128) NOT NULL
+                )";
+        echo doSQL($conn, $sql);
+        $sql = 'INSERT INTO users(user, pass) VALUES ("user", "pass")';
+        echo doSQL($conn, $sql);
     }
 
     function connectDB() {
@@ -30,8 +40,6 @@
         }
         echo "Connected successfully";
         return $conn;
-
-
     }
 
     function doSQL($conn, $sql) {

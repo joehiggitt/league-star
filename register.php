@@ -5,11 +5,12 @@
         <title></title>
     </head>
     <body>
-        <form action="doLogin.php" method="post">
+        <form action="doRegister.php" method="post">
             Username: <input type="text" name="user"/><br>
             Password: <input type="password" name="pass"/><br>
-            <input type="submit" value="Log on"/>
-            <a href="register.php"><input type="button" value="Register"></a>
+            Confirm Password: <input type="password" name="passCheck"/><br>
+            <input type="submit" value="Register"/>
+            <a href="login.php"><input type="button" value="Back"></a>
         </form>
     </body>
 </html>
