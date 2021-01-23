@@ -1,4 +1,5 @@
 <?php
+    // Constants
     $testMsgs = true;
 
     $database_host = "localhost";
@@ -6,7 +7,9 @@
     $database_pass = "root";
     $database_name = "loginTest";
 
+    // Creates the database and table if they do not exist
     function createDB() {
+        // Create database
         $conn = mysqli_connect($GLOBALS['database_host'],
                                $GLOBALS['database_user'],
                                $GLOBALS['database_pass']);
@@ -18,6 +21,7 @@
         $sql = "CREATE DATABASE IF NOT EXISTS loginTest";
         echo doSQL($conn, $sql);
 
+        // Connect to database and create table
         $conn = connectDB();
         $sql = "CREATE TABLE IF NOT EXISTS users (
                     userId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -29,6 +33,7 @@
         echo doSQL($conn, $sql);
     }
 
+    // Connects to the database and returns the connection
     function connectDB() {
         $conn = mysqli_connect($GLOBALS['database_host'],
                                $GLOBALS['database_user'],
@@ -42,6 +47,8 @@
         return $conn;
     }
 
+    // Executes an sql statement taking the sql connection and the sql statement
+    // as parameters, any results are returned
     function doSQL($conn, $sql) {
         if($GLOBALS['testMsgs']) {
             echo ("<br><code>SQL: $sql</code>");
