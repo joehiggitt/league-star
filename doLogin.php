@@ -11,10 +11,12 @@
 
             require_once 'DBHandler.php';
             $conn = connectDB();
-            $sql = "SELECT user, pass FROM users WHERE user='$user'";
+            $sql = "SELECT user, pass FROM users WHERE user='$user' AND pass='$pass'";
             $results = doSQL($conn, $sql);
-            while ($row = $results->fetch_assoc()) {
-                echo "$row[user] $row[pass] <br>";
+            if ($row = $results->fetch_assoc()) {
+                echo "pass"; //Logged in logic
+            } else {
+                echo "fail"; //Error message for incorrect details
             }
         ?>
     </body>
