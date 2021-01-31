@@ -33,7 +33,8 @@
             Password: <input type="password" name="pass"/><br>
             Confirm Password: <input type="password" name="passCheck"/><br>
             <input type="submit" name="submit" value="Register"/>
-            <a href="login.php"><input type="button" value="Back"></a>
+            <input type="reset" value="Reset"><br>
+            Already have an account? <a href="login.php">Log in</a> here
         </form>
     </body>
 </html>

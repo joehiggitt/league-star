@@ -27,7 +27,8 @@
             Username: <input type="text" name="user"/><br>
             Password: <input type="password" name="pass"/><br>
             <input type="submit" name="submit" value="Log on"/>
-            <a href="register.php"><input type="button" value="Register"></a>
+            <input type="reset" value="Reset"><br>
+            Don't have an account? <a href="register.php">Register</a> here
         </form>
     </body>
 </html>
