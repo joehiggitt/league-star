@@ -6,6 +6,7 @@
     </head>
     <body>
         <?php
+            session_start();
             if (isset($_POST['submit'])) {
                 // Get details from login form
                 $user = $_POST['user'];
@@ -17,7 +18,10 @@
                 $sql = "SELECT user, pass FROM users WHERE user='$user' AND pass='$pass'";
                 $results = doSQL($conn, $sql);
                 if ($row = $results->fetch_assoc()) {
-                    echo "pass"; // Log in
+                    // Log in
+                    $_SESSION["user"] = $user;
+                    header("Location: testHomePage.php");
+                    exit;
                 } else {
                     echo "fail"; // Go back to self
                 }

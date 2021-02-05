@@ -6,6 +6,7 @@
     </head>
     <body>
         <?php
+            session_start();
             if (isset($_POST['submit'])) {
                 // Get details from the register form
                 $user = $_POST['user'];
@@ -20,8 +21,15 @@
                     $sql = "INSERT INTO users (user, pass)
                             VALUES ('$user', '$pass')";
                     $results = doSQL($conn, $sql);
-                    echo($results);
+                    echo("<br>".$results."<br>");
+
                     // Log in
+                    if($results == 1) {
+                        $_SESSION["user"] = $user;
+                        header("Location: testHomePage.php");
+                        exit;
+                    }
+
                 } else {
                     echo "Passwords do not match";
                     // Go back to self
