@@ -10,7 +10,7 @@
             if (isset($_POST['submit'])) {
                 // Get details from login form
                 $user = $_POST['user'];
-                $pass = $_POST['pass'];
+                $pass = password_hash($_POST['pass']);
 
                 // Check if user details are valid or not
                 require_once 'DBHandler.php';
