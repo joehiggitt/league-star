@@ -10,7 +10,7 @@
             if (isset($_POST['submit'])) {
                 // Get details from the register form
                 $user = $_POST['user'];
-                $pass = password_hash($_POST['pass']);
+                $pass = $_POST['pass'];
                 $passCheck = $_POST['passCheck'];
 
                 // Checks if the given passwords match and adds details to database
