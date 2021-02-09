@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+	<?php
+		session_start();
+	?>
 	<header>
 			<h1>LeagueStar</h1>
 	</header>
