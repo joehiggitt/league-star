@@ -52,6 +52,7 @@
 		<p>Test paragraph</p>
 	</main>
 	<footer>
+		<p><a href="terms.php">Terms & Conditions</a></p>
 		<p>This website is owned by X16 Lads Ltd, undergraduates at the University of Manchester</p>
 	</footer>
 
