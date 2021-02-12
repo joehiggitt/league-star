@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>Terms & Conditions - LeagueStar</title>
 	<meta name="description" content="Terms & Conditions">
-    <meta lang="en">
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
