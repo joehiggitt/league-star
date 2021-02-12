@@ -24,9 +24,22 @@
         // Connect to database and create table
         $conn = connectDB();
         $sql = "CREATE TABLE IF NOT EXISTS users (
-                    userId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                    userId INT(6) AUTO_INCREMENT PRIMARY KEY,
                     user VARCHAR(30) NOT NULL UNIQUE,
                     pass VARCHAR(128) NOT NULL
+                )";
+        echo doSQL($conn, $sql);
+        $sql = "CREATE TABLE IF NOT EXISTS league (
+                    leagueId INT(6) AUTO_INCREMENT PRIMARY KEY,
+                    userId INT(6),
+                    leagueName VARCHAR(30) NOT NULL UNIQUE,
+                    preset VARCHAR(20) NOT NULL,
+                    maxPlayer INT(3),
+                    minPlayer INT(3),
+                    CONSTRAINT 'fk_user'
+                        FOREIGN KEY (userId) References user (userId)
+                        ON DELETE CASCADE
+                        ON UPDATE CASCADE
                 )";
         echo doSQL($conn, $sql);
         $sql = 'INSERT INTO users(user, pass) VALUES ("user", "pass")';

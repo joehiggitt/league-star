@@ -26,7 +26,7 @@
                     // Log in
                     if($results == 1) {
                         $_SESSION["user"] = $user;
-                        header("Location: testHomePage.php");
+                        header("Location: index.php");
                         exit;
                     }
 

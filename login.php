@@ -20,7 +20,7 @@
                 if ($row = $results->fetch_assoc()) {
                     // Log in
                     $_SESSION["user"] = $user;
-                    header("Location: testHomePage.php");
+                    header("Location: index.php");
                     exit;
                 } else {
                     echo "fail"; // Go back to self

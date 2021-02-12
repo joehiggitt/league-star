@@ -1,0 +1,110 @@
+body
+{
+	background-color: #ffffff;
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+header
+{
+	height: 80px;
+	background-color: #fcf8cc;
+	color: #000000;
+	text-align: center;
+}
+
+nav
+{
+	background-color: #f5ec89;
+	border-top: 0px;
+	height: 50px;
+	position: -webkit-sticky;
+	position: sticky;
+	top: 0%;
+	width: 100%;
+}
+
+.navNav
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.navNav li
+{
+	float: left;
+}
+
+.navNav a
+{
+	display: block;
+	padding: 8px;
+	color: #000000;
+	text-decoration: none;
+}
+
+.navNav a:hover
+{
+	background-color: #f0e035;
+}
+
+aside
+{
+	float: left;
+	width: 25%;
+	background-color: #f5ec89;
+	border-top: 0px;
+	border-right: 0px;
+	line-height: 50px;
+	height: 60%;
+	position: fixed;
+	overflow: auto;
+}
+
+.asideNav
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	/*height: 100%;
+	position: fixed;
+	overflow: auto;*/
+}
+
+.asideNav a
+{
+	display: block;
+	color: #000000;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+.asideNav a:hover
+{
+	background-color: #f0e035;
+}
+
+.active
+{
+	background-color: #edda0c;
+	color: #000000;
+}
+
+main
+{
+	background-color: #fcf8cc;
+	border-top: 0px;
+	padding-top: 10px;
+	padding-left: 27%;
+	height: 60%;
+}
+
+footer
+{
+	height: 10%;
+	background-color: #fcf8cc;
+	color: #000000;
+	text-align: center;
+	border-top: 0px;
+}
