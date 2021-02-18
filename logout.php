@@ -1,6 +1,6 @@
 <?php
     session_start();
     unset($_SESSION["user"]);
-    header("location: testHomePage.php");
+    header("location: index.php");
     exit;
 ?>

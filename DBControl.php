@@ -14,6 +14,8 @@
                 echo print_r($row);
                 echo "<br><br>";
             }
+            $sql = "DROP DATABASE loginTest";
+            echo doSQL($conn, $sql);
         ?>
     </body>
 </html>
