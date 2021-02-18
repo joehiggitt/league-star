@@ -16,8 +16,8 @@
 		<ul class="navNav">
 			<li><a href="index.php" class="active">Home</a></li>
 			<li><a href="about.php">About Us</a></li>
+			<li><a href="contact.php">Contact</a></li>
 			<li><a href="help.php">Help</a></li>
-			<li><a href="contacts.php">Contacts</a></li>
 			<?php
 				// Script used if login is not required to use this page
 				if(isset($_SESSION["user"])) {
