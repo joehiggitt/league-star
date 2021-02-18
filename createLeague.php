@@ -20,6 +20,7 @@
     		<ul class="navNav">
     			<li><a href="index.php">Home</a></li>
     			<li><a href="about.php">About Us</a></li>
+    			<li><a href="contact.php">Contact</a></li>
     			<li><a href="help.php">Help</a></li>
                 <?php
     				// Script used if login is required to view this page
@@ -34,7 +35,8 @@
                 <li><a href="viewLeague.php">League 1</a></li>
                 <li>&#9;<a href="viewFixtures.php">Fixtures</a></li>
                 <li>&#9;<a href="viewResults.php">Results</a></li>
-                <li><a href="createLeague.php" class="active">Create New League</a></li>
+                <li>&#9;<a href="createLeague.php" class="active">Create New League</a></li>
+                <li><a href="joinLeague.php">Join League</a></li>
             </ul>
         </aside>
     	<main>

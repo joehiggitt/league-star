@@ -40,7 +40,8 @@
 					echo '<li><a href="viewLeague.php">League 1</a></li>';
 					echo '<li>&#9;<a href="viewFixtures.php">Fixtures</a></li>';
 					echo '<li>&#9;<a href="viewResults.php">Results</a></li>';
-					echo '<li><a href="createLeague.php">Create New League</a></li>';
+					echo '<li>&#9;<a href="createLeague.php">Create New League</a></li>';
+					echo '<li><a href="joinLeague.php">Join League</a></li>';
 				echo '</ul>';
 			echo '</aside>';
 		}
