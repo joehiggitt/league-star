@@ -7,7 +7,11 @@
     </head>
     <body>
         <?php
+            // Script used if login is required to view this page
     		session_start();
+            if (!isset($_SESSION["user"])) {
+                header("Location: index.php");
+            }
     	?>
         <header>
     			<h1>LeagueStar</h1>
@@ -18,26 +22,21 @@
     			<li><a href="about.php">About Us</a></li>
     			<li><a href="help.php">Help</a></li>
                 <?php
-                    if(isset($_SESSION["user"])) {
-                        echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
-                        echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
-                    }
-                    else {
-                        echo '<li style="float:right"><a href="register.php">Register</a></li>';
-                        echo '<li style="float:right"><a href="login.php">Sign In</a></li>';
-                    }
+    				// Script used if login is required to view this page
+                    echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
+                    echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
                 ?>
     		</ul>
 
     	</nav>
-    	<aside>
-    		<ul class="asideNav">
-    			<li><a href="viewLeague.php">League 1</a></li>
-    			<li>&#9;<a href="viewFixtures.php">Fixtures</a></li>
-    			<li>&#9;<a href="viewResults.php">Results</a></li>
-    			<li><a href="createLeague.php" class="active">Create New League</a></li>
-    		</ul>
-    	</aside>
+        <aside>
+            <ul class="asideNav">
+                <li><a href="viewLeague.php">League 1</a></li>
+                <li>&#9;<a href="viewFixtures.php">Fixtures</a></li>
+                <li>&#9;<a href="viewResults.php">Results</a></li>
+                <li><a href="createLeague.php" class="active">Create New League</a></li>
+            </ul>
+        </aside>
     	<main>
     		<h3>Create New League</h3>
     		<form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">

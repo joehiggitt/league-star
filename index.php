@@ -18,6 +18,7 @@
 			<li><a href="about.php">About Us</a></li>
 			<li><a href="help.php">Help</a></li>
 			<?php
+				// Script used if login is not required to use this page
 				if(isset($_SESSION["user"])) {
 					echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
 					echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
@@ -30,14 +31,19 @@
 		</ul>
 
 	</nav>
-	<aside>
-		<ul class="asideNav">
-			<li><a href="viewLeague.php">League 1</a></li>
-			<li>&#9;<a href="viewFixtures.php">Fixtures</a></li>
-			<li>&#9;<a href="viewResults.php">Results</a></li>
-			<li><a href="createLeague.php">Create New League</a></li>
-		</ul>
-	</aside>
+	<?php
+		// Script used if login is not required to use this page
+		if (isset($_SESSION["user"])) {
+			echo '<aside>';
+				echo '<ul class="asideNav">';
+					echo '<li><a href="viewLeague.php">League 1</a></li>';
+					echo '<li>&#9;<a href="viewFixtures.php">Fixtures</a></li>';
+					echo '<li>&#9;<a href="viewResults.php">Results</a></li>';
+					echo '<li><a href="createLeague.php">Create New League</a></li>';
+				echo '</ul>';
+			echo '</aside>';
+		}
+	?>
 	<main>
 		<h3>Welcome to LeagueStar!</h3>
 		<p>LeagueStar is the perfect tool to create your own league with your friends, family or colleagues. From a new place to score your fantasy football to a fast way of recording your Among Us wins, LeagueStar can cover your needs.</p>

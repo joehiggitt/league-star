@@ -7,7 +7,11 @@
 </head>
 <body>
 	<?php
+		// Script used if login is required to view this page
 		session_start();
+		if (!isset($_SESSION["user"])) {
+			header("Location: index.php");
+		}
 	?>
 	<header>
 			<h1>LeagueStar</h1>
@@ -18,14 +22,9 @@
 			<li><a href="about.php">About Us</a></li>
 			<li><a href="help.php">Help</a></li>
 			<?php
-				if(isset($_SESSION["user"])) {
-					echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
-					echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
-				}
-				else {
-					echo '<li style="float:right"><a href="register.php">Register</a></li>';
-					echo '<li style="float:right"><a href="login.php">Sign In</a></li>';
-				}
+				// Script used if login is required to view this page
+				echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
+				echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
 			?>
 		</ul>
 
@@ -42,7 +41,7 @@
 		<h3>Join League</h3>
         <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
             Enter your join code: <input type="text" name="join" value="">
-            <input type="submit" name="submit" value="Create League"/><br>
+            <input type="submit" name="submit" value="Join"/><br>
         </form>
         <!-- Need to add php for joining a league at a later point -->
 	</main>
