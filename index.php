@@ -17,6 +17,7 @@
 		<ul class="navNav">
 			<li><a href="index.php" class="active">Home</a></li>
 			<li><a href="about.php">About Us</a></li>
+			<li><a href="contact.php" class="active">Contact</a></li>
 			<li><a href="help.php">Help</a></li>
 			<li style="float:right"><a href="register.php">Register</a></li>
 			<li style="float:right"><a href="login.php">Sign In</a></li>
