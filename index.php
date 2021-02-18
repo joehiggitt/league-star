@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<htmllang="en">
+<html>
 <head>
 	<title>LeagueStar - Create your league for free</title>
 	<meta name="description" content="LeagueStar is the perfect tool to create your own league with your friends, family or colleagues. From a new place to score your fantasy football to a fast way of recording your Among Us wins, LeagueStar can cover your needs.">
+    <meta lang="en">
     <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
