@@ -1,20 +1,36 @@
 body
 {
 	background-color: #ffffff;
-	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-family: "Didact Gothic";
 }
 
 header
 {
 	height: 80px;
-	background-color: #fcf8cc;
+	background-color: #f9a618;
 	color: #000000;
 	text-align: center;
+	position: relative;
+}
+
+h1
+{
+	background-color: #ffffff;
+}
+
+.imageText
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 nav
 {
-	background-color: #f5ec89;
+	background-color: #f9a618;
+	color: #3a404c;
+	font-weight: bold;
 	border-top: 0px;
 	height: 50px;
 	position: -webkit-sticky;
@@ -46,14 +62,31 @@ nav
 
 .navNav a:hover
 {
-	background-color: #f0e035;
+	background-color: #ee9f18;
 }
+
+/*aside
+{
+	height: 100%;
+	width: 200px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #f9a618;
+	color: #3a404c;
+	font-weight: bold;
+	overflow-x: hidden;
+	padding-top: 20px
+}*/
 
 aside
 {
 	float: left;
 	width: 25%;
-	background-color: #f5ec89;
+	background-color: #f9a618;
+	color: #3a404c;
+	font-weight: bold;
 	border-top: 0px;
 	border-right: 0px;
 	line-height: 50px;
@@ -82,18 +115,18 @@ aside
 
 .asideNav a:hover
 {
-	background-color: #f0e035;
+	background-color: #ee9f18;
 }
 
 .active
 {
-	background-color: #edda0c;
-	color: #000000;
+	background-color: #e39818;
+	color: #ffffff;
 }
 
 main
 {
-	background-color: #fcf8cc;
+	background-color: #ffffff;
 	border-top: 0px;
 	padding-top: 10px;
 	padding-left: 27%;
@@ -103,8 +136,42 @@ main
 footer
 {
 	height: 10%;
-	background-color: #fcf8cc;
+	background-color: #f9a618;
 	color: #000000;
 	text-align: center;
 	border-top: 0px;
+	position: relative;
 }
+
+footer p
+{
+	font-size: 12px;
+}
+
+footer a
+{
+	text-decoration: none;
+	color: #3a404c;
+}
+
+footer a:visited
+{
+	color: #3a404c;
+}
+
+footer a:hover
+{
+	color: #565d6b;
+}
+
+/*@media screen and (max-height: 450px)
+{
+	.sidenav
+	{
+		padding-top: 15px;
+	}
+	.sidenav a
+	{
+		font-size: 18px;
+	}
+}*/
