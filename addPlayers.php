@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 	<title>Add Players - LeagueStar</title>
 	<meta name="description" content="Add players to your league.">
@@ -48,16 +48,27 @@
 
 </head>
 <body>
+	<?php
+		// Script used if login is required to view this page
+		session_start();
+		if (!isset($_SESSION["user"])) {
+			header("Location: index.php");
+		}
+	?>
 	<header>
 			<h1>LeagueStar</h1>
 	</header>
 	<nav>
 		<ul class="navNav">
-			<li><a href="index.php" class="active">Home</a></li>
+			<li><a href="index.php">Home</a></li>
 			<li><a href="about.php">About Us</a></li>
+			<li><a href="contact.php">Contact</a></li>
 			<li><a href="help.php">Help</a></li>
-			<li style="float:right"><a href="register.php">Register</a></li>
-			<li style="float:right"><a href="login.php">Sign In</a></li>
+			<?php
+				// Script used if login is required to view this page
+				echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
+				echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
+			?>
 		</ul>
 	</nav>
 	<aside>
@@ -66,6 +77,8 @@
 			<li><a href="viewFixtures.php">Fixtures</a></li>
 			<li><a href="viewResults.php">Results</a></li>
 			<li><a href="createLeague.php">Create New League</a></li>
+			<li>&#9;<a href="addPlayers.php" class="active">Add Players</a></li>
+			<li><a href="joinLeague.php">Join League</a></li>
 		</ul>
 	</aside>
 	<main>

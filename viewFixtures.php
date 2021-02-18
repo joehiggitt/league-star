@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" dir="ltr">
 
 <head>
 	<title> League Star - Fixture</title>
-	<meta lang="en">
 	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 	<style type="text/css">
 
@@ -33,7 +33,7 @@
     border-bottom: 1px solid #dddddd;} /* for nice finishing, setting the colour of bottom border same colour as header */
 
 	.styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;} 
+    background-color: #f3f3f3;}
 
 	.styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;}
@@ -58,7 +58,7 @@
 	</dev>
 	<dev style="text-align: center;">
 		<h4>Matchday 1 (DATE)</h4>
-		
+
 		<table class="styled-table" style="align-content: center; margin: auto;">
 		    <!-- <thead>
 		        <tr>
@@ -94,7 +94,7 @@
 
 	<dev style="text-align: center;">
 		<h4>Matchday 2 (DATE)</h4>
-		
+
 		<table class="styled-table" style="align-content: center; margin: auto;">
 		    <!-- <thead>
 		        <tr>
@@ -128,7 +128,7 @@
 
 	<dev style="text-align: center;">
 		<h4>Matchday 3 (DATE)</h4>
-		
+
 		<table class="styled-table" style="align-content: center; margin: auto;">
 		    <!-- <thead>
 		        <tr>

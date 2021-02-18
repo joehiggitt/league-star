@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="styles.css">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title></title>
     </head>
     <body>
@@ -36,6 +37,7 @@
                 <li>&#9;<a href="viewFixtures.php">Fixtures</a></li>
                 <li>&#9;<a href="viewResults.php">Results</a></li>
                 <li>&#9;<a href="createLeague.php" class="active">Create New League</a></li>
+    			<li>&#9;<a href="addPlayers.php">Add Players</a></li>
                 <li><a href="joinLeague.php">Join League</a></li>
             </ul>
         </aside>

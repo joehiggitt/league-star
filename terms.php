@@ -1,11 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
 	<title>Terms & Conditions - LeagueStar</title>
 	<meta name="description" content="Terms & Conditions">
     <link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+	<?php
+		session_start();
+	?>
 	<header>
 			<h1>LeagueStar</h1>
 	</header>
@@ -38,6 +42,7 @@
 					echo '<li>&#9;<a href="viewFixtures.php">Fixtures</a></li>';
 					echo '<li>&#9;<a href="viewResults.php">Results</a></li>';
 					echo '<li>&#9;<a href="createLeague.php">Create New League</a></li>';
+					echo '<li>&#9;<a href="addPlayers.php">Add Players</a></li>';
 					echo '<li><a href="joinLeague.php">Join League</a></li>';
 				echo '</ul>';
 			echo '</aside>';
