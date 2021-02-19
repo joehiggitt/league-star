@@ -4,7 +4,7 @@
 	<title>LeagueStar - Create your league for free</title>
 	<meta name="description" content="LeagueStar is the perfect tool to create your own league with your friends, family or colleagues. From a new place to score your fantasy football to a fast way of recording your Among Us wins, LeagueStar can cover your needs.">
     <link rel="stylesheet" type="text/css" href="styles.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 </head>
 <body>
 	<?php
@@ -15,7 +15,8 @@
 		}
 	?>
 	<header>
-			<h1>LeagueStar</h1>
+		<img src="Header.png" alt="header" height="80px" width="100%">
+		<div class="imageText"><h1>LeagueStar</h1></div>
 	</header>
 	<nav>
 		<ul class="navNav">
@@ -38,7 +39,7 @@
 			<li>&#9;<a href="viewResults.php">Results</a></li>
 			<li>&#9;<a href="createLeague.php">Create New League</a></li>
 			<li>&#9;<a href="addPlayers.php">Add Players</a></li>
-			<li><a href="joinLeague.php" class="active">Join League</a></li>
+			<li><a href="joinLeague.php" id="active">Join League</a></li>
 		</ul>
 	</aside>
 	<main>
@@ -50,8 +51,10 @@
         <!-- Need to add php for joining a league at a later point -->
 	</main>
 	<footer>
-		<p><a href="terms.php">Terms & Conditions</a></p>
-		<p>This website is owned by X16 Lads Ltd, undergraduates at the University of Manchester</p>
+		<img src="Footer.png" height="80px" width="100%">
+		<div class="imageText">
+			<p><a href="contact.php" class="class">Contact Us</a>&emsp;&emsp;<a href="help.php" class="class">Help</a>&emsp;&emsp;<a href="terms.php" class="class">Terms & Conditions</a></p>
+		</div>
 	</footer>
 
 </body>

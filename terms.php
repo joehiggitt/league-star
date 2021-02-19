@@ -4,7 +4,7 @@
 	<title>Terms & Conditions - LeagueStar</title>
 	<meta name="description" content="Terms & Conditions">
     <link rel="stylesheet" type="text/css" href="styles.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 </head>
 <body>
 	<?php

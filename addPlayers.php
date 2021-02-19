@@ -4,6 +4,7 @@
 	<title>Add Players - LeagueStar</title>
 	<meta name="description" content="Add players to your league.">
 	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
 		function createForm(num, maxNum)
@@ -78,7 +79,7 @@
 			<li><a href="viewFixtures.php">Fixtures</a></li>
 			<li><a href="viewResults.php">Results</a></li>
 			<li><a href="createLeague.php">Create New League</a></li>
-			<li>&#9;<a href="addPlayers.php" class="active">Add Players</a></li>
+			<li>&#9;<a href="addPlayers.php" id="active">Add Players</a></li>
 			<li><a href="joinLeague.php">Join League</a></li>
 		</ul>
 	</aside>

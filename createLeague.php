@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="styles.css">
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
         <title></title>
     </head>
     <body>
@@ -15,7 +15,8 @@
             }
     	?>
         <header>
-    			<h1>LeagueStar</h1>
+    		<img src="Header.png" alt="header" height="80px" width="100%">
+    		<div class="imageText"><h1>LeagueStar</h1></div>
     	</header>
     	<nav>
     		<ul class="navNav">
@@ -36,7 +37,7 @@
                 <li><a href="viewLeague.php">League 1</a></li>
                 <li>&#9;<a href="viewFixtures.php">Fixtures</a></li>
                 <li>&#9;<a href="viewResults.php">Results</a></li>
-                <li>&#9;<a href="createLeague.php" class="active">Create New League</a></li>
+                <li>&#9;<a href="createLeague.php" id="active">Create New League</a></li>
     			<li>&#9;<a href="addPlayers.php">Add Players</a></li>
                 <li><a href="joinLeague.php">Join League</a></li>
             </ul>
@@ -77,9 +78,11 @@
                 }
             ?>
     	</main>
-    	<footer>
-    		<p><a href="terms.php">Terms & Conditions</a></p>
-    		<p>This website is owned by X16 Lads Ltd, undergraduates at the University of Manchester</p>
+        <footer>
+    		<img src="Footer.png" height="80px" width="100%">
+    		<div class="imageText">
+    			<p><a href="contact.php" class="class">Contact Us</a>&emsp;&emsp;<a href="help.php" class="class">Help</a>&emsp;&emsp;<a href="terms.php" class="class">Terms & Conditions</a></p>
+    		</div>
     	</footer>
     </body>
 </html>

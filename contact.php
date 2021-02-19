@@ -3,21 +3,22 @@
 <head>
 	<title>Contact Page</title>
 	<link rel="stylesheet" type="text/css" href="styles.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">>
 </head>
 <body>
 	<?php
 		session_start();
 	?>
 	<header>
-			<h1>Contact Us</h1>
+		<img src="Header.png" alt="header" height="80px" width="100%">
+		<div class="imageText"><h1>Contact Us</h1></div>
 	</header>
 
 	<nav>
 		<ul class="navNav">
 			<li><a href="index.php">Home</a></li>
 			<li><a href="about.php">About Us</a></li>
-			<li><a href="contact.php" class="active">Contact</a></li>
+			<li><a href="contact.php" id="active">Contact</a></li>
 			<li><a href="help.php">Help</a></li>
 			<?php
 				// Script used if login is not required to use this page
