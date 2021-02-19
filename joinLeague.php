@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<htmllang="en">
+<html lang="en" dir="ltr">
 <head>
 	<title>LeagueStar - Create your league for free</title>
 	<meta name="description" content="LeagueStar is the perfect tool to create your own league with your friends, family or colleagues. From a new place to score your fantasy football to a fast way of recording your Among Us wins, LeagueStar can cover your needs.">
     <link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<?php
@@ -18,8 +19,9 @@
 	</header>
 	<nav>
 		<ul class="navNav">
-			<li><a href="index.php" class="active">Home</a></li>
+			<li><a href="index.php">Home</a></li>
 			<li><a href="about.php">About Us</a></li>
+			<li><a href="contact.php">Contact</a></li>
 			<li><a href="help.php">Help</a></li>
 			<?php
 				// Script used if login is required to view this page
@@ -34,7 +36,9 @@
 			<li><a href="viewLeague.php">League 1</a></li>
 			<li>&#9;<a href="viewFixtures.php">Fixtures</a></li>
 			<li>&#9;<a href="viewResults.php">Results</a></li>
-			<li><a href="createLeague.php">Create New League</a></li>
+			<li>&#9;<a href="createLeague.php">Create New League</a></li>
+			<li>&#9;<a href="addPlayers.php">Add Players</a></li>
+			<li><a href="joinLeague.php" class="active">Join League</a></li>
 		</ul>
 	</aside>
 	<main>
