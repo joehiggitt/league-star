@@ -28,6 +28,7 @@
 				<li><a href="viewFixtures.php">Fixtures</a></li>
 				<li><a href="viewResults.php">Results</a></li>
 				<li><a href="createLeague.php">Create New League</a></li>
+				<li><a href="joinLeague.php">Join League</a></li>
 			</ul>
 		</aside>
 		<main>
@@ -56,7 +57,7 @@
 		<footer>
 			<img src="Footer.png" height="80px" width="100%">
 			<div class="imageText">
-				<p><a href="contact.php" class="class">Contact Us</a>&emsp;&emsp;<a href="help.php" class="class">Help</a>&emsp;&emsp;<a href="terms.php" class="class">Terms & Conditions</a></p>
+				<p><a href="contact.php" class="link">Contact Us</a>&emsp;&emsp;<a href="help.php" class="link">Help</a>&emsp;&emsp;<a href="terms.php" class="link">Terms & Conditions</a></p>
 			</div>
 		</footer>
 	</body>
