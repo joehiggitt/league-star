@@ -13,7 +13,7 @@
 		</header>
 		<nav>
 			<ul class="navNav">
-				<li><a href="index.php" class="active">Home</a></li>
+				<li><a href="index.php" id="active">Home</a></li>
 				<li><a href="about.php">About Us</a></li>
 				<li><a href="help.php">Help</a></li>
 				<li style="float:right"><a href="register.php">Register</a></li>
@@ -31,7 +31,7 @@
 			</ul>
 		</aside>
 		<main>
-			<h3>Welcome to LeagueStar!</h3>
+			<h2>Welcome to LeagueStar!</h2>
 			<p>LeagueStar is the perfect tool to create your own league with your friends, family or colleagues. From a new place to score your fantasy football to a fast way of recording your Among Us wins, LeagueStar can cover your needs.</p>
 			<p>Test paragraph</p>
 			<p>Test paragraph</p>

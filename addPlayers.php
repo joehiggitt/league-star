@@ -55,7 +55,7 @@
 		</header>
 		<nav>
 			<ul class="navNav">
-				<li><a href="index.php" class="active">Home</a></li>
+				<li><a href="index.php">Home</a></li>
 				<li><a href="about.php">About Us</a></li>
 				<li><a href="help.php">Help</a></li>
 				<li style="float:right"><a href="register.php">Register</a></li>
@@ -71,7 +71,7 @@
 			</ul>
 		</aside>
 		<main>
-			<h3>Add Players</h3>
+			<h2>Add Players</h2>
 			<p>Add players to your team below.</p>
 			<script>
 				var num = 10;
