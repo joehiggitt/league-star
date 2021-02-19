@@ -1,36 +1,20 @@
 body
 {
 	background-color: #ffffff;
-	font-family: "Didact Gothic";
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 }
 
 header
 {
 	height: 80px;
-	background-color: #f9a618;
+	background-color: #fcf8cc;
 	color: #000000;
 	text-align: center;
-	position: relative;
-}
-
-h1
-{
-	background-color: #ffffff;
-}
-
-.imageText
-{
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 }
 
 nav
 {
-	background-color: #f9a618;
-	color: #3a404c;
-	font-weight: bold;
+	background-color: #f5ec89;
 	border-top: 0px;
 	height: 50px;
 	position: -webkit-sticky;
@@ -62,31 +46,14 @@ nav
 
 .navNav a:hover
 {
-	background-color: #ee9f18;
+	background-color: #f0e035;
 }
-
-/*aside
-{
-	height: 100%;
-	width: 200px;
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	background-color: #f9a618;
-	color: #3a404c;
-	font-weight: bold;
-	overflow-x: hidden;
-	padding-top: 20px
-}*/
 
 aside
 {
 	float: left;
 	width: 25%;
-	background-color: #f9a618;
-	color: #3a404c;
-	font-weight: bold;
+	background-color: #f5ec89;
 	border-top: 0px;
 	border-right: 0px;
 	line-height: 50px;
@@ -115,18 +82,18 @@ aside
 
 .asideNav a:hover
 {
-	background-color: #ee9f18;
+	background-color: #f0e035;
 }
 
 .active
 {
-	background-color: #e39818;
-	color: #ffffff;
+	background-color: #edda0c;
+	color: #000000;
 }
 
 main
 {
-	background-color: #ffffff;
+	background-color: #fcf8cc;
 	border-top: 0px;
 	padding-top: 10px;
 	padding-left: 27%;
@@ -136,11 +103,10 @@ main
 footer
 {
 	height: 10%;
-	background-color: #f9a618;
+	background-color: #fcf8cc;
 	color: #000000;
 	text-align: center;
 	border-top: 0px;
-	position: relative;
 }
 
 footer p
@@ -151,27 +117,9 @@ footer p
 footer a
 {
 	text-decoration: none;
-	color: #3a404c;
-}
-
-footer a:visited
-{
-	color: #3a404c;
 }
 
 footer a:hover
 {
-	color: #565d6b;
+	color: gray;
 }
-
-/*@media screen and (max-height: 450px)
-{
-	.sidenav
-	{
-		padding-top: 15px;
-	}
-	.sidenav a
-	{
-		font-size: 18px;
-	}
-}*/

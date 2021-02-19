@@ -4,15 +4,14 @@
 	<title>LeagueStar - Create your league for free</title>
 	<meta name="description" content="LeagueStar is the perfect tool to create your own league with your friends, family or colleagues. From a new place to score your fantasy football to a fast way of recording your Among Us wins, LeagueStar can cover your needs.">
 	<link rel="stylesheet" type="text/css" href="styles.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 	<?php
 		session_start();
 	?>
 	<header>
-		<img src="Header.png" alt="header" height="80px" width="100%">
-		<div class="imageText"><h1>LeagueStar</h1></div>
+			<h1>LeagueStar</h1>
 	</header>
 	<nav>
 		<ul class="navNav">
@@ -73,10 +72,8 @@
 		<p>Test paragraph</p>
 	</main>
 	<footer>
-		<img src="Footer.png" height="80px" width="100%">
-		<div class="imageText">
-			<p><a href="contact.php" class="class">Contact Us</a>&emsp;&emsp;<a href="help.php" class="class">Help</a>&emsp;&emsp;<a href="terms.php" class="class">Terms & Conditions</a></p>
-		</div>
+		<p><a href="terms.php" class="class">Terms & Conditions</a></p>
+		<p>This website is owned by X16 Lads Ltd, undergraduates at the University of Manchester</p>
 	</footer>
 
 </body>
