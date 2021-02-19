@@ -4,14 +4,15 @@
 	<title>Terms & Conditions - LeagueStar</title>
 	<meta name="description" content="Terms & Conditions">
     <link rel="stylesheet" type="text/css" href="styles.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 </head>
 <body>
 	<?php
 		session_start();
 	?>
 	<header>
-			<h1>LeagueStar</h1>
+		<img src="Header.png" alt="header" height="80px" width="100%">
+		<div class="imageText"><h1>LeagueStar</h1></div>
 	</header>
 	<nav>
 		<ul class="navNav">
@@ -57,9 +58,11 @@
 		<p>LeagueStar cannot be used for the creation of nuclear or biological weapons.</p>
 	</main>
 	<footer>
-		<p><a href="terms.php">Terms & Conditions</a></p>
-		<p>This website is owned by X16 Lads Ltd, undergraduates at the University of Manchester</p>
+		<img src="Footer.png" height="80px" width="100%">
+		<div class="imageText">
+			<p><a href="contact.php" class="class">Contact Us</a>&emsp;&emsp;<a href="help.php" class="class">Help</a>&emsp;&emsp;<a href="terms.php" class="class">Terms & Conditions</a></p>
+		</div>
 	</footer>
 
-</body>
+	</body>
 </html>
