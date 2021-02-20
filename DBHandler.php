@@ -26,21 +26,63 @@
         $sql = "CREATE TABLE IF NOT EXISTS users (
                     userId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                     user VARCHAR(30) NOT NULL UNIQUE,
-                    pass VARCHAR(128) NOT NULL
-                )";
+                    pass VARCHAR(128) NOT NULL,
+                    email VARCHAR(128)
+                ) ENGINE=InnoDB";
         echo doSQL($conn, $sql);
         $sql = "CREATE TABLE IF NOT EXISTS league (
                     leagueId INT(6) AUTO_INCREMENT PRIMARY KEY,
-                    userId INT(6) UNSIGNED NOT NULL,
+                    creatorId INT(6) UNSIGNED NOT NULL,
                     leagueName VARCHAR(30) NOT NULL UNIQUE,
                     preset VARCHAR(20) NOT NULL,
-                    maxPlayer INT(3),
-                    minPlayer INT(3),
+                    maxPlayer INT(3) NOT NULL,
+                    minPlayer INT(3) NOT NULL,
                     CONSTRAINT fk_user
-                        FOREIGN KEY (userId) REFERENCES users(userId)
+                        FOREIGN KEY (creatorId) REFERENCES users(userId)
                         ON DELETE CASCADE
                         ON UPDATE CASCADE
-                )";
+                ) ENGINE=InnoDB";
+        echo doSQL($conn, $sql);
+        $sql = "CREATE TABLE IF NOT EXISTS teams (
+                    teamId INT(6) AUTO_INCREMENT PRIMARY KEY,
+                    teamName VARCHAR(30) NOT NULL
+                ) ENGINE=InnoDB";
+        echo doSQL($conn, $sql);
+        $sql = "CREATE TABLE IF NOT EXISTS players (
+                    playerId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                    teamId INT(6),
+                    playerName VARCHAR(30),
+                    CONSTRAINT fk_player
+                        FOREIGN KEY (playerId) REFERENCES users(userId)
+                        ON DELETE CASCADE
+                        ON UPDATE CASCADE,
+                    CONSTRAINT fk_team
+                        FOREIGN KEY (teamId) REFERENCES teams(teamId)
+                        ON DELETE SET NULL
+                        ON UPDATE CASCADE
+                ) ENGINE=InnoDB";
+        echo doSQL($conn, $sql);
+        // $sql = "SHOW ENGINE InnoDB STATUS";
+        // $results = doSQL($conn, $sql);
+        // while ($row = $results->fetch_assoc()) {
+        //     foreach ($row as $cell) {
+        //         echo $cell;
+        //     }
+        // }
+        $sql = "CREATE TABLE IF NOT EXISTS results (
+                    resultId INT(8) AUTO_INCREMENT PRIMARY KEY,
+                    team1Id INT(6),
+                    team2Id INT(6),
+                    score VARCHAR(20),
+                    CONSTRAINT fk_team1
+                        FOREIGN KEY (team1Id) REFERENCES teams(teamId)
+                        ON DELETE SET NULL
+                        ON UPDATE CASCADE,
+                    CONSTRAINT fk_team2
+                        FOREIGN KEY (team2Id) REFERENCES teams(teamId)
+                        ON DELETE SET NULL
+                        ON UPDATE CASCADE
+                ) ENGINE=InnoDB";
         echo doSQL($conn, $sql);
         $sql = 'INSERT INTO users(user, pass) VALUES ("user", "pass")';
         echo doSQL($conn, $sql);
