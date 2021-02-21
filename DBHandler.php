@@ -74,14 +74,14 @@
                     team1Id INT(6),
                     team2Id INT(6),
                     score VARCHAR(20),
-                    CONSTRAINT fk_team1
-                        FOREIGN KEY (team1Id) REFERENCES teams(teamId)
-                        ON DELETE SET NULL
-                        ON UPDATE CASCADE,
-                    CONSTRAINT fk_team2
-                        FOREIGN KEY (team2Id) REFERENCES teams(teamId)
-                        ON DELETE SET NULL
-                        ON UPDATE CASCADE
+                    -- CONSTRAINT fk_team1
+                    --     FOREIGN KEY (team1Id) REFERENCES teams(teamId)
+                    --     ON DELETE SET NULL
+                    --     ON UPDATE CASCADE,
+                    -- CONSTRAINT fk_team2
+                    --     FOREIGN KEY (team2Id) REFERENCES teams(teamId)
+                    --     ON DELETE SET NULL
+                    --     ON UPDATE CASCADE
                 ) ENGINE=InnoDB";
         echo doSQL($conn, $sql);
         $sql = 'INSERT INTO users(user, pass) VALUES ("user", "pass")';
