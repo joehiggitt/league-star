@@ -37,6 +37,8 @@
                     preset VARCHAR(20) NOT NULL,
                     maxPlayer INT(3) NOT NULL,
                     minPlayer INT(3) NOT NULL,
+                    matchDay VARCHAR(10),
+                    matchTime TIME,
                     CONSTRAINT fk_user
                         FOREIGN KEY (creatorId) REFERENCES users(userId)
                         ON DELETE CASCADE
