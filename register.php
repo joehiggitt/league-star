@@ -8,8 +8,37 @@
 	</head>
 	<body>
 		<?php
-			session_start();
-		?>
+            session_start();
+            if (isset($_POST['submit'])) {
+                // Get details from the register form
+                $user = $_POST['user'];
+				$email = $_POST['email'];
+                $pass = $_POST['pass'];
+                $passCheck = $_POST['passCheck'];
+
+                // Checks if the given passwords match and adds details to database
+                // if they do
+                if ($pass == $passCheck) {
+                    require_once 'DBHandler.php';
+                    $conn = connectDB();
+                    $sql = "INSERT INTO users (user, pass, email)
+                            VALUES ('$user', '$pass', '$email')";
+                    $results = doSQL($conn, $sql);
+                    echo("<br>".$results."<br>");
+
+                    // Log in
+                    if($results == 1) {
+                        $_SESSION["user"] = $user;
+                        header("Location: index.php");
+                        exit;
+                    }
+
+                } else {
+                    echo "Passwords do not match";
+                    // Go back to self
+                }
+            }
+        ?>
 		<header>
 			<img src="Header.png" alt="header" height="80px" width="100%">
 			<div class="imageLogo"><img src="Logo.png" height="130px"></div>
@@ -20,8 +49,19 @@
 				<li><a href="index.php">Home</a></li>
 				<li><a href="about.php">About Us</a></li>
 				<li><a href="help.php">Help</a></li>
-				<li style="float:right"><a href="register.php" id="active">Register</a></li>
-				<li style="float:right"><a href="login.php">Sign In</a></li>
+				<?php
+					// Script used if login is not required to use this page
+					if(isset($_SESSION["user"]))
+					{
+						echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
+						echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
+					}
+					else
+					{
+						echo '<li style="float:right"><a href="register.php">Register</a></li>';
+						echo '<li style="float:right"><a href="login.php">Sign In</a></li>';
+					}
+				?>
 			</ul>
 
 		</nav>
@@ -43,36 +83,6 @@
 		?>
 		<main>
 			<h2>Create Your LeagueStar Account!</h2>
-			<?php
-				session_start();
-				if (isset($_POST['submit']))
-				{
-					// Get details from login form
-					$user = $_POST['user'];
-					$email = $_POST['email'];
-					$pass = $_POST['pass'];
-					$conpass = $_POST['conpass'];
-
-					// NEEDS FINISHING
-
-					// Check if user details are valid or not
-					// require_once 'DBHandler.php';
-					// $conn = connectDB();
-					// $sql = "SELECT user, pass FROM users WHERE user='$user' AND pass='$pass'";
-					// $results = doSQL($conn, $sql);
-					// if ($row = $results->fetch_assoc()) 
-					// {
-					// 	// Log in
-					// 	$_SESSION["user"] = $user;
-					// 	header("Location: index.php");
-					// 	exit;
-					// }
-					// else 
-					// {
-					// 	echo "fail"; // Go back to self
-					// }
-				}
-			?>
 			<form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
 				<label>Username</label><br>
 				<input type="text" name="user" required><br>
@@ -81,9 +91,9 @@
 				<label>Password</label><br>
 				<input type="password" name="pass" required><br>
 				<label>Confirm Password</label><br>
-				<input type="password" name="pass" required><br><br>
+				<input type="password" name="passCheck" required><br><br>
 				<input type="submit" name="submit" value="Create Your Account"/>
-				<!-- <input type="reset" value="Reset"><br> -->
+				<input type="reset" value="Reset"><br>
 				<p>Already have an account? <a href="login.php" class="link">Sign in</a> here.</p>
 			</form>
 
