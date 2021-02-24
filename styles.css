@@ -117,7 +117,8 @@ input[type=submit], button
 
 input[type=submit]:hover, button:hover
 {
-	background-color: #ee9f18;
+	color: #5e636d;
+    background-color: #ee9f18;
 }
 
 input[type=text], input[type=number], input[type=time], input[type=password]
@@ -271,6 +272,11 @@ textarea
 {
 	background-color: #e39818;
 	color: #ffffff;
+}
+
+#active:hover
+{
+	color: #5e636d;
 }
 
 
