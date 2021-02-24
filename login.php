@@ -9,6 +9,29 @@
 	<body>
 		<?php
 			session_start();
+			if (isset($_POST['submit']))
+			{
+				// Get details from login form
+				$user = $_POST['user'];
+				$pass = $_POST['pass'];
+
+				// Check if user details are valid or not
+				require_once 'DBHandler.php';
+				$conn = connectDB();
+				$sql = "SELECT user, pass FROM users WHERE user='$user' AND pass='$pass'";
+				$results = doSQL($conn, $sql);
+				if ($row = $results->fetch_assoc())
+				{
+					// Log in
+					$_SESSION["user"] = $user;
+					header("Location: index.php");
+					exit;
+				}
+				else
+				{
+					echo "fail"; // Go back to self
+				}
+			}
 		?>
 		<header>
 			<img src="Header.png" alt="header" height="80px" width="100%">
@@ -20,8 +43,19 @@
 				<li><a href="index.php">Home</a></li>
 				<li><a href="about.php">About Us</a></li>
 				<li><a href="help.php">Help</a></li>
-				<li style="float:right"><a href="register.php">Register</a></li>
-				<li style="float:right"><a href="login.php" id="active">Sign In</a></li>
+				<?php
+					// Script used if login is not required to use this page
+					if(isset($_SESSION["user"]))
+					{
+						echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
+						echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
+					}
+					else
+					{
+						echo '<li style="float:right"><a href="register.php">Register</a></li>';
+						echo '<li style="float:right"><a href="login.php">Sign In</a></li>';
+					}
+				?>
 			</ul>
 
 		</nav>
@@ -43,39 +77,13 @@
 		?>
 		<main>
 			<h2>Sign In To Your LeagueStar Account!</h2>
-			<?php
-				session_start();
-				if (isset($_POST['submit']))
-				{
-					// Get details from login form
-					$user = $_POST['user'];
-					$pass = $_POST['pass'];
-
-					// Check if user details are valid or not
-					require_once 'DBHandler.php';
-					$conn = connectDB();
-					$sql = "SELECT user, pass FROM users WHERE user='$user' AND pass='$pass'";
-					$results = doSQL($conn, $sql);
-					if ($row = $results->fetch_assoc()) 
-					{
-						// Log in
-						$_SESSION["user"] = $user;
-						header("Location: index.php");
-						exit;
-					}
-					else 
-					{
-						echo "fail"; // Go back to self
-					}
-				}
-			?>
 			<form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
 				<label>Username</label><br>
 				<input type="text" name="user" required><br>
 				<label>Password</label><br>
 				<input type="password" name="pass" required><br><br>
 				<input type="submit" name="submit" value="Sign In"/>
-				<!-- <input type="reset" value="Reset"><br> -->
+				<input type="reset" value="Reset"><br>
 				<p>Don't have an account? <a href="register.php" class="link">Register</a> here.</p>
 			</form>
 

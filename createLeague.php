@@ -85,7 +85,7 @@
                     // $maxPlayer = $_POST['maxPlayer'];
                     $day = $_POST['day'];
                     $time = $_POST['time'];
-                    if ($name == "" or $min == "" or $max == "") {
+                    if ($name == "" or $minTeams == "" or $maxTeams == "") {
                         echo '<p style="color: red;">Fields marked with an asterisk are required fields</p>';
                     } else {
                         require_once 'DBHandler.php';
@@ -96,8 +96,8 @@
                         $results = doSQL($conn, $sql);
                         $out = $results->fetch_assoc();
                         $out = $out["userId"];
-                        $sql = "INSERT INTO league (userId, leagueName, preset, maxPlayer, minPlayer)
-                                VALUES ('$out', '$name', '$preset', '$max', '$min')";
+                        $sql = "INSERT INTO league (creatorId, leagueName, preset, maxPlayer, minPlayer, matchDay, matchTime)
+                                VALUES ('$out', '$name', '$preset', '$maxTeams', '$minTeams', '$day', '$time')";
                         $results = doSQL($conn, $sql);
                         echo("<br>".$results."<br>");
                     }
