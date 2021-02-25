@@ -62,7 +62,6 @@
 			<p>Text</p>
 			<p>Text</p>
 			<p>Text</p>
-			<p>Text</p>
 			<br><br>
 		</main>
 		<footer>
