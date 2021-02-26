@@ -295,7 +295,7 @@ textarea
 	/* Styling the header */
 .styled-table thead tr
 {
-	background-color: #009879;
+	background-color: #eea941;
 	color: #ffffff;
 	text-align: left;
 }
@@ -319,12 +319,26 @@ textarea
 
 .styled-table tbody tr:last-of-type
 {
-	border-bottom: 2px solid #009879;
+	border-bottom: 2px solid #eea941;
 }
 
 	/* make the active row look different */
 .styled-table tbody tr.active-row
 {
 	font-weight: bold;
-	color: #009879;
+	color: #eea941;
+}
+
+#LeagueTable tbody tr:last-of-type {
+	border-bottom: 2px solid #eea941;
+}
+
+#LeagueTable tbody tr.active-row {
+	font-weight: bold;
+	color: #eea941;
+}
+
+#LeagueTable tbody tr:nth-of-type(even)
+{
+	background-color: #f6e5cc;
 }
