@@ -8,14 +8,20 @@
         <?php
             require_once "DBHandler.php";
             $conn = connectDB();
-            $sql = "SELECT * FROM users";
-            $results = doSQL($conn, $sql);
-            while($row = mysqli_fetch_array($results)) {
-                echo print_r($row);
-                echo "<br><br>";
+            // $sql = "SELECT * FROM users";
+            // $results = doSQL($conn, $sql);
+            // while($row = mysqli_fetch_array($results)) {
+            //     echo print_r($row);
+            //     echo "<br><br>";
+            // }
+            // $sql = "DROP DATABASE loginTest";
+            // echo doSQL($conn, $sql);
+            $sql = "SHOW DATABASES";
+            $result = doSQL($conn, $sql);
+            while($row = mysqli_fetch_row($result)) {
+                echo $row[0];
+                echo "<br>";
             }
-            $sql = "DROP DATABASE loginTest";
-            echo doSQL($conn, $sql);
         ?>
     </body>
 </html>
