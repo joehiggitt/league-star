@@ -8,17 +8,26 @@
 	</head>
 	<body>
 		<?php
+			// Script used if login is required to view this page
+			session_start();
+			if (isset($_SESSION["user"]))
+			{
+				header("Location: index.php");
+			}
+		?>
+		<?php
             session_start();
             if (isset($_POST['submit'])) {
                 // Get details from the register form
                 $user = $_POST['user'];
 				$email = $_POST['email'];
+				$emailCheck = $_POST['emailCheck'];
                 $pass = $_POST['pass'];
                 $passCheck = $_POST['passCheck'];
 
                 // Checks if the given passwords match and adds details to database
                 // if they do
-                if ($pass == $passCheck) {
+                if ($pass == $passCheck && $email == $emailCheck) {
                     require_once 'DBHandler.php';
                     $conn = connectDB();
                     $sql = "INSERT INTO users (user, pass, email)
@@ -88,12 +97,13 @@
 				<input type="text" name="user" required><br>
 				<label>Email</label><br>
 				<input type="text" name="email" required><br>
+				<label>Confirm Email</label><br>
+				<input type="text" name="emailCheck" required><br>
 				<label>Password</label><br>
 				<input type="password" name="pass" required><br>
 				<label>Confirm Password</label><br>
 				<input type="password" name="passCheck" required><br><br>
-				<input type="submit" name="submit" value="Create Your Account"/>
-				<input type="reset" value="Reset"><br>
+				<input type="submit" name="submit" value="Create Your Account">
 				<p>Already have an account? <a href="login.php" class="link">Sign in</a> here.</p>
 			</form>
 

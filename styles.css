@@ -60,7 +60,6 @@ aside
 
 main
 {
-	text-align: center;
 	background-color: #ffffff;
 	border-top: 0px;
 	padding-top: 10px;
@@ -280,6 +279,15 @@ textarea
 	color: #5e636d;
 }
 
+#deleteButtton
+{
+	background-color: #fc5b0d;
+}
+
+#deleteButtton:hover
+{
+	background-color: #fd3c09;
+}
 
 .styled-table
 {

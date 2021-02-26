@@ -8,6 +8,14 @@
 	</head>
 	<body>
 		<?php
+			// Script used if login is required to view this page
+			session_start();
+			if (isset($_SESSION["user"]))
+			{
+				header("Location: index.php");
+			}
+		?>
+		<?php
 			session_start();
 			if (isset($_POST['submit']))
 			{
@@ -24,7 +32,7 @@
 				{
 					// Log in
 					$_SESSION["user"] = $user;
-					header("Location: index.php");
+					header("Location: dashboard.php");
 					exit;
 				}
 				else

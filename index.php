@@ -8,7 +8,12 @@
 	</head>
 	<body>
 		<?php
+			// Script used if login is required to view this page
 			session_start();
+			if (isset($_SESSION["user"]))
+			{
+				header("Location: dashboard.php");
+			}
 		?>
 		<header>
 			<img src="Header.png" height="80px" width="100%">
