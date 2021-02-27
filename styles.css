@@ -14,6 +14,8 @@ header
 
 nav
 {
+	resize: both;
+    overflow: auto;
 	background-color: #f9a618;
 	font-weight: bold;
 	font-size: 22px;
@@ -26,7 +28,7 @@ nav
 }
 
 aside
-{
+{	
 	float: left;
 	width: 350px;
 	background-color: #f9a618;
@@ -67,6 +69,7 @@ main
 	padding-left: 10px;
 	/*height: 60%;*/
 	overflow-x: hidden;
+	font-size:4vw;
 }
 
 footer
@@ -98,7 +101,7 @@ h2
 
 p
 {
-	font-size: 20px;
+	font-size: 80px;
 }
 
 input[type=submit], button
