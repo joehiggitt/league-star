@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>
 	</head>
-	<body>
+	<body onload="addDropdownEvent()">
 		<?php
 			session_start();
 		?>
