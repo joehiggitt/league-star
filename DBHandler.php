@@ -75,7 +75,8 @@
                     resultId INT(8) AUTO_INCREMENT PRIMARY KEY,
                     team1Id INT(6),
                     team2Id INT(6),
-                    score VARCHAR(20),
+                    team1Score INT(6),
+                    team2Score INT(6)
                     -- CONSTRAINT fk_team1
                     --     FOREIGN KEY (team1Id) REFERENCES teams(teamId)
                     --     ON DELETE SET NULL
