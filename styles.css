@@ -27,7 +27,7 @@ nav
 	width: 100%;
 }
 
-aside
+/*aside
 {	
 	float: left;
 	width: 350px;
@@ -40,10 +40,10 @@ aside
 	height: 100%;
 	/*position: fixed;
 	overflow: auto;*/
-	position: -webkit-sticky;
+/*	position: -webkit-sticky;
 	position: sticky;
 	top: 49px;
-}
+}*/
 
 /*aside
 {
@@ -70,6 +70,7 @@ main
 	/*height: 60%;*/
 	overflow-x: hidden;
 	font-size:4vw;
+	margin-left: 250px;
 }
 
 footer
@@ -96,12 +97,12 @@ h1
 
 h2
 {
-	font-size: 25px;
+	font-size:3vw;
 }
 
 p
 {
-	font-size: 80px;
+	font-size:2vw;
 }
 
 input[type=submit], button
@@ -188,20 +189,33 @@ textarea
 
 .asideNav
 {
-	list-style-type: none;
+	/*list-style-type: none;
 	margin: 0;
-	padding: 0;
+	padding: 0;*/
 	/*height: 100%;
 	position: fixed;
 	overflow: auto;*/
+	height: 100%;
+	width: 250px;
+	position: fixed;
+	z-index: 1;
+	left: 2;
+	background-color: #f9a618;
+	overflow-x: hidden;
+	padding-top: 20px;
 }
 
-.asideNav a
+.asideNav a, .dropdown-btn
 {
 	display: block;
+	font-size: 22px;
 	color: #3a404c;
 	padding: 8px 16px;
+	width: 100%;
+	text-align: left;
 	text-decoration: none;
+	cursor: pointer;
+	outline: none;
 }
 
 .asideNav a:hover
@@ -209,6 +223,23 @@ textarea
 	color: #5e636d;
 	background-color: #ee9f18;
 }
+
+.dropdown-container {
+	display: none; 
+}
+
+.active {
+	background-color: orange;
+	color: white;
+}
+
+
+
+
+
+
+
+
 
 .imageText
 {
@@ -345,3 +376,16 @@ textarea
 {
 	background-color: #f6e5cc;
 }
+
+
+
+
+
+
+
+/*.dropdown-btn {
+	width: 100%;
+	display: block;
+	text-align: left;
+	font-size: 22px;
+}*/
