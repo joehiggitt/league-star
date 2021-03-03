@@ -16,7 +16,6 @@
 			}
 		?>
 		<?php
-            session_start();
             if (isset($_POST['submit'])) {
                 // Get details from the register form
                 $user = $_POST['user'];
@@ -42,9 +41,6 @@
                         exit;
                     }
 
-                } else {
-                    echo "Passwords do not match";
-                    // Go back to self
                 }
             }
         ?>
@@ -92,21 +88,47 @@
 		?>
 		<main>
 			<h2>Create Your LeagueStar Account!</h2>
-			<form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
-				<label>Username</label><br>
-				<input type="text" name="user" required><br>
-				<label>Email</label><br>
-				<input type="text" name="email" required><br>
-				<label>Confirm Email</label><br>
-				<input type="text" name="emailCheck" required><br>
-				<label>Password</label><br>
-				<input type="password" name="pass" required><br>
-				<label>Confirm Password</label><br>
-				<input type="password" name="passCheck" required><br><br>
-				<input type="submit" name="submit" value="Create Your Account">
-				<p>Already have an account? <a href="login.php" class="link">Sign in</a> here.</p>
-			</form>
+			<?php
+				if (!empty($_POST))
+				{
+					if ($pass != $passCheck && $email != $emailCheck)
+					{
+						echo '<p>The emails and passwords you entered don\'t match.</p>';
+					}
+					elseif ($pass != $passCheck)
+					{
+						echo '<p>The passwords you entered don\'t match.</p>';
+					}
+					elseif ($email != $emailCheck)
+					{
+						echo '<p>The emails you entered don\'t match.</p>';
+					}
+					else
+					{
+						echo '<p>An account already exists with the username you entered.</p>';
+					}
+				}
+				else
+				{
+					$user = "";
+					$email = "";
+				}
 
+				echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">';
+				echo '	<label>Username</label><br>';
+				echo '	<input type="text" name="user" value = "' . $user . '" required><br>';
+				echo '	<label>Email</label><br>';
+				echo '	<input type="text" name="email" value = "' . $email . '" required><br>';
+				echo '	<label>Confirm Email</label><br>';
+				echo '	<input type="text" name="emailCheck" required><br>';
+				echo '	<label>Password</label><br>';
+				echo '	<input type="password" name="pass" required><br>';
+				echo '	<label>Confirm Password</label><br>';
+				echo '	<input type="password" name="passCheck" required><br><br>';
+				echo '	<input type="submit" name="submit" value="Create Your Account">';
+				echo '	<p>Already have an account? <a href="login.php" class="link">Sign in here</a>.</p>';
+				echo '</form>';
+			?>
 		</main>
 		<footer>
 			<img src="Footer.png" height="80px" width="100%">

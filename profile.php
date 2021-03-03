@@ -8,37 +8,58 @@
 	</head>
 	<body>
 		<?php
-    //         session_start();
-    //         if (isset($_POST['submit'])) {
-    //             // Get details from the register form
-    //             $user = $_POST['user'];
-				// $email = $_POST['email'];
-    //             $pass = $_POST['pass'];
-    //             $passCheck = $_POST['passCheck'];
+			session_start();
+			if (!isset($_SESSION["user"]))
+			{
+				header("Location: index.php");
+			}
+			$user = $_SESSION["user"];
+			require_once 'DBHandler.php';
+			$conn = connectDB();
+		?>
+		<?php
+			if (isset($_POST['submit']))
+			{
+				// Get details from the register form
+				$newUser = $_POST['user'];
+				$newEmail = $_POST['email'];
 
-    //             // Checks if the given passwords match and adds details to database
-    //             // if they do
-    //             if ($pass == $passCheck) {
-    //                 require_once 'DBHandler.php';
-    //                 $conn = connectDB();
-    //                 $sql = "INSERT INTO users (user, pass, email)
-    //                         VALUES ('$user', '$pass', '$email')";
-    //                 $results = doSQL($conn, $sql);
-    //                 echo("<br>".$results."<br>");
+				// Get details from the database
+				$oldUser = $_SESSION['user'];
+				$sql = "SELECT email FROM users WHERE user='$user'";
+				$results = doSQL($conn, $sql);
+				$oldEmail = mysqli_fetch_array($results)['email'];
 
-    //                 // Log in
-    //                 if($results == 1) {
-    //                     $_SESSION["user"] = $user;
-    //                     header("Location: index.php");
-    //                     exit;
-    //                 }
-
-    //             } else {
-    //                 echo "Passwords do not match";
-    //                 // Go back to self
-    //             }
-    //         }
-        ?>
+				// Checks if new username and email equal old values
+				// if they do
+				if ($oldUser != $newUser && $oldEmail != $newEmail)
+				{
+					$sql = "UPDATE users SET user = '$newUser', email = '$newEmail' WHERE user = '$oldUser'";
+					$results = doSQL($conn, $sql);
+					echo("<br>".$results."<br>");
+				}
+				elseif ($oldUser != $newUser)
+				{
+					$sql = "UPDATE users SET user = '$newUser' WHERE user = '$oldUser'";
+					$results = doSQL($conn, $sql);
+					echo("<br>".$results."<br>");
+				}
+				elseif ($oldEmail != $newEmail)
+				{
+					$sql = "UPDATE users SET email = '$newEmail' WHERE user = '$oldUser'";
+					$results = doSQL($conn, $sql);
+					echo("<br>".$results."<br>");
+				}
+				// Test if account updated
+				$sql = "SELECT * FROM users WHERE user = '$newUser'";
+				$results = doSQL($conn, $sql);
+				$data = mysqli_fetch_array($results);
+				if (!empty($data) && $data['email'] == $newEmail)
+				{
+					$_SESSION["user"] = $newUser;
+				}
+			}
+		?>
 		<header>
 			<img src="Header.png" alt="header" height="80px" width="100%">
 			<div class="imageLogo"><img src="Logo.png" height="130px"></div>
@@ -48,6 +69,7 @@
 			<ul class="navNav">
 				<li><a href="index.php">Home</a></li>
 				<li><a href="about.php">About Us</a></li>
+				<li><a href="contact.php">Contact Us</a></li>
 				<li><a href="help.php">Help</a></li>
 				<?php
 					// Script used if login is not required to use this page
@@ -63,7 +85,6 @@
 					}
 				?>
 			</ul>
-
 		</nav>
 		<aside>
 			<ul class="asideNav">
@@ -77,26 +98,48 @@
 		</aside>
 		<main>
 			<h2>Your LeagueStar Account</h2>
+			<p>Your current account details</p>
 			<?php
-				$user = $_SESSION["user"];
-				require_once 'DBHandler.php';
-				$conn = connectDB();
-				$sql = "SELECT user, email FROM users WHERE user='$user";
+				if (!empty($_POST))
+				{
+					if (!empty($data) && $data['email'] == $newEmail)
+					{
+						echo '<p>Your LeagueStar Account was updated successfully!</p>';
+					}
+					else
+					{
+						echo '<p>Unfortunately we couldn\'t update your LeagueStar Account right now.</p>';
+					}
+				}
+				elseif (isset($_SESSION['updatePass']))
+				{
+					if ($_SESSION['updatePass'] == True)
+					{
+						echo '<p>You\'re password was updated successfully!</p>';
+						unset($_SESSION['updatePass']);
+					}
+				}
+				$user = $_SESSION['user'];
+				$sql = "SELECT email FROM users WHERE user = '$user'";
 				$results = doSQL($conn, $sql);
-				echo("Results = " . $results);
+				$data = mysqli_fetch_array($results);
 
 
 				echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">';
-				echo 	'<label>Username</label><br>';
-				echo 	'<input type="text" value="" name="user"><br>';
-				echo 	'<label>Email</label><br>';
-				echo 	'<input type="text" value="" name="email"><br><br>';
-				echo 	'<input type="submit" name="submit" value="Save Profile">';
-				echo 	'<input type="submit" name="changePass" value="Change Password">';
-				echo 	'<input type="submit" name="delete" value="Delete Account" id="deleteButtton">';
+				echo '	<label>Username</label><br>';
+				echo '	<input type="text" value="' . $user . '" name="user"><br>';
+				echo '	<label>Email</label><br>';
+				echo '	<input type="text" value="' . $data['email'] . '" name="email"><br><br>';
+				echo '	<input type="submit" name="submit" value="Save Profile"><br><br>';
+				echo '</form>';
+				echo '<form action="changePassword.php">';
+				echo '	<input type="submit" value="Change Password"><br><br>';
+				echo '</form>';
+				echo '<form action="deleteProfile.php">';
+				echo '	<input type="submit" value="Delete Account" id="deleteButtton">';
 				echo '</form>';
 			?>
-
+			<br><br>
 		</main>
 		<footer>
 			<img src="Footer.png" height="80px" width="100%">

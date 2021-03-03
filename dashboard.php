@@ -6,6 +6,14 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 	</head>
 	<body>
+		<?php
+			// Script used if login is required to view this page
+			session_start();
+			if (!isset($_SESSION["user"]))
+			{
+				header("Location: index.php");
+			}
+		?>
 		<header>
 			<img src="Header.png" alt="header" height="80px" width="100%">
 			<div class="imageLogo"><img src="Logo.png" height="130px"></div>

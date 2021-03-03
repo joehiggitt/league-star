@@ -9,6 +9,9 @@
 		<?php
 			session_start();
 		?>
+		<?php
+			// sendMessage code here
+		?>
 		<header>
 			<img src="Header.png" alt="header" height="80px" width="100%">
 			<div class="imageLogo"><img src="Logo.png" height="130px"></div>
@@ -51,16 +54,21 @@
 		<main>
 			<h2>Contact Us</h2>
 			<p>If you encounter any difficulties, please fill out the following form and one of our operators will get back with a response as soon as possible.</p>
-			<form>
-				<label>* Name</label><br>
-				<input type="text" name="name" required><br>
-				<label>* Email</label><br>
-				<input type="text" name="email" required><br>
-				<label>* Message</label><br>
-				<textarea name="message" required></textarea><br><br>
-				<input type="submit" name="submit" value="Send Message">
-				<!-- <input type="reset" value="Reset"><br> -->
-			</form>
+			<?php
+			echo '<form>';
+			if (!isset($_SESSION["user"]))
+			{
+				echo '	<label>* Name</label><br>';
+				echo '	<input type="text" name="name" required><br>';
+				echo '	<label>* Email</label><br>';
+				echo '	<input type="text" name="email" required><br>';
+			}
+			echo '	<label>* Message</label><br>';
+			echo '	<textarea name="message" required></textarea><br><br>';
+			echo '	<input type="submit" name="submit" value="Send Message">';
+			echo '	<!-- <input type="reset" value="Reset"><br> -->';
+			echo '</form>';
+			?>
 			<br><br>
 		</main>
 		<footer>
