@@ -1,26 +1,241 @@
 body
 {
 	background-color: #ffffff;
-	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-family: "Didact Gothic";
 }
 
 header
 {
 	height: 80px;
-	background-color: #fcf8cc;
 	color: #000000;
 	text-align: center;
+	position: relative;
 }
 
 nav
 {
-	background-color: #f5ec89;
+	background-color: #f9a618;
+	font-weight: bold;
+	font-size: 22px;
 	border-top: 0px;
-	height: 50px;
+	height: 49px;
 	position: -webkit-sticky;
 	position: sticky;
 	top: 0%;
 	width: 100%;
+}
+
+aside
+{
+	float: left;
+	width: 350px;
+	background-color: #f9a618;
+	font-weight: bold;
+	font-size: 22px;
+	border-top: 0px;
+	border-right: 0px;
+	line-height: 50px;
+	height: 100%;
+	/*position: fixed;
+	overflow: auto;*/
+	position: -webkit-sticky;
+	position: sticky;
+	top: 49px;
+}
+
+/*aside
+{
+	height: 100%;
+	width: 200px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #f9a618;
+	color: #3a404c;
+	font-weight: bold;
+	overflow-x: hidden;
+	padding-top: 20px
+}*/
+
+main
+{
+	text-align: center;
+	background-color: #ffffff;
+	border-top: 0px;
+	padding-top: 10px;
+	padding-left: 10px;
+	/*height: 60%;*/
+	overflow-x: hidden;
+}
+
+footer
+{
+	height: 80px;
+	color: #000000;
+	text-align: center;
+	border-top: 0px;
+	position: relative;
+	/*position: absolute;
+	bottom: 0;*/
+}
+
+footer p
+{
+	font-size: 15px;
+}
+
+h1
+{
+	background-color: #ffffff;
+	font-size: 40px;
+}
+
+h2
+{
+	font-size: 25px;
+}
+
+p
+{
+	font-size: 20px;
+}
+
+input[type=submit], button
+{
+	background-color: #f9a618;
+	border: none;
+	color: #3a404c;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	border-radius: 8px;
+	font-size: 20px;
+	font-family: "Didact Gothic";
+	font-weight: bold;
+}
+
+input[type=submit]:hover, button:hover
+{
+	color: #5e636d;
+    background-color: #ee9f18;
+}
+
+input[type=text], input[type=number], input[type=time], input[type=password]
+{
+	background-color: #feeccc;
+	border: none;
+	font-family: "Didact Gothic";
+	width: 100%;
+	font-size: 20px;
+	clear: both;
+	padding: 5px;
+}
+
+/*input[type=text]:active, input[type=password]:active
+{
+	color: #fccd78;
+	border: none;
+}*/
+
+form
+{
+	width: 60%;
+	clear: both;
+}
+
+select
+{
+	background-color: #feeccc;
+	border: none;
+	font-family: "Didact Gothic";
+	width: 100%;
+	font-size: 20px;
+	padding: 5px;
+}
+
+textarea
+{
+	background-color: #feeccc;
+	border: none;
+	font-family: "Didact Gothic";
+	width: 100%;
+	height: 150px;
+	font-size: 20px;
+	clear: both;
+	padding: 5px;
+	box-sizing: border-box;
+	resize: none;
+}
+
+
+/*@media screen and (max-height: 450px)
+{
+	.asideNav
+	{
+		padding-top: 15px;
+	}
+	.asideNav a
+	{
+		font-size: 18px;
+	}
+}*/
+
+
+.asideNav
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	/*height: 100%;
+	position: fixed;
+	overflow: auto;*/
+}
+
+.asideNav a
+{
+	display: block;
+	color: #3a404c;
+	padding: 8px 16px;
+	text-decoration: none;
+}
+
+.asideNav a:hover
+{
+	color: #5e636d;
+	background-color: #ee9f18;
+}
+
+.imageText
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.imageLogo
+{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+}
+
+.link
+{
+	text-decoration: none;
+	color: #3a404c;
+}
+
+.link:visited
+{
+	color: #3a404c;
+}
+
+.link:hover
+{
+	color: #565d6b;
 }
 
 .navNav
@@ -39,72 +254,91 @@ nav
 .navNav a
 {
 	display: block;
-	padding: 8px;
-	color: #000000;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	color: #3a404c;
 	text-decoration: none;
 }
 
 .navNav a:hover
 {
-	background-color: #f0e035;
+	color: #5e636d;
+	background-color: #ee9f18;
 }
 
-aside
+
+#active
 {
-	float: left;
-	width: 25%;
-	background-color: #f5ec89;
-	border-top: 0px;
-	border-right: 0px;
-	line-height: 50px;
-	height: 60%;
-	position: fixed;
-	overflow: auto;
+	background-color: #e39818;
+	color: #ffffff;
 }
 
-.asideNav
+#active:hover
 {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	/*height: 100%;
-	position: fixed;
-	overflow: auto;*/
+	color: #5e636d;
 }
 
-.asideNav a
+
+.styled-table
 {
-	display: block;
-	color: #000000;
-	padding: 8px 16px;
-	text-decoration: none;
+	border-collapse: collapse; /* for smooth borders */
+	margin: 25px 0;
+	font-size: 0.9em;
+	min-width: 400px; /* setting the width of cells */
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	align-content: center;
+	margin: auto;
 }
 
-.asideNav a:hover
+	/* Styling the header */
+.styled-table thead tr
 {
-	background-color: #f0e035;
+	background-color: #eea941;
+	color: #ffffff;
+	text-align: left;
 }
 
-.active
+	/* Moving onto the table cells */
+.styled-table th, .styled-table td
 {
-	background-color: #edda0c;
-	color: #000000;
+	padding: 12px 15px;
+} /* setting padding for all cells */
+
+	/* the table rows */
+.styled-table tbody tr
+{
+	border-bottom: 1px solid #dddddd;
+} /* for nice finishing, setting the colour of bottom border same colour as header */
+
+.styled-table tbody tr:nth-of-type(even)
+{
+	background-color: #f3f3f3;
 }
 
-main
+.styled-table tbody tr:last-of-type
 {
-	background-color: #fcf8cc;
-	border-top: 0px;
-	padding-top: 10px;
-	padding-left: 27%;
-	height: 60%;
+	border-bottom: 2px solid #eea941;
 }
 
-footer
+	/* make the active row look different */
+.styled-table tbody tr.active-row
 {
-	height: 10%;
-	background-color: #fcf8cc;
-	color: #000000;
-	text-align: center;
-	border-top: 0px;
+	font-weight: bold;
+	color: #eea941;
+}
+
+#LeagueTable tbody tr:last-of-type {
+	border-bottom: 2px solid #eea941;
+}
+
+#LeagueTable tbody tr.active-row {
+	font-weight: bold;
+	color: #eea941;
+}
+
+#LeagueTable tbody tr:nth-of-type(even)
+{
+	background-color: #f6e5cc;
 }
