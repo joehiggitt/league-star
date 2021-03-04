@@ -63,12 +63,13 @@
                 <input type="number" name="maxPlayers" required><br> -->
                 <label>Match Day</label><br>
                 <select name="day">
+                    <option value="none" selected="selected">None</option>
                     <option value="mon">Monday</option>
                     <option value="tue">Tuesday</option>
                     <option value="wed">Wednesday</option>
                     <option value="thu">Thursday</option>
                     <option value="fri">Friday</option>
-                    <option value="sat" selected="selected">Saturday</option>
+                    <option value="sat">Saturday</option>
                     <option value="sun">Sunday</option>
                 </select><br>
                 <label>Match Time</label><br>

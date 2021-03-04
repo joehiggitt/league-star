@@ -10,7 +10,12 @@
 	</head>
 	<body onload="addDropdownEvent()">
 		<?php
+			// Script used if login is required to view this page
 			session_start();
+			if (isset($_SESSION["user"]))
+			{
+				header("Location: dashboard.php");
+			}
 		?>
 		<header>
 			<img src="Header.png" height="80px" width="100%">
@@ -37,6 +42,7 @@
 					}
 				?>
 			</ul>
+			<!-- <script src="writeNav.js"></script> -->
 		</nav>
 		<?php
 			// Script used if login is not required to use this page
@@ -56,6 +62,10 @@
 				//echo '</aside>';
 			}
 		?>
+		<!--<script src="writeAside.js"></script>
+		<script>
+			SCRIPT.pass(["League 1", "League 2"]);
+		</script> -->
 		<main>
 			<h2>Welcome to LeagueStar!</h2>
 			<p>LeagueStar is the perfect tool to create your own league with your friends, family or colleagues. From a new place to score your fantasy football to a fast way of recording your Among Us wins, LeagueStar can cover your needs.</p>

@@ -87,7 +87,7 @@
                     --     ON UPDATE CASCADE
                 ) ENGINE=InnoDB";
         echo doSQL($conn, $sql);
-        $sql = 'INSERT INTO users(user, pass) VALUES ("user", "pass")';
+        $sql = 'INSERT INTO users(user, pass, email) VALUES ("user", "pass", "user@test.com")';
         echo doSQL($conn, $sql);
     }
 

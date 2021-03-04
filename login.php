@@ -8,7 +8,14 @@
 	</head>
 	<body>
 		<?php
+			// Script used if login is required to view this page
 			session_start();
+			if (isset($_SESSION["user"]))
+			{
+				header("Location: index.php");
+			}
+		?>
+		<?php
 			if (isset($_POST['submit']))
 			{
 				// Get details from login form
@@ -24,7 +31,7 @@
 				{
 					// Log in
 					$_SESSION["user"] = $user;
-					header("Location: index.php");
+					header("Location: dashboard.php");
 					exit;
 				}
 				else
@@ -84,7 +91,7 @@
 				<input type="password" name="pass" required><br><br>
 				<input type="submit" name="submit" value="Sign In"/>
 				<input type="reset" value="Reset"><br>
-				<p>Don't have an account? <a href="register.php" class="link">Register</a> here.</p>
+				<p>Don't have an account? <a href="register.php" class="link">Register here</a>.</p>
 			</form>
 
 		</main>
