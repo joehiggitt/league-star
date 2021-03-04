@@ -2,11 +2,13 @@
 <html lang="en" dir="ltr">
 	<head>
 		<title>LeagueStar - Create your league for free</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="LeagueStar is the perfect tool to create your own league with your friends, family or colleagues. From a new place to score your fantasy football to a fast way of recording your Among Us wins, LeagueStar can cover your needs.">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
+		<script src="javaScript.js"></script>
 	</head>
-	<body>
+	<body onload="addDropdownEvent()">
 		<?php
 			// Script used if login is required to view this page
 			session_start();
@@ -46,16 +48,18 @@
 			// Script used if login is not required to use this page
 			if (isset($_SESSION["user"]))
 			{
-				echo '<aside>';
-				echo '	<ul class="asideNav">';
-				echo '		<li><a href="viewLeague.php">League 1</a></li>';
-				echo '		<li><a href="viewTable.php">Table</a></li>';
-				echo '		<li><a href="viewFixtures.php">Fixtures</a></li>';
-				echo '		<li><a href="viewResults.php">Results</a></li>';
-				echo '		<li><a href="createLeague.php">Create New League</a></li>';
-				echo '		<li><a href="joinLeague.php">Join League</a></li>';
-				echo '	</ul>';
-				echo '</aside>';
+				//echo '<aside>';
+					echo '<div class="asideNav">';
+						echo '<button class="dropdown-btn">League 1</button>';
+						echo '<div class="dropdown-container">';
+							echo '<a href="viewTable.php">Table</a>';
+							echo '<a href="viewFixtures.php">Fixtures</a>';
+							echo '<a href="viewResults.php">Results</a>';
+						echo '</div>';
+						echo '<a href="createLeague.php">Create New League</a>';
+						echo '<a href="joinLeague.php">Join League</a>';
+					echo '</div>';
+				//echo '</aside>';
 			}
 		?>
 		<!--<script src="writeAside.js"></script>
