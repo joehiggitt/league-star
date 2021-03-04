@@ -1,6 +1,6 @@
 <?php
     // Constants
-    $testMsgs = true;
+    // $testMsgs = true;
 
     $database_host = "localhost";
     $database_user = "root";
@@ -16,10 +16,10 @@
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
-        echo "Initial Connect";
+        "Initial Connect";
 
         $sql = "CREATE DATABASE IF NOT EXISTS loginTest";
-        echo doSQL($conn, $sql);
+        doSQL($conn, $sql);
 
         // Connect to database and create table
         $conn = connectDB();
@@ -29,7 +29,7 @@
                     pass VARCHAR(128) NOT NULL,
                     email VARCHAR(128)
                 ) ENGINE=InnoDB";
-        echo doSQL($conn, $sql);
+        doSQL($conn, $sql);
         $sql = "CREATE TABLE IF NOT EXISTS league (
                     leagueId INT(6) AUTO_INCREMENT PRIMARY KEY,
                     creatorId INT(6) UNSIGNED NOT NULL,
@@ -44,12 +44,12 @@
                         ON DELETE CASCADE
                         ON UPDATE CASCADE
                 ) ENGINE=InnoDB";
-        echo doSQL($conn, $sql);
+        doSQL($conn, $sql);
         $sql = "CREATE TABLE IF NOT EXISTS teams (
                     teamId INT(6) AUTO_INCREMENT PRIMARY KEY,
                     teamName VARCHAR(30) NOT NULL
                 ) ENGINE=InnoDB";
-        echo doSQL($conn, $sql);
+        doSQL($conn, $sql);
         $sql = "CREATE TABLE IF NOT EXISTS players (
                     playerId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                     teamId INT(6),
@@ -63,7 +63,7 @@
                         ON DELETE SET NULL
                         ON UPDATE CASCADE
                 ) ENGINE=InnoDB";
-        echo doSQL($conn, $sql);
+        doSQL($conn, $sql);
         // $sql = "SHOW ENGINE InnoDB STATUS";
         // $results = doSQL($conn, $sql);
         // while ($row = $results->fetch_assoc()) {
@@ -73,6 +73,7 @@
         // }
         $sql = "CREATE TABLE IF NOT EXISTS results (
                     resultId INT(8) AUTO_INCREMENT PRIMARY KEY,
+                    matchDay DATE,
                     team1Id INT(6),
                     team2Id INT(6),
                     team1Score INT(6),
@@ -86,9 +87,9 @@
                     --     ON DELETE SET NULL
                     --     ON UPDATE CASCADE
                 ) ENGINE=InnoDB";
-        echo doSQL($conn, $sql);
+        doSQL($conn, $sql);
         $sql = 'INSERT INTO users(user, pass, email) VALUES ("user", "pass", "user@test.com")';
-        echo doSQL($conn, $sql);
+        doSQL($conn, $sql);
     }
 
     // Connects to the database and returns the connection
@@ -101,14 +102,14 @@
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
-        echo "Connected successfully";
+        // echo "Connected successfully";
         return $conn;
     }
 
     // Executes an sql statement taking the sql connection and the sql statement
     // as parameters, any results are returned
-    function doSQL($conn, $sql) {
-        if($GLOBALS['testMsgs']) {
+    function doSQL($conn, $sql, $testMsgs=true) {
+        if($testMsgs) {
             echo ("<br><code>SQL: $sql</code>");
             if ($result = $conn->query($sql))
                 echo "<code> - OK</code>";
