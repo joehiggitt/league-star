@@ -29,14 +29,8 @@
 				<?php
 					// Script used if login is not required to use this page
 					if(isset($_SESSION["user"])) {
-						echo '<div class="dropdownProfile"> 
-									<button class="dropbtn">' . $_SESSION["user"] . '</button>
-									<div class="dropdown-content">
-										<a href="profile.php">View profile</a>
-										<a href="logout.php">Sign Out</a>
-									</div>
-								</div>';
-						/*echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';*/
+						echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
+						echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
 					}
 					else {
 						echo '<li style="float:right"><a href="register.php">Register</a></li>';
@@ -45,16 +39,12 @@
 				?>
 			</ul>
 		</nav>
-		<div class="asideNav">
-            <button class="dropdown-btn">League 1</button>
-            <div class="dropdown-container">
-                <a href="viewTable.php">Table</a>
-                <a href="viewFixtures.php">Fixtures</a>
-                <a href="viewResults.php">Results</a>
-            </div>
-            <a href="createLeague.php">Create New League</a>
-            <a href="joinLeague.php">Join League</a>
-        </div>
+		<?php
+			if(isset($_SESSION["user"])) {
+				require_once("createSideBar.php");
+				createSideBar("fixture");
+			}
+		?>
 		<main style="text-align: center;">
 			<h2>League 1 Fixtures</h2>
 			<div style="text-align: center;">
