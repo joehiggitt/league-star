@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
+        <title></title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="styles.css">
     	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
-        <title></title>
-		<script src="javaScript.js"></script>
+        <script src="javaScript.js"></script>
     </head>
     <body onload="addDropdownEvent()">
         <?php
@@ -29,18 +29,28 @@
     			<li><a href="help.php">Help</a></li>
                 <?php
     				// Script used if login is required to view this page
-                    echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
-                    echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
+                    echo '<div class="dropdownProfile"> 
+                                    <button class="dropbtn">' . $_SESSION["user"] . '</button>
+                                    <div class="dropdown-content">
+                                        <a href="profile.php">View profile</a>
+                                        <a href="logout.php">Sign Out</a>
+                                    </div>
+                                </div>';
+                    /*echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';*/
                 ?>
     		</ul>
 
     	</nav>
-        <?php
-			if(isset($_SESSION["user"])) {
-				require_once("createSideBar.php");
-				createSideBar("create");
-			}
-		?>
+        <div class="asideNav">
+            <button class="dropdown-btn">League 1</button>
+            <div class="dropdown-container">
+                <a href="viewTable.php">Table</a>
+                <a href="viewFixtures.php">Fixtures</a>
+                <a href="viewResults.php">Results</a>
+            </div>
+            <a href="createLeague.php">Create New League</a>
+            <a href="joinLeague.php">Join League</a>
+        </div>
     	<main>
     		<h2>Create New League</h2>
     		<form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">

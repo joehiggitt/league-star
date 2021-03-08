@@ -28,12 +28,19 @@
 				<li><a href="about.php">About Us</a></li>
 				<li><a href="contact.php">Contact Us</a></li>
 				<li><a href="help.php">Help</a></li>
+
 				<?php
 					// Script used if login is not required to use this page
 					if(isset($_SESSION["user"]))
 					{
-						echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
-						echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
+						echo '<div class="dropdownProfile"> 
+									<button class="dropbtn">' . $_SESSION["user"] . '</button>
+									<div class="dropdown-content">
+										<a href="profile.php">View profile</a>
+										<a href="logout.php">Sign Out</a>
+									</div>
+								</div>';
+						/*echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';*/
 					}
 					else
 					{
@@ -46,16 +53,26 @@
 		</nav>
 		<?php
 			// Script used if login is not required to use this page
-			if(isset($_SESSION["user"])) {
-				require_once("createSideBar.php");
-				createSideBar();
+			if (isset($_SESSION["user"]))
+			{	
+				echo '<script src="marginJS.js"></script>';
+					echo '<div class="asideNav">';
+						echo '<button class="dropdown-btn">League 1</button>';
+						echo '<div class="dropdown-container">';
+							echo '<a href="viewTable.php">Table</a>';
+							echo '<a href="viewFixtures.php">Fixtures</a>';
+							echo '<a href="viewResults.php">Results</a>';
+						echo '</div>';
+						echo '<a href="createLeague.php">Create New League</a>';
+						echo '<a href="joinLeague.php">Join League</a>';
+					echo '</div>';
 			}
 		?>
 		<!--<script src="writeAside.js"></script>
 		<script>
 			SCRIPT.pass(["League 1", "League 2"]);
 		</script> -->
-		<main>
+		<main id="main">
 			<h2>Welcome to LeagueStar!</h2>
 			<p>LeagueStar is the perfect tool to create your own league with your friends, family or colleagues. From a new place to score your fantasy football to a fast way of recording your Among Us wins, LeagueStar can cover your needs.</p>
 			<p>Test paragraph</p>

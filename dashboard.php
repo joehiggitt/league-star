@@ -29,8 +29,14 @@
 					<?php
 						// Script used if login is not required to use this page
 						if(isset($_SESSION["user"])) {
-							echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
-							echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
+							echo '<div class="dropdownProfile"> 
+									<button class="dropbtn">' . $_SESSION["user"] . '</button>
+									<div class="dropdown-content">
+										<a href="profile.php">View profile</a>
+										<a href="logout.php">Sign Out</a>
+									</div>
+								</div>';
+							/*echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';*/
 						}
 						else {
 							echo '<li style="float:right"><a href="register.php">Register</a></li>';
@@ -39,12 +45,16 @@
 					?>
 				</ul>
 		</nav>
-		<?php
-			if(isset($_SESSION["user"])) {
-				require_once("createSideBar.php");
-				createSideBar();
-			}
-		?>
+		<div class="asideNav">
+        	<button class="dropdown-btn">League 1</button>
+        	<div class="dropdown-container">
+            	<a href="viewTable.php">Table</a>
+            	<a href="viewFixtures.php">Fixtures</a>
+            	<a href="viewResults.php">Results</a>
+        	</div>
+        	<a href="createLeague.php">Create New League</a>
+        	<a href="joinLeague.php">Join League</a>
+    	</div>
 
 		<main>
 			<h2>Dashboard</h2>
@@ -53,7 +63,7 @@
 				<table class="styled-table" style="margin-top: 80px; float: left; margin-left: 30px">
 				    <thead>
 				        <tr>
-				           <th colspan="4" style="font-size: 28px"> Name of the League </th>
+				           <th colspan="4" style="font-size: 28px"> Name of the League </th> 
 				        </tr>
 				    </thead>
 				    <tbody>
@@ -80,7 +90,7 @@
 				<table class="styled-table" style="margin-top: 80px; float: right; margin-right: 30px">
 				    <thead>
 				        <tr>
-				           <th colspan="4" style="font-size: 28px"> Name of the League </th>
+				           <th colspan="4" style="font-size: 28px"> Name of the League </th> 
 				        </tr>
 				    </thead>
 				    <tbody>
@@ -109,7 +119,7 @@
 			<table class="styled-table" style="margin-top: 80px; float: left; margin-left: 30px; margin-bottom: 40px;">
 				    <thead>
 				        <tr>
-				           <th colspan="4" style="font-size: 28px"> Name of the League </th>
+				           <th colspan="4" style="font-size: 28px"> Name of the League </th> 
 				        </tr>
 				    </thead>
 				    <tbody>
@@ -136,7 +146,7 @@
 				<table class="styled-table" style="margin-top: 80px; float: right; margin-right: 30px; margin-bottom: 40px;">
 				    <thead>
 				        <tr>
-				           <th colspan="4" style="font-size: 28px"> Name of the League </th>
+				           <th colspan="4" style="font-size: 28px"> Name of the League </th> 
 				        </tr>
 				    </thead>
 				    <tbody>
