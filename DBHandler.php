@@ -2,10 +2,10 @@
     // Constants
     // $testMsgs = true;
 
-    $database_host = "localhost";
-    $database_user = "root";
-    $database_pass = "root";
-    $database_name = "loginTest";
+    $GLOBALS['database_host'] = "localhost";
+    $GLOBALS['database_user'] = "root";
+    $GLOBALS['database_pass'] = "root";
+    $GLOBALS['database_name'] = "loginTest";
 
     // Creates the database and table if they do not exist
     function createDB() {
@@ -88,6 +88,24 @@
                     --     ON UPDATE CASCADE
                 ) ENGINE=InnoDB";
         doSQL($conn, $sql);
+        $sql = "CREATE TABLE IF NOT EXISTS totalScore (
+                    leagueId INT(6),
+                    teamId INT(6),
+                    matchesPlayed INT(6),
+                    wins INT(6),
+                    draws INT(6),
+                    losses INT(6),
+                    totalScore INT(6),
+                    PRIMARY KEY(leagueId, teamId)
+                    CONSTRAINT fk_league
+                        FOREIGN KEY (leagueId) REFERENCES league(leagueId)
+                        ON DELETE CASCADE
+                        ON UPDATE CASCADE,
+                    -- CONSTRAINT fk_team
+                    --     FOREIGN KEY (teamId) REFERENCES teams(teamId)
+                    --     ON DELETE CASCADE
+                    --     ON UPDATE CASCADE
+        ) ENGINE = InnoDB";
         $sql = 'INSERT INTO users(user, pass, email) VALUES ("user", "pass", "user@test.com")';
         doSQL($conn, $sql);
     }
@@ -108,7 +126,7 @@
 
     // Executes an sql statement taking the sql connection and the sql statement
     // as parameters, any results are returned
-    function doSQL($conn, $sql, $testMsgs=true) {
+    function doSQL($conn, $sql, $testMsgs=false) {
         if($testMsgs) {
             echo ("<br><code>SQL: $sql</code>");
             if ($result = $conn->query($sql))

@@ -10,7 +10,7 @@
             $conn = connectDB();
         ?>
         <?php
-            $sql = "SELECT * FROM users WHERE user = 'John'";
+            $sql = "SHOW TABLES FROM loginTest";
             $results = doSQL($conn, $sql);
             $data = mysqli_fetch_array($results);
             echo '<br>';
@@ -20,7 +20,7 @@
                 echo "<br><br>";
             }
             echo '<br>';
- 
+
 
             // $sql = "DROP DATABASE loginTest";
             // $results = doSQL($conn, $sql);

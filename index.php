@@ -46,20 +46,9 @@
 		</nav>
 		<?php
 			// Script used if login is not required to use this page
-			if (isset($_SESSION["user"]))
-			{
-				//echo '<aside>';
-					echo '<div class="asideNav">';
-						echo '<button class="dropdown-btn">League 1</button>';
-						echo '<div class="dropdown-container">';
-							echo '<a href="viewTable.php">Table</a>';
-							echo '<a href="viewFixtures.php">Fixtures</a>';
-							echo '<a href="viewResults.php">Results</a>';
-						echo '</div>';
-						echo '<a href="createLeague.php">Create New League</a>';
-						echo '<a href="joinLeague.php">Join League</a>';
-					echo '</div>';
-				//echo '</aside>';
+			if(isset($_SESSION["user"])) {
+				require_once("createSideBar.php");
+				createSideBar();
 			}
 		?>
 		<!--<script src="writeAside.js"></script>
