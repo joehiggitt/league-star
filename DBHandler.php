@@ -2,10 +2,10 @@
     // Constants
     // $testMsgs = true;
 
-    $database_host = "localhost";
-    $database_user = "root";
-    $database_pass = "root";
-    $database_name = "loginTest";
+    $GLOBALS['database_host'] = "localhost";
+    $GLOBALS['database_user'] = "root";
+    $GLOBALS['database_pass'] = "root";
+    $GLOBALS['database_name'] = "loginTest";
 
     // Creates the database and table if they do not exist
     function createDB() {

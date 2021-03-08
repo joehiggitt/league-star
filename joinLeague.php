@@ -5,8 +5,9 @@
 		<meta name="description" content="LeagueStar is the perfect tool to create your own league with your friends, family or colleagues. From a new place to score your fantasy football to a fast way of recording your Among Us wins, LeagueStar can cover your needs.">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
+		<script src="javaScript.js"></script>
 	</head>
-	<body>
+	<body onload="addDropdownEvent()">
 		<?php
 			// Script used if login is required to view this page
 			session_start();
@@ -34,17 +35,12 @@
 			</ul>
 
 		</nav>
-		<aside>
-			<ul class="asideNav">
-				<li><a href="viewLeague.php">League 1</a></li>
-				<li><a href="viewTable.php">Table</a></li>
-				<li><a href="viewFixtures.php">Fixtures</a></li>
-				<li><a href="viewResults.php">Results</a></li>
-				<li><a href="createLeague.php">Create New League</a></li>
-				<!-- <li><a href="addPlayers.php">Add Players</a></li> -->
-				<li><a href="joinLeague.php" id="active">Join League</a></li>
-			</ul>
-		</aside>
+		<?php
+			if(isset($_SESSION["user"])) {
+				require_once("createSideBar.php");
+				createSideBar("join");
+			}
+		?>
 		<main>
 			<h2>Join League</h2>
 	        <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">

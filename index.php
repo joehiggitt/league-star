@@ -48,6 +48,7 @@
 			// Script used if login is not required to use this page
 			if(isset($_SESSION["user"])) {
 				require_once("createSideBar.php");
+				createSideBar();
 			}
 		?>
 		<!--<script src="writeAside.js"></script>
