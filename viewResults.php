@@ -4,8 +4,9 @@
 		<title> League Star - Fixture</title>
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
+		<script src="javaScript.js"></script>
 	</head>
-	<body>
+	<body onload="addDropdownEvent()">
 		<?php
 			// Script used if login is required to view this page
 			session_start();
@@ -28,9 +29,15 @@
 				<?php
 					// Script used if login is not required to use this page
 					if(isset($_SESSION["user"])) {
-						echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
-						echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
-					}
+						echo '<div class="dropdownProfile">
+								<button class="dropbtn">' . $_SESSION["user"] . '</button>
+								<div class="dropdown-content">
+									<a href="profile.php">View profile</a>
+									<a href="logout.php">Sign Out</a>
+								</div>
+							</div>';
+							/*echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';*/
+						}
 					else {
 						echo '<li style="float:right"><a href="register.php">Register</a></li>';
 						echo '<li style="float:right"><a href="login.php">Sign In</a></li>';
@@ -38,16 +45,12 @@
 				?>
 			</ul>
 		</nav>
-		<aside>
-			<ul class="asideNav">
-				<li><a href="viewLeague.php">League 1</a></li>
-				<li><a href="viewTable.php">Table</a></li>
-				<li><a href="viewFixtures.php">Fixtures</a></li>
-				<li><a href="viewResults.php" id="active">Results</a></li>
-				<li><a href="createLeague.php">Create New League</a></li>
-				<li><a href="joinLeague.php">Join League</a></li>
-			</ul>
-		</aside>
+		<?php
+			if(isset($_SESSION["user"])) {
+				require_once("createSideBar.php");
+				createSideBar("result");
+			}
+		?>
 		<main style="text-align: center;">
 			<h2>League 1 Results</h2>
 			<div>

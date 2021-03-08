@@ -20,7 +20,7 @@
                 echo "<br><br>";
             }
             echo '<br>';
- 
+
 
             // $sql = "DROP DATABASE loginTest";
             // $results = doSQL($conn, $sql);

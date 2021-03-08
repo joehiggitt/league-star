@@ -14,6 +14,8 @@ header
 
 nav
 {
+	/* resize: both; */
+    /* overflow: hidden; */
 	background-color: #f9a618;
 	font-weight: bold;
 	font-size: 22px;
@@ -45,6 +47,7 @@ aside
 
 main
 {
+	text-align: center;
 	background-color: #ffffff;
 	border-top: 0px;
 	padding-top: 10px;
@@ -56,6 +59,7 @@ main
 footer
 {
 	height: 80px;
+	color: #000000;
 	text-align: center;
 	border-top: 0px;
 	position: relative;
@@ -70,6 +74,7 @@ footer p
 
 h1
 {
+
 	color: #3a404c;
 	background-color: #ffffffa0;
 	backdrop-filter: blur(2px);
@@ -94,7 +99,7 @@ input[type=submit], button
 {
 	background-color: #f9a618;
 	border: none;
-	margin-left: 10px;
+
 	color: #3a404c;
 	padding: 10px 20px;
 	text-align: center;
@@ -196,6 +201,55 @@ textarea
 	color: #5e636d;
 	background-color: #ee9f18;
 }
+
+.dropdown-container {
+	display: none;
+}
+
+.dropbtn {
+	text-align: center;
+	width: 150px;
+	text-decoration: none;
+	cursor: pointer;
+	border: none;
+}
+
+.dropdownProfile {
+	float: right;
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	background-color: #f9a618;
+	text-align: center;
+	/*position: relative;*/
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdownProfile:hover .dropdown-content {
+	display: block;
+}
+
+.active {
+	background-color: orange;
+	color: white;
+}
+
+
+
+
+
+
+
+
 
 .imageText
 {
