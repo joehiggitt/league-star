@@ -27,7 +27,7 @@ nav
 	width: 100%;
 }
 
-/*aside
+aside
 {
 	float: left;
 	width: 350px;
@@ -40,25 +40,10 @@ nav
 	height: 100%;
 	/*position: fixed;
 	overflow: auto;*/
-/*	position: -webkit-sticky;
+	position: -webkit-sticky;
 	position: sticky;
 	top: 49px;
-}*/
-
-/*aside
-{
-	height: 100%;
-	width: 200px;
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	background-color: #f9a618;
-	color: #3a404c;
-	font-weight: bold;
-	overflow-x: hidden;
-	padding-top: 20px
-}*/
+}
 
 main
 {
@@ -69,8 +54,6 @@ main
 	padding-left: 10px;
 	/*height: 60%;*/
 	overflow-x: hidden;
-	font-size:4vw;
-	margin-left: 250px;
 }
 
 footer
@@ -104,7 +87,7 @@ h1
 
 h2
 {
-	font-size: 30px;
+	font-size: 25px;
 }
 
 p
@@ -197,33 +180,20 @@ textarea
 
 .asideNav
 {
-	/*list-style-type: none;
+	list-style-type: none;
 	margin: 0;
-	padding: 0;*/
+	padding: 0;
 	/*height: 100%;
 	position: fixed;
 	overflow: auto;*/
-	height: 100%;
-	width: 250px;
-	position: fixed;
-	z-index: 1;
-	left: 2;
-	background-color: #f9a618;
-	overflow-x: hidden;
-	padding-top: 20px;
 }
 
-.asideNav a, .dropdown-btn
+.asideNav a
 {
 	display: block;
-	font-size: 22px;
 	color: #3a404c;
 	padding: 8px 16px;
-	width: 100%;
-	text-align: left;
 	text-decoration: none;
-	cursor: pointer;
-	outline: none;
 }
 
 .asideNav a:hover
@@ -378,7 +348,7 @@ textarea
 	/* Styling the header */
 .styled-table thead tr
 {
-	background-color: #eea941;
+	background-color: #009879;
 	color: #ffffff;
 	text-align: left;
 }
@@ -402,17 +372,17 @@ textarea
 
 .styled-table tbody tr:last-of-type
 {
-	border-bottom: 2px solid #eea941;
+	border-bottom: 2px solid #009879;
 }
 
 	/* make the active row look different */
 .styled-table tbody tr.active-row
 {
 	font-weight: bold;
-	color: #eea941;
+	color: #009879;
 }
 
-#LeagueTable tbody tr:last-of-type {
+/*#LeagueTable tbody tr:last-of-type {
 	border-bottom: 2px solid #eea941;
 }
 
@@ -424,17 +394,81 @@ textarea
 #LeagueTable tbody tr:nth-of-type(even)
 {
 	background-color: #f6e5cc;
+}*/
+
+#leagueTable
+{
+	border-collapse: collapse;
+	border:	none;
+	background-color: #ffffff;
+	text-align: center;
+	margin: auto;
+	width: 90%;
+	font-size: 25px;
 }
 
+#leagueTable tr:hover
+{
+	color: #3a404c;
+	background-color: #fbc66c;
+}
 
+#leagueTable .posColumn
+{
+	width: 8%;
+	font-weight: bold;
+	padding: 10px;
+}
 
-
-
-
-
-/*.dropdown-btn {
-	width: 100%;
-	display: block;
+#leagueTable .teamColumn
+{
 	text-align: left;
-	font-size: 22px;
-}*/
+	padding: 10px;
+}
+
+#leagueTable .dataColumns
+{
+	width: 8%;
+	padding: 10px;
+}
+
+#leagueTable .pointsColumn
+{
+	width: 8%;
+	font-weight: bold;
+	padding: 10px;
+}
+
+#leagueTable #header
+{
+	font-size: 18px;
+}
+
+#leagueTable #header:hover
+{
+	color: #000000;
+	background-color: #ffffff;
+}
+
+#leagueTable #winnerRow
+{
+	background-color: #e39818;
+	color: #ffffff;
+}
+
+#leagueTable .runnersUpRow
+{
+	background-color: #f9a618;
+	color: #3a404c;
+}
+
+#leagueTable #winnerRow:hover
+{
+	color: #5e636d;
+}
+
+#leagueTable .runnersUpRow:hover
+{
+	color: #5e636d;
+	background-color: #ee9f18;
+}

@@ -54,19 +54,12 @@
 			<ul class="navNav">
 				<li><a href="index.php">Home</a></li>
 				<li><a href="about.php">About Us</a></li>
+				<li><a href="contact.php">Contact Us</a></li>
 				<li><a href="help.php">Help</a></li>
 				<?php
 					// Script used if login is not required to use this page
-					if(isset($_SESSION["user"]))
-					{
-						echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
-						echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
-					}
-					else
-					{
-						echo '<li style="float:right"><a href="register.php">Register</a></li>';
-						echo '<li style="float:right"><a href="login.php">Sign In</a></li>';
-					}
+					echo '<li style="float:right"><a href="register.php" id="active">Register</a></li>';
+					echo '<li style="float:right"><a href="login.php">Sign In</a></li>';
 				?>
 			</ul>
 
