@@ -52,88 +52,54 @@
 			<!-- style="text-align: center; margin-top: 90px; color: black; width: 400px; height: 50px; margin-left: auto; margin-right: auto;  font-size: 42px;" -->
 			<h2>League Name</h2>
 			<div>
-				<!-- class="styled-table" style="margin-top: 40px; margin-bottom: 50px; margin-left: auto; margin-right: auto;" -->
-				<table id="leagueTable">
-					<tr id="header">
-						<td class="posColumn" style="font-weight: normal;">#</td>
-						<!-- style="text-align: left;" -->
-						<td class="teamColumn">Team</td>
-						<td class="dataColumn">GP</td>
-						<td class="dataColumn">W</td>
-						<td class="dataColumn">D</td>
-						<td class="dataColumn">L</td>
-						<td class="dataColumn">GD</td>
-						<td class="pointsColumn" style="font-weight: normal;">P</td>
-					</tr>
-					<!-- class="active-row" -->
-					<tr id="winnerRow">
-						<td class="posColumn">1</td>
-						<!-- style="text-align: left;" -->
-						<td class="teamColumn">Oak FC</td>
-						<td class="dataColumn">10</td>
-						<td class="dataColumn">9</td>
-						<td class="dataColumn">1</td>
-						<td class="dataColumn">0</td>
-						<td class="dataColumn">16</td>
-						<td class="pointsColumn">28</td>
-					</tr>
-					<tr class="runnersUpRow">
-						<td class="posColumn">2</td>
-						<!-- style="text-align: left;" -->
-						<td class="teamColumn">Owens United</td>
-						<td class="dataColumn">10</td>
-						<td class="dataColumn">6</td>
-						<td class="dataColumn">3</td>
-						<td class="dataColumn">1</td>
-						<td class="dataColumn">8</td>
-						<td class="pointsColumn">21</td>
-					</tr>
-					<tr class="runnersUpRow">
-						<td class="posColumn">3</td>
-						<!-- style="text-align: left;" -->
-						<td class="teamColumn">Richmond Rovers</td>
-						<td class="dataColumn">10</td>
-						<td class="dataColumn">4</td>
-						<td class="dataColumn">3</td>
-						<td class="dataColumn">3</td>
-						<td class="dataColumn">5</td>
-						<td class="pointsColumn">15</td>
-					</tr>
-					<tr>
-						<td class="posColumn">4</td>
-						<!-- style="text-align: left;" -->
-						<td class="teamColumn">Sheavyn City</td>
-						<td class="dataColumn">10</td>
-						<td class="dataColumn">2</td>
-						<td class="dataColumn">2</td>
-						<td class="dataColumn">6</td>
-						<td class="dataColumn">-9</td>
-						<td class="pointsColumn">8</td>
-					</tr>
-					<tr>
-						<td class="posColumn">5</td>
-						<!-- style="text-align: left;" -->
-						<td class="teamColumn">Asburne Albion</td>
-						<td class="dataColumn">10</td>
-						<td class="dataColumn">0</td>
-						<td class="dataColumn">6</td>
-						<td class="dataColumn">4</td>
-						<td class="dataColumn">-14</td>
-						<td class="pointsColumn">6</td>
-					</tr>
-					<tr>
-						<td class="posColumn">6</td>
-						<!-- style="text-align: left;" -->
-						<td class="teamColumn">Unsworth Town</td>
-						<td class="dataColumn">10</td>
-						<td class="dataColumn">0</td>
-						<td class="dataColumn">2</td>
-						<td class="dataColumn">8</td>
-						<td class="dataColumn">-17</td>
-						<td class="pointsColumn">2</td>
-					</tr>
-					<!-- and so on... -->
-				</table>
+				<?php
+					echo '<table id="leagueTable">';
+					echo '	<tr id="header">';
+					echo '		<td class="posColumn" style="font-weight: normal;">#</td>';
+					echo '		<td class="teamColumn">Team</td>';
+					echo '		<td class="dataColumn">GP</td>';
+					echo '		<td class="dataColumn">W</td>';
+					echo '		<td class="dataColumn">D</td>';
+					echo '		<td class="dataColumn">L</td>';
+					echo '		<td class="dataColumn">GD</td>';
+					echo '		<td class="pointsColumn" style="font-weight: normal;">P</td>';
+
+					$content = array(
+						array("Oak FC", "10", "9", "1", "0", "16", "28"),
+						array("Owens United", "10", "6", "3", "1", "8", "21"),
+						array("Richmond Rovers", "10", "4", "3", "3", "5", "15"),
+						array("Sheavyn City", "10", "2", "2", "6", "-9", "8"),
+						array("Asburne Albion", "10", "0", "6", "4", "-14", "6"),
+						array("Unsworth Town", "10", "0", "2", "8", "-17", "2"),
+					);
+
+					for ($i = 0; $i < count($content); $i++)
+					{ 
+						echo '	</tr>';
+						if ($i == 0)
+						{
+							echo '	<tr id="winnerRow">';
+						}
+						elseif ($i < 3)
+						{
+							echo '	<tr class="runnersUpRow">';
+						}
+						else
+						{
+							echo '	<tr>';
+						}
+						echo '		<td class="posColumn">' . ($i + 1) . '</td>';
+						echo '		<td class="teamColumn">' . $content[$i][0] . '</td>';
+						echo '		<td class="dataColumn">' . $content[$i][1] . '</td>';
+						echo '		<td class="dataColumn">' . $content[$i][2] . '</td>';
+						echo '		<td class="dataColumn">' . $content[$i][3] . '</td>';
+						echo '		<td class="dataColumn">' . $content[$i][4] . '</td>';
+						echo '		<td class="dataColumn">' . $content[$i][5] . '</td>';
+						echo '		<td class="pointsColumn">' . $content[$i][6] . '</td>';
+						echo '	</tr>';
+					}
+					echo '</table>';
+				?>
 			</div>
 			<div>
 				<!-- style="text-align: center; margin-top: 90px; color: black; width: 400px; height: 50px; margin-left: auto; margin-right: auto;  font-size: 42px;" -->
