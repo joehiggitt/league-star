@@ -1,4 +1,5 @@
 <?php
+    // Script for dynamically creating sidebar
     function createSideBar($active="") {
         require_once("DBHandler.php");
         $user = $_SESSION["user"];
