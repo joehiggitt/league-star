@@ -36,19 +36,19 @@
 				{
 					$sql = "UPDATE users SET user = '$newUser', email = '$newEmail' WHERE user = '$oldUser'";
 					$results = doSQL($conn, $sql);
-					echo("<br>".$results."<br>");
+					// echo("<br>".$results."<br>");
 				}
 				elseif ($oldUser != $newUser)
 				{
 					$sql = "UPDATE users SET user = '$newUser' WHERE user = '$oldUser'";
 					$results = doSQL($conn, $sql);
-					echo("<br>".$results."<br>");
+					// echo("<br>".$results."<br>");
 				}
 				elseif ($oldEmail != $newEmail)
 				{
 					$sql = "UPDATE users SET email = '$newEmail' WHERE user = '$oldUser'";
 					$results = doSQL($conn, $sql);
-					echo("<br>".$results."<br>");
+					// echo("<br>".$results."<br>");
 				}
 				// Test if account updated
 				$sql = "SELECT * FROM users WHERE user = '$newUser'";

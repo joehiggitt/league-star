@@ -26,7 +26,7 @@
 				if (empty($data))
 				{
 					unset($_SESSION['user']);
-					$_SESSION['deleteProfile'] == True;
+					$_SESSION['deleteProfile'] = True;
 				}
 			}
 		?>
@@ -73,19 +73,20 @@
 			}
 		?>
 		<main>
-			<h2>Delete Your LeagueStar Account</h2>
 			<?php
 				if (isset($_SESSION['deleteProfile']))
 				{
 					if ($_SESSION['deleteProfile'] == True)
 					{
-						echo '<p>You\'re account was successfully deleted, we\'re sorry to see you go.</p>';
-						echo '<p>You can always create a new account by <a href="register.php" class="link">registering again here</a>.</p>';
 						unset($_SESSION['deleteProfile']);
+						echo '<h2>Your LeagueStar Account Was Successfully Deleted</h2>';
+						echo '<p>We\'re sorry to see you go.</p>';
+						echo '<p>You can always create a new account by <a href="register.php" class="link">registering again here</a>.</p>';
 					}
 				}
 				elseif (isset($_SESSION['user']))
 				{
+					echo '<h2>Delete Your LeagueStar Account</h2>';
 					echo '<p>Are you sure you want to delete your account? This process is irreversable.</p>';
 					echo '<p>All the leagues you coordinate will be immediately terminated and you will lose your current progress in any league you take part in.</p>';
 					echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">';

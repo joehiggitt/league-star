@@ -10,7 +10,7 @@
             $conn = connectDB();
         ?>
         <?php
-            $sql = "SELECT * FROM users WHERE user = 'John'";
+            $sql = "SELECT * FROM users WHERE user = 'jiggitt'";
             $results = doSQL($conn, $sql);
             $data = mysqli_fetch_array($results);
             echo '<br>';

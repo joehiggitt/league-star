@@ -108,7 +108,7 @@
 
     // Executes an sql statement taking the sql connection and the sql statement
     // as parameters, any results are returned
-    function doSQL($conn, $sql, $testMsgs=true) {
+    function doSQL($conn, $sql, $testMsgs=false) {
         if($testMsgs) {
             echo ("<br><code>SQL: $sql</code>");
             if ($result = $conn->query($sql))
