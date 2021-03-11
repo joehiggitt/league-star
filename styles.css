@@ -30,7 +30,7 @@ nav
 aside
 {
 	float: left;
-	width: 350px;
+	/* width: 350px; */
 	background-color: #f9a618;
 	font-weight: bold;
 	font-size: 22px;
@@ -180,20 +180,31 @@ textarea
 
 .asideNav
 {
-	list-style-type: none;
+	/* list-style-type: none;
 	margin: 0;
-	padding: 0;
+	padding: 0; */
 	/*height: 100%;
 	position: fixed;
 	overflow: auto;*/
+	width: 250px;
+	z-index: 1;
+	left: 2;
+	background-color: #f9a618;
+	overflow-x: hidden;
+	padding-top: 20px;
 }
 
 .asideNav a
 {
 	display: block;
+	font-size: 22px;
 	color: #3a404c;
 	padding: 8px 16px;
+	width: 100%;
+	text-align: left;
 	text-decoration: none;
+	cursor: pointer;
+	outline: none;
 }
 
 .asideNav a:hover

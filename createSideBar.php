@@ -8,7 +8,7 @@
         } else {
             $leagueId = 0;
         }
-        echo '<div class="asideNav">';
+        echo '<aside class="asideNav">';
         $conn = connectDB();
         $sql = "SELECT league.leagueId, league.leagueName
                 FROM league
@@ -47,6 +47,6 @@
         } else {
             echo '<a href="joinLeague.php">Join League</a>';
         }
-        echo '</div>';
+        echo '</aside>';
     }
 ?>
