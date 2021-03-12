@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<title>About Page</title>
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
+		<script src="javaScript.js"></script>
+	</head>
+	<body onload="addDropdownEvent()">
+		<?php
+			session_start();
+		?>
+		<header>
+			<img src="Header.png" alt="header" height="80px" width="100%">
+			<div class="imageLogo"><img src="Logo.png" height="130px"></div>
+			<div class="imageText"><h1>LeagueStar</h1></div>
+		</header>
+
+		<nav>
+			<ul class="navNav">
+				<li><a href="index.php">Home</a></li>
+				<li><a href="about.php" id="active">About Us</a></li>
+				<li><a href="contact.php">Contact Us</a></li>
+				<li><a href="help.php">Help</a></li>
+				<?php
+					// Script used if login is not required to use this page
+					if(isset($_SESSION["user"])) {
+						echo '<div class="dropdownProfile">
+								<button class="dropbtn">' . $_SESSION["user"] . '</button>
+								<div class="dropdown-content">
+									<a href="profile.php">View profile</a>
+									<a href="logout.php">Sign Out</a>
+								</div>
+							</div>';
+					/*echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';*/
+					}
+					else {
+						echo '<li style="float:right"><a href="register.php">Register</a></li>';
+						echo '<li style="float:right"><a href="login.php">Sign In</a></li>';
+					}
+				?>
+			</ul>
+		</nav>
+		<?php
+			// Script used if login is not required to use this page
+			if(isset($_SESSION["user"])) {
+				require_once("createSideBar.php");
+				createSideBar();
+			}
+		?>
+		<main>
+			<h2>All you need to know about us</h2>
+			<p1>Who we are</p1>
+			<p>   Leaguestar is a perfect tool to create, organize and manage your own league.                  </p>
+			<p>   It is a free website, you can create a league by entering your league name ,                  </p>
+			<p>   tweaking the settings and inviting your friends! Then you can have online              </p>
+			<p>   tournament with your friends and league will update itself each match day by entering the result!               </p>
+			<p>   Some key benefits of LeagueStar include:                 </p>
+			<p>   1.Its a hassle free way of adding competition to your sport or games.               </p>
+			<p>   2.Can add regularity to casual meetups with friends              </p>
+			<p>   3.Encourages a physically and mentally healthy lifestyle.           </p>
+			<p>    The website is developed by 6 students in University of Manchester:               </p>
+			<p>    Joe, George , Edi , Almuaiyad, Aasimobin and Kehan
+			<br><br>
+		</main>
+		<footer>
+			<img src="Footer.png" height="80px" width="100%">
+			<div class="imageText">
+				<p><a href="contact.php" class="link">Contact Us</a>&emsp;&emsp;<a href="help.php" class="link">Help</a>&emsp;&emsp;<a href="terms.php" class="link">Terms & Conditions</a></p>
+			</div>
+		</footer>
+	</body>
+</html>
