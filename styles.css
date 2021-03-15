@@ -8,7 +8,7 @@ header
 {
 	height: 80px;
 	color: #000000;
-	text-align: center;
+	/*text-align: center;*/
 	position: relative;
 }
 
@@ -47,7 +47,7 @@ aside
 
 main
 {
-	text-align: center;
+	/*text-align: center;*/
 	background-color: #ffffff;
 	border-top: 0px;
 	padding-top: 10px;
@@ -218,7 +218,7 @@ textarea
 }
 
 .dropbtn {
-	text-align: center;
+	/*text-align: center;*/
 	width: 150px;
 	text-decoration: none;
 	cursor: pointer;
@@ -234,7 +234,7 @@ textarea
 .dropdown-content {
 	display: none;
 	background-color: #f9a618;
-	text-align: center;
+	/*text-align: center;*/
 	/*position: relative;*/
 	z-index: 1;
 }
