@@ -102,7 +102,7 @@
                         $out = $out["userId"];
                         $sql = "INSERT INTO league (creatorId, leagueName, preset, maxPlayer, minPlayer, matchDay, matchTime)
                                 VALUES ('$out', '$name', '$preset', '$maxTeams', '$minTeams', '$day', '$time')";
-                        $results = doSQL($conn, $sql, true);
+                        $results = doSQL($conn, $sql);
                         echo "<meta http-equiv='refresh' content='0'>";
                     }
                 }

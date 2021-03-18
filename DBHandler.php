@@ -73,11 +73,12 @@
         // }
         $sql = "CREATE TABLE IF NOT EXISTS results (
                     resultId INT(8) AUTO_INCREMENT PRIMARY KEY,
-                    matchDay DATE,
+                    leagueId INT(6),
+                    matchDay VARCHAR(16),
                     team1Id INT(6),
                     team2Id INT(6),
                     team1Score INT(6),
-                    team2Score INT(6)
+                    team2Score INT(6),
                     -- CONSTRAINT fk_team1
                     --     FOREIGN KEY (team1Id) REFERENCES teams(teamId)
                     --     ON DELETE SET NULL
@@ -86,6 +87,10 @@
                     --     FOREIGN KEY (team2Id) REFERENCES teams(teamId)
                     --     ON DELETE SET NULL
                     --     ON UPDATE CASCADE
+                    CONSTRAINT fk_leagueResult
+                        FOREIGN KEY (leagueId) REFERENCES league(leagueId)
+                        ON DELETE CASCADE
+                        ON UPDATE CASCADE
                 ) ENGINE=InnoDB";
         doSQL($conn, $sql);
         $sql = "CREATE TABLE IF NOT EXISTS totalScore (
