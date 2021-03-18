@@ -115,7 +115,34 @@
 			</table>
 		</div>
 		<div style="text-align: center;">
-			<h4>Matchday 3 (DATE)</h4>
+			<?php
+				$leagueId = $_GET["league"];
+				$conn = connectDB();
+				$sql = "SELECT results.team1Id, results.team2Id, results.team1Score, results.team2Score
+						FROM results
+						INNER JOIN league ON league.leagueId = results.leagueId
+						WHERE league.leagueId = '$leagueId' AND
+							  NOT results.team1Score IS NULL AND
+							  NOT results.team2Score IS NULL";
+				$results = doSQL($conn, $sql);
+				if ($results->num_rows === 0) {
+					echo "<p>There are no results for this league</p>";
+				} else {
+					echo "<h4>Matchday 3 (DATE)</h4>";
+					echo "<table class='styled-table'>";
+					echo "<tbody>";
+					while ($result = $results->fetch_assoc()) {
+						echo "<tr>";
+						echo "<td> " . $result['team1Id'] . " </td>";
+						echo "<td> " . $result['team1Score'] . " </td>";
+						echo "<td> " . $result['team2Score'] . " </td>";
+						echo "<td> " . $result['team2Id'] . " </td>";
+					}
+					echo "</tbody>";
+					echo "</table>";
+				}
+			?>
+			<!-- <h4>Matchday 3 (DATE)</h4>
 			<table class="styled-table">
 			    <tbody>
 			        <tr>
@@ -138,7 +165,7 @@
 			            <td>  Brighton & Hove Albion  </td>
 			        </tr>
 			    </tbody>
-			</table>
+			</table> -->
 			</div>
 			<br><br>
 		</main>

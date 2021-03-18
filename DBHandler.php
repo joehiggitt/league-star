@@ -100,17 +100,19 @@
                     wins INT(6),
                     draws INT(6),
                     losses INT(6),
+                    goalDifference INT(6),
                     totalScore INT(6),
-                    PRIMARY KEY(leagueId, teamId)
+                    PRIMARY KEY(leagueId, teamId),
                     CONSTRAINT fk_league
                         FOREIGN KEY (leagueId) REFERENCES league(leagueId)
                         ON DELETE CASCADE
-                        ON UPDATE CASCADE,
+                        ON UPDATE CASCADE
                     -- CONSTRAINT fk_team
                     --     FOREIGN KEY (teamId) REFERENCES teams(teamId)
                     --     ON DELETE CASCADE
                     --     ON UPDATE CASCADE
         ) ENGINE = InnoDB";
+        doSQL($conn, $sql);
         $sql = 'INSERT INTO users(user, pass, email) VALUES ("user", "pass", "user@test.com")';
         doSQL($conn, $sql);
     }
