@@ -19,7 +19,7 @@
 		<nav>
 			<ul class="navNav">
 				<li><a href="index.php">Home</a></li>
-				<li><a href="about.php" id="active">About Us</a></li>
+				<li><a href="about.php" class="active">About Us</a></li>
 				<li><a href="contact.php">Contact Us</a></li>
 				<li><a href="help.php">Help</a></li>
 				<?php
@@ -28,7 +28,7 @@
 						echo '<div class="dropdownProfile">
 								<button class="dropbtn">' . $_SESSION["user"] . '</button>
 								<div class="dropdown-content">
-									<a href="profile.php">View profile</a>
+									<a href="profile.php">View Profile</a>
 									<a href="logout.php">Sign Out</a>
 								</div>
 							</div>';

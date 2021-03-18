@@ -22,7 +22,7 @@
 		</header>
 		<nav>
 			<ul class="navNav">
-				<li><a href="index.php" id="active">Home</a></li>
+				<li><a href="index.php" class="active">Home</a></li>
 				<li><a href="about.php">About Us</a></li>
 				<li><a href="contact.php">Contact Us</a></li>
 				<li><a href="help.php">Help</a></li>
@@ -33,7 +33,7 @@
 						echo '<div class="dropdownProfile">
 								<button class="dropbtn">' . $_SESSION["user"] . '</button>
 								<div class="dropdown-content">
-									<a href="profile.php">View profile</a>
+									<a href="profile.php">View Profile</a>
 									<a href="logout.php">Sign Out</a>
 								</div>
 							</div>';

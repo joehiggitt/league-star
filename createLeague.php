@@ -32,7 +32,7 @@
                     echo '<div class="dropdownProfile">
                             <button class="dropbtn">' . $_SESSION["user"] . '</button>
                             <div class="dropdown-content">
-                                <a href="profile.php">View profile</a>
+                                <a href="profile.php">View Profile</a>
                                 <a href="logout.php">Sign Out</a>
                             </div>
                         </div>';
@@ -89,22 +89,21 @@
                     // $maxPlayer = $_POST['maxPlayer'];
                     $day = $_POST['day'];
                     $time = $_POST['time'];
-                    if ($name == "" or $minTeams == "" or $maxTeams == "") {
-                        echo '<p style="color: red;">Fields marked with an asterisk are required fields</p>';
-                    } else {
-                        require_once 'DBHandler.php';
-                        $conn = connectDB();
-                        print_r($_SESSION);
-                        $user = $_SESSION["user"];
-                        $sql = "SELECT userId FROM users WHERE user = '$user'";
-                        $results = doSQL($conn, $sql);
-                        $out = $results->fetch_assoc();
-                        $out = $out["userId"];
-                        $sql = "INSERT INTO league (creatorId, leagueName, preset, maxPlayer, minPlayer, matchDay, matchTime)
-                                VALUES ('$out', '$name', '$preset', '$maxTeams', '$minTeams', '$day', '$time')";
-                        $results = doSQL($conn, $sql);
-                        echo("<br>".$results."<br>");
-                    }
+
+                    require_once 'DBHandler.php';
+                    $conn = connectDB();
+                    print_r($_SESSION);
+                    $user = $_SESSION["user"];
+                    $sql = "SELECT userId FROM users WHERE user = '$user'";
+                    $results = doSQL($conn, $sql);
+                    $out = $results->fetch_assoc();
+                    $out = $out["userId"];
+                    $sql = "INSERT INTO league (creatorId, leagueName, preset, maxPlayer, minPlayer, matchDay, matchTime)
+                            VALUES ('$out', '$name', '$preset', '$maxTeams', '$minTeams', '$day', '$time')";
+                    $results = doSQL($conn, $sql);
+                    // echo("<br>".$results."<br>");
+
+                    header("Location: viewTable.php?league=" . $row["leagueId"]);
                 }
             ?>
             <br><br>

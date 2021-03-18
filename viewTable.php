@@ -32,7 +32,7 @@
 					echo '<div class="dropdownProfile">
 						    	<button class="dropbtn">' . $_SESSION["user"] . '</button>
 						    	<div class="dropdown-content">
-						    		<a href="profile.php">View profile</a>
+						    		<a href="profile.php">View Profile</a>
 							    	<a href="logout.php">Sign Out</a>
 						    	</div>
 						    </div>';
@@ -45,16 +45,12 @@
 				?>
 			</ul>
 		</nav>
-		<aside>
-			<ul class="asideNav">
-			<li><a href="viewLeague.php">League 1</a></li>
-			<li><a href="viewTable.php" id="active">Table</a></li>
-			<li><a href="viewFixtures.php">Fixtures</a></li>
-			<li><a href="viewResults.php">Results</a></li>
-			<li><a href="createLeague.php">Create New League</a></li>
-			<li><a href="joinLeague.php">Join League</a></li>
-			</ul>
-		</aside>
+		<?php
+			if(isset($_SESSION["user"])) {
+				require_once("createSideBar.php");
+				createSideBar("table");
+			}
+		?>
 		<main><!--  style="text-align: center;" -->
 			<!-- style="text-align: center; margin-top: 90px; color: black; width: 400px; height: 50px; margin-left: auto; margin-right: auto;  font-size: 42px;" -->
 			<h2>League Name</h2>
