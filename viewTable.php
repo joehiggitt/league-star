@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 	    <script src="javaScript.js"></script>
 	</head>
-	<body>
+	<body onload="addDropdownEvent()">
 		<?php
 			// Script used if login is required to view this page
 			session_start();
@@ -45,16 +45,13 @@
 				?>
 			</ul>
 		</nav>
-		<aside>
-			<ul class="asideNav">
-			<li><a href="viewLeague.php">League 1</a></li>
-			<li><a href="viewTable.php" id="active">Table</a></li>
-			<li><a href="viewFixtures.php">Fixtures</a></li>
-			<li><a href="viewResults.php">Results</a></li>
-			<li><a href="createLeague.php">Create New League</a></li>
-			<li><a href="joinLeague.php">Join League</a></li>
-			</ul>
-		</aside>
+		<?php
+			// Script used if login is not required to use this page
+			if(isset($_SESSION["user"])) {
+				require_once("createSideBar.php");
+				createSideBar();
+			}
+		?>
 		<main><!--  style="text-align: center;" -->
 			<!-- style="text-align: center; margin-top: 90px; color: black; width: 400px; height: 50px; margin-left: auto; margin-right: auto;  font-size: 42px;" -->
 			<h2>League Name</h2>
