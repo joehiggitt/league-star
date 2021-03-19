@@ -74,11 +74,12 @@
         // }
         $sql = "CREATE TABLE IF NOT EXISTS results (
                     resultId INT(8) AUTO_INCREMENT PRIMARY KEY,
-                    matchDay INT(8),
-                    team1Id INT(6) NOT NULL,
-                    team2Id INT(6) NOT NULL,
+                    leagueId INT(6),
+                    matchDay VARCHAR(16),
+                    team1Id INT(6),
+                    team2Id INT(6),
                     team1Score INT(6),
-                    team2Score INT(6)
+                    team2Score INT(6),
                     -- CONSTRAINT fk_team1
                     --     FOREIGN KEY (team1Id) REFERENCES teams(teamId)
                     --     ON DELETE SET NULL
@@ -87,6 +88,10 @@
                     --     FOREIGN KEY (team2Id) REFERENCES teams(teamId)
                     --     ON DELETE SET NULL
                     --     ON UPDATE CASCADE
+                    CONSTRAINT fk_leagueResult
+                        FOREIGN KEY (leagueId) REFERENCES league(leagueId)
+                        ON DELETE CASCADE
+                        ON UPDATE CASCADE
                 ) ENGINE=InnoDB";
         doSQL($conn, $sql);
         $sql = "CREATE TABLE IF NOT EXISTS totalScore (
@@ -96,20 +101,19 @@
                     wins INT(6),
                     draws INT(6),
                     losses INT(6),
+                    goalDifference INT(6),
                     totalScore INT(6),
-                    PRIMARY KEY(leagueId, teamId)
+                    PRIMARY KEY(leagueId, teamId),
                     CONSTRAINT fk_league
                         FOREIGN KEY (leagueId) REFERENCES league(leagueId)
                         ON DELETE CASCADE
-                        ON UPDATE CASCADE,
+                        ON UPDATE CASCADE
                     -- CONSTRAINT fk_team
                     --     FOREIGN KEY (teamId) REFERENCES teams(teamId)
                     --     ON DELETE CASCADE
                     --     ON UPDATE CASCADE
         ) ENGINE = InnoDB";
-
-
-        // Test user
+        doSQL($conn, $sql);
         $sql = 'INSERT INTO users(user, pass, email) VALUES ("user", "pass", "user@test.com")';
         doSQL($conn, $sql);
 

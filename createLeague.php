@@ -75,21 +75,22 @@
                     // $maxPlayer = $_POST['maxPlayer'];
                     $day = $_POST['day'];
                     $time = $_POST['time'];
-
-                    require_once 'DBHandler.php';
-                    $conn = connectDB();
-                    print_r($_SESSION);
-                    $user = $_SESSION["user"];
-                    $sql = "SELECT userId FROM users WHERE user = '$user'";
-                    $results = doSQL($conn, $sql);
-                    $out = $results->fetch_assoc();
-                    $out = $out["userId"];
-                    $sql = "INSERT INTO league (creatorId, leagueName, preset, minTeams, maxTeams, matchDay, matchTime)
-                            VALUES ('$out', '$name', '$preset', '$minTeams', '$maxTeams', '$day', '$time')";
-                    $results = doSQL($conn, $sql);
-                    // echo("<br>".$results."<br>");
-
-                    header("Location: viewTable.php?league=" . $row["leagueId"]);
+                    if ($name == "" or $minTeams == "" or $maxTeams == "") {
+                        echo '<p style="color: red;">Fields marked with an asterisk are required fields</p>';
+                    } else {
+                        require_once 'DBHandler.php';
+                        $conn = connectDB();
+                        print_r($_SESSION);
+                        $user = $_SESSION["user"];
+                        $sql = "SELECT userId FROM users WHERE user = '$user'";
+                        $results = doSQL($conn, $sql);
+                        $out = $results->fetch_assoc();
+                        $out = $out["userId"];
+                        $sql = "INSERT INTO league (creatorId, leagueName, preset, maxPlayer, minPlayer, matchDay, matchTime)
+                                VALUES ('$out', '$name', '$preset', '$maxTeams', '$minTeams', '$day', '$time')";
+                        $results = doSQL($conn, $sql);
+                        echo "<meta http-equiv='refresh' content='0'>";
+                    }
                 }
             ?>
             <br><br>
