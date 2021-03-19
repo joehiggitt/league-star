@@ -55,6 +55,25 @@
 				<input type="submit" name="submit" value="Join League"/>
 	        </form>
 	        <!-- Need to add php for joining a league at a later point -->
+	        <?php
+	            session_start();
+	            if (isset($_POST['submit'])) {
+	              	// Get details from join code form
+	                $join = $_POST['join'];
+	       			// Check if user details are valid or not
+	                require_once 'DBHandler.php';
+	                $conn = connectDB();
+	                $sql = "SELECT leagueId , leagueName FROM users WHERE join='$join';
+	                $results = doSQL($conn, $sql);
+	                if ($row = $results->fetch_assoc()) {
+	                    //take you to the league page 
+	                    exit;
+	            	} else {
+	                echo "fail"; // Go back to self
+	                    }
+	            }
+	        ?>
+
 	        <br><br>
 		</main>
 		<footer>
