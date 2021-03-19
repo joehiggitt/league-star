@@ -44,7 +44,7 @@
         <?php
 			if(isset($_SESSION["user"])) {
 				require_once("createSideBar.php");
-				createSideBar("create");
+				createSideBar("addResult");
 			}
 		?>
     	<main>
