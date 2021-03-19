@@ -74,17 +74,10 @@
 			<div class="imageText"><h1>LeagueStar</h1></div>
 		</header>
 		<nav>
-			<ul class="navNav">
-				<li><a href="index.php">Home</a></li>
-				<li><a href="about.php">About Us</a></li>
-				<li><a href="contact.php">Contact</a></li>
-				<li><a href="help.php">Help</a></li>
-				<?php
-					// Script used if login is required to view this page
-					echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
-					echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
-				?>
-			</ul>
+			<?php
+				require_once("createNavBar.php");
+				createNavBar($_SESSION["user"]);
+			?>
 		</nav>
 		<?php
 			if(isset($_SESSION["user"])) {

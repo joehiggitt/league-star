@@ -8,7 +8,7 @@ header
 {
 	height: 80px;
 	color: #000000;
-	text-align: center;
+	/*text-align: center;*/
 	position: relative;
 }
 
@@ -30,24 +30,27 @@ nav
 aside
 {
 	float: left;
-	/* width: 350px; */
 	background-color: #f9a618;
 	font-weight: bold;
 	font-size: 22px;
-	border-top: 0px;
-	border-right: 0px;
+	border-top: none;
 	line-height: 50px;
 	height: 100%;
-	/*position: fixed;
-	overflow: auto;*/
 	position: -webkit-sticky;
 	position: sticky;
 	top: 49px;
+	width: 275px;
+	overflow-x: hidden;
+	/* width: 350px;
+	z-index: 1;
+	left: 2;
+	position: fixed;
+	overflow: auto;*/
 }
 
 main
 {
-	text-align: center;
+	/*text-align: center;*/
 	background-color: #ffffff;
 	border-top: 0px;
 	padding-top: 10px;
@@ -95,7 +98,7 @@ p
 	font-size: 20px;
 }
 
-input[type=submit], button
+input[type=submit]/*, button*/
 {
 	background-color: #f9a618;
 	border: none;
@@ -111,7 +114,7 @@ input[type=submit], button
 	font-weight: bold;
 }
 
-input[type=submit]:hover, button:hover
+input[type=submit]:hover/*, button:hover*/
 {
 	color: #5e636d;
     background-color: #ee9f18;
@@ -164,42 +167,12 @@ textarea
 	resize: none;
 }
 
-
-/*@media screen and (max-height: 450px)
-{
-	.asideNav
-	{
-		padding-top: 15px;
-	}
-	.asideNav a
-	{
-		font-size: 18px;
-	}
-}*/
-
-
-.asideNav
-{
-	/* list-style-type: none;
-	margin: 0;
-	padding: 0; */
-	/*height: 100%;
-	position: fixed;
-	overflow: auto;*/
-	width: 250px;
-	z-index: 1;
-	left: 2;
-	background-color: #f9a618;
-	overflow-x: hidden;
-	padding-top: 20px;
-}
-
-.asideNav a
+aside a, aside button
 {
 	display: block;
 	font-size: 22px;
 	color: #3a404c;
-	padding: 8px 16px;
+	padding: 6px 16px;
 	width: 100%;
 	text-align: left;
 	text-decoration: none;
@@ -207,60 +180,133 @@ textarea
 	outline: none;
 }
 
-.asideNav a:hover
+aside button
+{
+	padding: 16px 16px;
+	background-color: #f9a618;
+	border: none;
+	display: inline-block;
+	font-family: "Didact Gothic";
+	font-weight: bold;
+}
+
+aside a:hover, aside button:hover
 {
 	color: #5e636d;
 	background-color: #ee9f18;
 }
 
-.dropdown-container {
+nav ul
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+nav ul li
+{
+	float: left;
+}
+
+nav ul a, .navDrop button
+{
+	display: block;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	color: #3a404c;
+	text-decoration: none;
+}
+
+nav ul a:hover, .navDrop button:hover
+{
+	color: #5e636d;
+	background-color: #ee9f18;
+}
+
+
+/*@media screen and (max-height: 450px)
+{
+	aside
+	{
+		padding-top: 15px;
+	}
+	aside a
+	{
+		font-size: 18px;
+	}
+}*/
+
+
+#active
+{
+	background-color: #e39818;
+	color: #ffffff; /*!important*/
+}
+
+#active:hover
+{
+	color: #5e636d;
+}
+
+#selected
+{
+	background-color: #e39818;
+	color: #ffffff;
+}
+
+#selected:hover
+{
+	color: #5e636d;
+}
+
+.asideDropContainer
+{
 	display: none;
 }
 
-.dropbtn {
-	text-align: center;
+.navDrop button
+{
+	/*text-align: center;*/
 	width: 150px;
 	text-decoration: none;
 	cursor: pointer;
 	border: none;
+	border-radius: 0px;
+	font-weight: bold;
+	font-size: 22px;
+	font-family: "Didact Gothic";
+	background-color: #f9a618;
+	padding-right: 15px;
 }
 
-.dropdownProfile {
+.navDrop
+{
 	float: right;
 	position: relative;
 	display: inline-block;
 }
 
-.dropdown-content {
+.navDropContent
+{
 	display: none;
 	background-color: #f9a618;
-	text-align: center;
-	/*position: relative;*/
 	z-index: 1;
+	/*position: relative;*/
 }
 
-.dropdown-content a {
-	color: black;
+.navDropContent a
+{
 	text-decoration: none;
 	display: block;
 }
 
-.dropdownProfile:hover .dropdown-content {
+.navDrop:hover .navDropContent
+{
 	display: block;
 }
-
-.active {
-	background-color: orange;
-	color: white;
-}
-
-
-
-
-
-
-
-
 
 .imageText
 {
@@ -291,48 +337,6 @@ textarea
 .link:hover
 {
 	color: #565d6b;
-}
-
-.navNav
-{
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-}
-
-.navNav li
-{
-	float: left;
-}
-
-.navNav a
-{
-	display: block;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
-	color: #3a404c;
-	text-decoration: none;
-}
-
-.navNav a:hover
-{
-	color: #5e636d;
-	background-color: #ee9f18;
-}
-
-
-#active
-{
-	background-color: #e39818;
-	color: #ffffff;
-}
-
-#active:hover
-{
-	color: #5e636d;
 }
 
 #deleteButtton
