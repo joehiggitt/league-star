@@ -134,7 +134,7 @@
         $leagueId = $data["leagueId"];
 
         for ($i = 0; $i < 6; $i++)
-        { 
+        {
             $teamName = "Team" . ($i + 1);
             $sql = "INSERT INTO teams (teamName) VALUES ('$teamName')";
             doSQL($conn, $sql);
