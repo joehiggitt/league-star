@@ -21,35 +21,15 @@
 			<div class="imageText"><h1>LeagueStar</h1></div>
 		</header>
 		<nav>
-			<ul class="navNav">
-			<li><a href="index.php">Home</a></li>
-			<li><a href="about.php">About Us</a></li>
-			<li><a href="contact.php">Contact Us</a></li>
-			<li><a href="help.php">Help</a></li>
 			<?php
-				// Script used if login is not required to use this page
-				if(isset($_SESSION["user"])) {
-					echo '<div class="dropdownProfile">
-						    	<button class="dropbtn">' . $_SESSION["user"] . '</button>
-						    	<div class="dropdown-content">
-						    		<a href="profile.php">View profile</a>
-							    	<a href="logout.php">Sign Out</a>
-						    	</div>
-						    </div>';
-					/*echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';*/
-					}
-					else {
-						echo '<li style="float:right"><a href="register.php">Register</a></li>';
-						echo '<li style="float:right"><a href="login.php">Sign In</a></li>';
-					}
-				?>
-			</ul>
+				require_once("createNavBar.php");
+				createNavBar($_SESSION["user"]);
+			?>
 		</nav>
 		<?php
-			// Script used if login is not required to use this page
 			if(isset($_SESSION["user"])) {
 				require_once("createSideBar.php");
-				createSideBar();
+				createSideBar("table");
 			}
 		?>
 		<main><!--  style="text-align: center;" -->
@@ -57,52 +37,74 @@
 			<h2>League Name</h2>
 			<div>
 				<?php
-					echo '<table id="leagueTable">';
-					echo '	<tr id="header">';
-					echo '		<td class="posColumn" style="font-weight: normal;">#</td>';
-					echo '		<td class="teamColumn">Team</td>';
-					echo '		<td class="dataColumn">GP</td>';
-					echo '		<td class="dataColumn">W</td>';
-					echo '		<td class="dataColumn">D</td>';
-					echo '		<td class="dataColumn">L</td>';
-					echo '		<td class="dataColumn">GD</td>';
-					echo '		<td class="pointsColumn" style="font-weight: normal;">P</td>';
+					$leagueId = $_GET['league'];
+					$conn = connectDB();
+					$sql = "SELECT * FROM totalScore
+							WHERE leagueId = '$leagueId'
+							ORDER BY totalScore DESC, goalDifference DESC";
+					$results = doSQL($conn, $sql);
 
-					$content = array(
-						array("Oak FC", "10", "9", "1", "0", "16", "28"),
-						array("Owens United", "10", "6", "3", "1", "8", "21"),
-						array("Richmond Rovers", "10", "4", "3", "3", "5", "15"),
-						array("Sheavyn City", "10", "2", "2", "6", "-9", "8"),
-						array("Asburne Albion", "10", "0", "6", "4", "-14", "6"),
-						array("Unsworth Town", "10", "0", "2", "8", "-17", "2"),
-					);
+					if ($results->num_rows === 0) {
+						echo "<p>There are no teams in this league</p>";
+					} else {
 
-					for ($i = 0; $i < count($content); $i++)
-					{ 
-						echo '	</tr>';
-						if ($i == 0)
-						{
-							echo '	<tr id="winnerRow">';
+						echo '<table id="leagueTable">';
+						echo '	<tr id="header">';
+						echo '		<td class="posColumn" style="font-weight: normal;">#</td>';
+						echo '		<td class="teamColumn">Team</td>';
+						echo '		<td class="dataColumn">GP</td>';
+						echo '		<td class="dataColumn">W</td>';
+						echo '		<td class="dataColumn">D</td>';
+						echo '		<td class="dataColumn">L</td>';
+						echo '		<td class="dataColumn">GD</td>';
+						echo '		<td class="pointsColumn" style="font-weight: normal;">P</td>';
+
+						$content = array();
+						while ($result = $results->fetch_assoc()) {
+							array_push($content, array($result["teamId"],
+													   $result["matchesPlayed"],
+												   	   $result["wins"],
+												       $result["draws"],
+												       $result["losses"],
+												       $result["goalDifference"],
+												       $result["totalScore"]));
 						}
-						elseif ($i < 3)
+						// $content = array(
+						// 	array("Oak FC", "10", "9", "1", "0", "16", "28"),
+						// 	array("Owens United", "10", "6", "3", "1", "8", "21"),
+						// 	array("Richmond Rovers", "10", "4", "3", "3", "5", "15"),
+						// 	array("Sheavyn City", "10", "2", "2", "6", "-9", "8"),
+						// 	array("Asburne Albion", "10", "0", "6", "4", "-14", "6"),
+						// 	array("Unsworth Town", "10", "0", "2", "8", "-17", "2"),
+						// );
+
+						for ($i = 0; $i < count($content); $i++)
 						{
-							echo '	<tr class="runnersUpRow">';
+							echo '	</tr>';
+							if ($i == 0)
+							{
+								echo '	<tr id="winnerRow">';
+							}
+							elseif ($i < 3)
+							{
+								echo '	<tr class="runnersUpRow">';
+							}
+							else
+							{
+								echo '	<tr>';
+							}
+							echo '		<td class="posColumn">' . ($i + 1) . '</td>';
+							echo '		<td class="teamColumn">' . $content[$i][0] . '</td>';
+							echo '		<td class="dataColumn">' . $content[$i][1] . '</td>';
+							echo '		<td class="dataColumn">' . $content[$i][2] . '</td>';
+							echo '		<td class="dataColumn">' . $content[$i][3] . '</td>';
+							echo '		<td class="dataColumn">' . $content[$i][4] . '</td>';
+							echo '		<td class="dataColumn">' . $content[$i][5] . '</td>';
+							echo '		<td class="pointsColumn">' . $content[$i][6] . '</td>';
+							echo '	</tr>';
 						}
-						else
-						{
-							echo '	<tr>';
-						}
-						echo '		<td class="posColumn">' . ($i + 1) . '</td>';
-						echo '		<td class="teamColumn">' . $content[$i][0] . '</td>';
-						echo '		<td class="dataColumn">' . $content[$i][1] . '</td>';
-						echo '		<td class="dataColumn">' . $content[$i][2] . '</td>';
-						echo '		<td class="dataColumn">' . $content[$i][3] . '</td>';
-						echo '		<td class="dataColumn">' . $content[$i][4] . '</td>';
-						echo '		<td class="dataColumn">' . $content[$i][5] . '</td>';
-						echo '		<td class="pointsColumn">' . $content[$i][6] . '</td>';
-						echo '	</tr>';
+						echo '</table>';
 					}
-					echo '</table>';
 				?>
 			</div>
 			<div>
@@ -111,7 +113,7 @@
 				<!-- style="text-align: left; margin-top: 70px; color: black; height: 50px; margin-left: auto; margin-right: auto;  font-size: 25px;" -->
 				<p>DATE: News</p>
 				<p>DATE: News</p>
-			</div>	
+			</div>
 		</main>
 		<footer>
 		<img src="Footer.png" height="80px" width="100%">

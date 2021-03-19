@@ -27,7 +27,7 @@
                     userId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                     user VARCHAR(30) NOT NULL UNIQUE,
                     pass VARCHAR(128) NOT NULL,
-                    email VARCHAR(128)
+                    email VARCHAR(128) NOT NULL
                 ) ENGINE=InnoDB";
         doSQL($conn, $sql);
         $sql = "CREATE TABLE IF NOT EXISTS league (
@@ -35,8 +35,8 @@
                     creatorId INT(6) UNSIGNED NOT NULL,
                     leagueName VARCHAR(30) NOT NULL UNIQUE,
                     preset VARCHAR(20) NOT NULL,
-                    maxPlayer INT(3) NOT NULL,
-                    minPlayer INT(3) NOT NULL,
+                    minTeams INT(3) NOT NULL,
+                    maxTeams INT(3) NOT NULL,
                     matchDay VARCHAR(10),
                     matchTime TIME,
                     CONSTRAINT fk_user
@@ -48,6 +48,7 @@
         $sql = "CREATE TABLE IF NOT EXISTS teams (
                     teamId INT(6) AUTO_INCREMENT PRIMARY KEY,
                     teamName VARCHAR(30) NOT NULL
+                    -- userId INT(6) UNSIGNED
                 ) ENGINE=InnoDB";
         doSQL($conn, $sql);
         $sql = "CREATE TABLE IF NOT EXISTS players (
@@ -73,11 +74,12 @@
         // }
         $sql = "CREATE TABLE IF NOT EXISTS results (
                     resultId INT(8) AUTO_INCREMENT PRIMARY KEY,
-                    matchDay DATE,
+                    leagueId INT(6),
+                    matchDay VARCHAR(16),
                     team1Id INT(6),
                     team2Id INT(6),
                     team1Score INT(6),
-                    team2Score INT(6)
+                    team2Score INT(6),
                     -- CONSTRAINT fk_team1
                     --     FOREIGN KEY (team1Id) REFERENCES teams(teamId)
                     --     ON DELETE SET NULL
@@ -86,6 +88,10 @@
                     --     FOREIGN KEY (team2Id) REFERENCES teams(teamId)
                     --     ON DELETE SET NULL
                     --     ON UPDATE CASCADE
+                    CONSTRAINT fk_leagueResult
+                        FOREIGN KEY (leagueId) REFERENCES league(leagueId)
+                        ON DELETE CASCADE
+                        ON UPDATE CASCADE
                 ) ENGINE=InnoDB";
         doSQL($conn, $sql);
         $sql = "CREATE TABLE IF NOT EXISTS totalScore (
@@ -95,19 +101,51 @@
                     wins INT(6),
                     draws INT(6),
                     losses INT(6),
+                    goalDifference INT(6),
                     totalScore INT(6),
-                    PRIMARY KEY(leagueId, teamId)
+                    PRIMARY KEY(leagueId, teamId),
                     CONSTRAINT fk_league
                         FOREIGN KEY (leagueId) REFERENCES league(leagueId)
                         ON DELETE CASCADE
-                        ON UPDATE CASCADE,
+                        ON UPDATE CASCADE
                     -- CONSTRAINT fk_team
                     --     FOREIGN KEY (teamId) REFERENCES teams(teamId)
                     --     ON DELETE CASCADE
                     --     ON UPDATE CASCADE
         ) ENGINE = InnoDB";
+        doSQL($conn, $sql);
         $sql = 'INSERT INTO users(user, pass, email) VALUES ("user", "pass", "user@test.com")';
         doSQL($conn, $sql);
+
+        // Test league
+        $sql = "SELECT userId FROM users WHERE user = 'user'";
+        $results = doSQL($conn, $sql);
+        $data = mysqli_fetch_array($results);
+        // echo("<br>" . $data['userId'] . "<br>");
+        $userId = $data["userId"];
+        $sql = "INSERT INTO league (creatorId, leagueName, preset, minTeams, maxTeams, matchDay, matchTime) VALUES ('$userId', 'Test League', 'football', '5', '15', 'sat', '15:00:00')";
+        $results = doSQL($conn, $sql);
+
+        // Test teams
+        $sql = "SELECT * FROM league WHERE leagueName = 'Test League' AND creatorId = '$userId'";
+        $results = doSQL($conn, $sql);
+        $data = mysqli_fetch_array($results);
+        // echo("<br>LeagueId = " . $data['leagueId'] . "<br>");
+        $leagueId = $data["leagueId"];
+
+        for ($i = 0; $i < 6; $i++)
+        {
+            $teamName = "Team" . ($i + 1);
+            $sql = "INSERT INTO teams (teamName) VALUES ('$teamName')";
+            doSQL($conn, $sql);
+            $sql = "SELECT teamId FROM teams WHERE teamName = '$teamName'";
+            $results = doSQL($conn, $sql);
+            $data = mysqli_fetch_array($results);
+            // echo("<br>" . $data['teamId'] . "<br>");
+            $teamId = $data["teamId"];
+            $sql = "INSERT INTO totalScore (leagueId, teamId, matchesPlayed, wins, draws, losses, totalScore) VALUES ('$leagueId', '$teamId', '10', '4', '2', '4', '0')";
+            doSQL($conn, $sql);
+        }
     }
 
     // Connects to the database and returns the connection

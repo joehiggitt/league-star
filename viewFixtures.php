@@ -21,23 +21,10 @@
 			<div class="imageText"><h1>LeagueStar</h1></div>
 		</header>
 		<nav>
-			<ul class="navNav">
-				<li><a href="index.php">Home</a></li>
-				<li><a href="about.php">About Us</a></li>
-				<li><a href="contact.php">Contact Us</a></li>
-				<li><a href="help.php">Help</a></li>
-				<?php
-					// Script used if login is not required to use this page
-					if(isset($_SESSION["user"])) {
-						echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
-						echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
-					}
-					else {
-						echo '<li style="float:right"><a href="register.php">Register</a></li>';
-						echo '<li style="float:right"><a href="login.php">Sign In</a></li>';
-					}
-				?>
-			</ul>
+			<?php
+				require_once("createNavBar.php");
+				createNavBar($_SESSION["user"]);
+			?>
 		</nav>
 		<?php
 			if(isset($_SESSION["user"])) {
@@ -101,9 +88,36 @@
 				</table>
 			</div>
 			<div style="text-align: center;">
-				<h4>Matchday 3 (DATE)</h4>
+				<?php
+					$leagueId = $_GET["league"];
+					$conn = connectDB();
+					$sql = "SELECT results.team1Id, results.team2Id
+							FROM results
+							INNER JOIN league ON league.leagueId = results.leagueId
+							WHERE league.leagueId = '$leagueId' AND
+								  results.team1Score IS NULL AND
+								  results.team2Score IS NULL";
+					$results = doSQL($conn, $sql);
+					if ($results->num_rows === 0) {
+						echo "<p>There are no fixtures for this league</p>";
+					} else {
+						echo "<h4>Matchday 3 (DATE)</h4>";
+						echo "<table class='styled-table'>";
+						echo "<tbody>";
+						while ($result = $results->fetch_assoc()) {
+							echo "<tr>";
+							echo "<td> " . $result['team1Id'] . " </td>";
+							echo "<td> VS </td>";
+							echo "<td> " . $result['team2Id'] . " </td>";
+						}
+						echo "</tbody>";
+						echo "</table>";
+					}
+				?>
+				<!-- <h4>Matchday 3 (DATE)</h4>
 				<table class="styled-table">
 				    <tbody>
+
 				        <tr>
 				            <td>  Arsenal  </td>
 				            <td>  VS  </td>
@@ -119,7 +133,7 @@
 				            <td>  Brighton  </td>
 				        </tr>
 				    </tbody>
-				</table>
+				</table> -->
 			</div>
 			<br><br>
 		</main>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
-		<title>LeagueStar - Create your league for free</title>
-		<meta name="description" content="LeagueStar is the perfect tool to create your own league with your friends, family or colleagues. From a new place to score your fantasy football to a fast way of recording your Among Us wins, LeagueStar can cover your needs.">
+		<title>LeagueStar - Join a league</title>
+		<meta name="description" content="Join a friend's league">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>
@@ -22,24 +22,10 @@
 			<div class="imageText"><h1>LeagueStar</h1></div>
 		</header>
 		<nav>
-			<ul class="navNav">
-				<li><a href="index.php">Home</a></li>
-				<li><a href="about.php">About Us</a></li>
-				<li><a href="contact.php">Contact Us</a></li>
-				<li><a href="help.php">Help</a></li>
-				<?php
-					// Script used if login is required to view this page
-					echo '<div class="dropdownProfile">
-							<button class="dropbtn">' . $_SESSION["user"] . '</button>
-							<div class="dropdown-content">
-								<a href="profile.php">View profile</a>
-								<a href="logout.php">Sign Out</a>
-							</div>
-						</div>';
-					/*echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';*/
-				?>
-			</ul>
-
+			<?php
+				require_once("createNavBar.php");
+				createNavBar($_SESSION["user"]);
+			?>
 		</nav>
 		<?php
 			if(isset($_SESSION["user"])) {
