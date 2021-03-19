@@ -39,6 +39,11 @@
             } else {
                 echo '<a href="addResults.php?league=' . $row["leagueId"] . '">&emsp;Enter Results</a>';
             }
+            if ($active == "addResult" && $leagueId == $count) {
+                echo '<a href="addResults.php?league=' . $row["leagueId"] . '" id="active">Add Results</a>';
+            } else {
+                echo '<a href="addResults.php?league=' . $row["leagueId"] . '">Add Results</a>';
+            }
             echo '</div>';
             $count += 1;
         }

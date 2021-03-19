@@ -308,49 +308,115 @@ nav ul a:hover, .navDrop button:hover
 	display: block;
 }
 
-.imageText
-{
+.active {
+	background-color: orange;
+	color: white;
+}
+
+
+.addresults {
+	border-collapse: collapse;
+	margin: 25px 0;
+	font-size: 0.9em;
+	min-width: 400px; /* setting the width of cells */
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	align-content: center;
+	margin: auto;
+}
+.addresults th, .addresults td {
+	padding: 12px 20px;
+	font-size: 20px;
+}
+.addresults tr {
+	border-bottom: 1px solid #dddddd;
+}
+.addresults tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
+
+.addresults tr:last-of-type {
+	border-bottom: 3px solid #f9a618;
+}
+/*.addresults tr.active-row {
+	font-weight: bold;
+	color: #f9a618;
+}*/
+
+
+
+
+
+.imageText {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
 
-.imageLogo
-{
+.imageLogo {
 	position: absolute;
 	top: -20px;
 	left: -20px;
 }
 
-.link
-{
+.link {
 	text-decoration: none;
 	color: #3a404c;
 }
 
-.link:visited
-{
+.link:visited {
 	color: #3a404c;
 }
 
-.link:hover
-{
+.link:hover {
 	color: #565d6b;
 }
 
-#deleteButtton
-{
+.navNav {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+.navNav li {
+	float: left;
+}
+
+.navNav a {
+	display: block;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	color: #3a404c;
+	text-decoration: none;
+}
+
+.navNav a:hover {
+	color: #5e636d;
+	background-color: #ee9f18;
+}
+
+
+#active {
+	background-color: #e39818;
+	color: #ffffff;
+}
+
+#active:hover {
+	color: #5e636d;
+}
+
+#deleteButtton {
 	background-color: #fc5b0d;
 }
 
-#deleteButtton:hover
-{
+#deleteButtton:hover {
 	background-color: #fd3c09;
 }
 
-.styled-table
-{
+.styled-table {
 	border-collapse: collapse; /* for smooth borders */
 	margin: 25px 0;
 	font-size: 0.9em;
@@ -361,38 +427,32 @@ nav ul a:hover, .navDrop button:hover
 }
 
 	/* Styling the header */
-.styled-table thead tr
-{
+.styled-table thead tr {
 	background-color: #009879;
 	color: #ffffff;
 	text-align: left;
 }
 
 	/* Moving onto the table cells */
-.styled-table th, .styled-table td
-{
+.styled-table th, .styled-table td {
 	padding: 12px 15px;
 } /* setting padding for all cells */
 
 	/* the table rows */
-.styled-table tbody tr
-{
+.styled-table tbody tr {
 	border-bottom: 1px solid #dddddd;
 } /* for nice finishing, setting the colour of bottom border same colour as header */
 
-.styled-table tbody tr:nth-of-type(even)
-{
+.styled-table tbody tr:nth-of-type(even) {
 	background-color: #f3f3f3;
 }
 
-.styled-table tbody tr:last-of-type
-{
+.styled-table tbody tr:last-of-type {
 	border-bottom: 2px solid #009879;
 }
 
 	/* make the active row look different */
-.styled-table tbody tr.active-row
-{
+.styled-table tbody tr.active-row {
 	font-weight: bold;
 	color: #009879;
 }
