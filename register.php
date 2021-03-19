@@ -56,11 +56,8 @@
 				<li><a href="about.php">About Us</a></li>
 				<li><a href="contact.php">Contact Us</a></li>
 				<li><a href="help.php">Help</a></li>
-				<?php
-					// Script used if login is not required to use this page
-					echo '<li style="float:right"><a href="register.php" id="active">Register</a></li>';
-					echo '<li style="float:right"><a href="login.php">Sign In</a></li>';
-				?>
+				<li style="float: right"><a href="register.php" class="active">Register</a></li>
+				<li style="float: right"><a href="login.php">Sign In</a></li>
 			</ul>
 
 		</nav>

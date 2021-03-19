@@ -79,7 +79,7 @@
 						echo '<div class="dropdownProfile">
 								<button class="dropbtn">' . $_SESSION["user"] . '</button>
 								<div class="dropdown-content">
-									<a href="profile.php">View profile</a>
+									<a href="profile.php">View Profile</a>
 									<a href="logout.php">Sign Out</a>
 								</div>
 							</div>';

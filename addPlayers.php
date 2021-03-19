@@ -81,8 +81,13 @@
 				<li><a href="help.php">Help</a></li>
 				<?php
 					// Script used if login is required to view this page
-					echo '<li style="float:right"><a href="logout.php">Sign Out</a></li>';
-					echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';
+					echo '<div class="dropdownProfile">
+								<button class="dropbtn">' . $_SESSION["user"] . '</button>
+								<div class="dropdown-content">
+									<a href="profile.php">View Profile</a>
+									<a href="logout.php">Sign Out</a>
+								</div>
+							</div>';
 				?>
 			</ul>
 		</nav>

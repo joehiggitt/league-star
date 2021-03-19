@@ -22,7 +22,7 @@
 			<ul class="navNav">
 				<li><a href="index.php">Home</a></li>
 				<li><a href="about.php">About Us</a></li>
-				<li><a href="contact.php" id="active">Contact Us</a></li>
+				<li><a href="contact.php" class="active">Contact Us</a></li>
 				<li><a href="help.php">Help</a></li>
 				<?php
 					// Script used if login is not required to use this page
@@ -30,7 +30,7 @@
 						echo '<div class="dropdownProfile">
 							<button class="dropbtn">' . $_SESSION["user"] . '</button>
 							<div class="dropdown-content">
-								<a href="profile.php">View profile</a>
+								<a href="profile.php">View Profile</a>
 								<a href="logout.php">Sign Out</a>
 							</div>
 						</div>';
