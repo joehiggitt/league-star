@@ -10,14 +10,14 @@
             $conn = connectDB();
         ?>
         <?php
-            $sql = "SELECT * FROM users WHERE user = 'jiggitt'";
-            $results = doSQL($conn, $sql);
+            $sql = "SELECT leagueName FROM league WHERE creatorId = '1'";
+            $results = doSQL($conn, $sql, True);
             $data = mysqli_fetch_array($results);
-            echo '<br>';
+            echo($data['leagueName']);
             while($row = mysqli_fetch_array($results))
             {
                 echo print_r($row);
-                echo "<br><br>";
+                echo "<br>-<br>";
             }
             echo '<br>';
 

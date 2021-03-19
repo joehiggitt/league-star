@@ -47,14 +47,10 @@
 			<div class="imageText"><h1>LeagueStar</h1></div>
 		</header>
 		<nav>
-			<ul class="navNav">
-				<li><a href="index.php">Home</a></li>
-				<li><a href="about.php">About Us</a></li>				
-				<li><a href="contact.php">Contact Us</a></li>
-				<li><a href="help.php">Help</a></li>
-				<li style="float: right"><a href="register.php">Register</a></li>
-				<li style="float: right"><a href="login.php" class="active">Sign In</a></li>
-			</ul>
+			<?php
+				require_once("createNavBar.php");
+				createNavBar("", "login");
+			?>
 
 		</nav>
 		<?php
@@ -71,6 +67,7 @@
 					if ($_SESSION["loggedIn"] == false)
 					{
 						echo '<p>The details you entered don\'t match any of our users, please try again.<p>';
+						unset($_SESSION["loggedIn"]);
 					}
 				}
 			?>

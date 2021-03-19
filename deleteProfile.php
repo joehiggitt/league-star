@@ -17,12 +17,11 @@
 		<?php
 			if (isset($_POST['submit']))
 			{
-				echo '<br>2';
 				$sql = "DELETE FROM users WHERE user = '$user'";
 				$results = doSQL($conn, $sql);
 				// Test if account deleted
 				$sql = "SELECT * FROM users WHERE user = '$user'";
-				$results = doSQL($conn, $sql);
+				$results = doSQL($conn, $sql)
 				$data = mysqli_fetch_array($results);
 				if (empty($data))
 				{
@@ -37,21 +36,17 @@
 			<div class="imageText"><h1>LeagueStar</h1></div>
 		</header>
 		<nav>
-			<ul class="navNav">
-				<li><a href="index.php">Home</a></li>
-				<li><a href="about.php">About Us</a></li>
-				<li><a href="contact.php">Contact Us</a></li>
-				<li><a href="help.php">Help</a></li>
-				<?php
-					echo '<div class="dropdownProfile">
-							<button class="dropbtn">' . $_SESSION["user"] . '</button>
-							<div class="dropdown-content">
-								<a href="profile.php">View Profile</a>
-								<a href="logout.php">Sign Out</a>
-							</div>
-						</div>';
-				?>
-			</ul>
+			<?php
+				require_once("createNavBar.php");
+				if (isset($_SESSION["user"]))
+				{
+					createNavBar($_SESSION["user"]);
+				}
+				else
+				{
+					createNavBar("");
+				}
+			?>
 		</nav>
 		<?php
 			if(isset($_SESSION["user"])) {

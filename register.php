@@ -51,15 +51,10 @@
 			<div class="imageText"><h1>LeagueStar</h1></div>
 		</header>
 		<nav>
-			<ul class="navNav">
-				<li><a href="index.php">Home</a></li>
-				<li><a href="about.php">About Us</a></li>
-				<li><a href="contact.php">Contact Us</a></li>
-				<li><a href="help.php">Help</a></li>
-				<li style="float: right"><a href="register.php" class="active">Register</a></li>
-				<li style="float: right"><a href="login.php">Sign In</a></li>
-			</ul>
-
+			<?php
+				require_once("createNavBar.php");
+				createNavBar("", "register");
+			?>
 		</nav>
 		<?php
 			if(isset($_SESSION["user"])) {
