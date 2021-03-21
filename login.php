@@ -8,79 +8,81 @@
 		<script src="javaScript.js"></script>
 	</head>
 	<body onload="addDropdownEvent()">
-		<?php
-			// Script used if login is required to view this page
-			session_start();
-			if (isset($_SESSION["user"]))
-			{
-				header("Location: index.php");
-			}
-		?>
-		<?php
-			if (isset($_POST['submit']))
-			{
-				// Get details from login form
-				$user = $_POST['user'];
-				$pass = $_POST['pass'];
-
-				// Check if user details are valid or not
-				require_once 'DBHandler.php';
-				$conn = connectDB();
-				$sql = "SELECT user, pass FROM users WHERE user='$user' AND pass='$pass'";
-				$results = doSQL($conn, $sql);
-				if ($row = $results->fetch_assoc())
-				{
-					// Log in
-					$_SESSION["user"] = $user;
-					header("Location: dashboard.php");
-					exit;
-				}
-				else
-				{
-					$_SESSION["loggedIn"] = false;
-				}
-			}
-		?>
-		<header>
-			<img src="Header.png" alt="header" height="80px" width="100%">
-			<div class="imageLogo"><img src="Logo.png" height="130px"></div>
-			<div class="imageText"><h1>LeagueStar</h1></div>
-		</header>
-		<nav>
+		<div class="content">
 			<?php
-				require_once("createNavBar.php");
-				createNavBar("", "login");
+				// Script used if login is required to view this page
+				session_start();
+				if (isset($_SESSION["user"]))
+				{
+					header("Location: index.php");
+				}
 			?>
-
-		</nav>
-		<?php
-			if(isset($_SESSION["user"])) {
-				require_once("createSideBar.php");
-				createSideBar();
-			}
-		?>
-		<main>
-			<h2>Sign In To Your LeagueStar Account!</h2>
 			<?php
-				if (isset($_SESSION["loggedIn"]))
+				if (isset($_POST['submit']))
 				{
-					if ($_SESSION["loggedIn"] == false)
+					// Get details from login form
+					$user = $_POST['user'];
+					$pass = $_POST['pass'];
+
+					// Check if user details are valid or not
+					require_once 'DBHandler.php';
+					$conn = connectDB();
+					$sql = "SELECT user, pass FROM users WHERE user='$user' AND pass='$pass'";
+					$results = doSQL($conn, $sql);
+					if ($row = $results->fetch_assoc())
 					{
-						echo '<p>The details you entered don\'t match any of our users, please try again.<p>';
-						unset($_SESSION["loggedIn"]);
+						// Log in
+						$_SESSION["user"] = $user;
+						header("Location: dashboard.php");
+						exit;
+					}
+					else
+					{
+						$_SESSION["loggedIn"] = false;
 					}
 				}
 			?>
-			<form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
-				<label>Username</label><br>
-				<input type="text" name="user" required><br>
-				<label>Password</label><br>
-				<input type="password" name="pass" required><br><br>
-				<input type="submit" name="submit" value="Sign In"/>
-				<p>Don't have an account? <a href="register.php" class="link">Register here</a>.</p>
-			</form>
+			<header>
+				<img src="Header.png" alt="header" height="80px" width="100%">
+				<div class="imageLogo"><img src="Logo.png" height="130px"></div>
+				<div class="imageText"><h1>LeagueStar</h1></div>
+			</header>
+			<nav>
+				<?php
+					require_once("createNavBar.php");
+					createNavBar("", "login");
+				?>
 
-		</main>
+			</nav>
+			<?php
+				if(isset($_SESSION["user"])) {
+					require_once("createSideBar.php");
+					createSideBar();
+				}
+			?>
+			<main>
+				<h2>Sign In To Your LeagueStar Account!</h2>
+				<?php
+					if (isset($_SESSION["loggedIn"]))
+					{
+						if ($_SESSION["loggedIn"] == false)
+						{
+							echo '<p>The details you entered don\'t match any of our users, please try again.<p>';
+							unset($_SESSION["loggedIn"]);
+						}
+					}
+				?>
+				<form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
+					<label>Username</label><br>
+					<input type="text" name="user" required><br>
+					<label>Password</label><br>
+					<input type="password" name="pass" required><br><br>
+					<input type="submit" name="submit" value="Sign In"/>
+					<p>Don't have an account? <a href="register.php" class="link">Register here</a>.</p>
+				</form>
+			</main>
+			<div class="push"></div>
+		</div>
 		<footer>
 			<img src="Footer.png" height="80px" width="100%">
 			<div class="imageText">

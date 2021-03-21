@@ -8,99 +8,143 @@
 		<script src="javaScript.js"></script>
     </head>
     <body onload="addDropdownEvent()">
-        <?php
-            // Script used if login is required to view this page
-            session_start();
-            if (!isset($_SESSION["user"]))
-            {
-                header("Location: index.php");
-            }
-        ?>
-        <header>
-    		<img src="Header.png" alt="header" height="80px" width="100%">
-            <div class="imageLogo"><img src="Logo.png" height="130px"></div>
-    		<div class="imageText"><h1>LeagueStar</h1></div>
-    	</header>
-    	<nav>
-    		<ul class="navNav">
-    			<li><a href="index.php">Home</a></li>
-    			<li><a href="about.php">About Us</a></li>
-    			<li><a href="contact.php">Contact Us</a></li>
-    			<li><a href="help.php">Help</a></li>
-                <?php
-    				// Script used if login is required to view this page
-                    echo '<div class="dropdownProfile">
-                            <button class="dropbtn">' . $_SESSION["user"] . '</button>
-                            <div class="dropdown-content">
-                                <a href="profile.php">View profile</a>
-                                <a href="logout.php">Sign Out</a>
-                            </div>
-                        </div>';
-                    /*echo '<li style="float:right"><a href="profile.php">' . $_SESSION["user"] . '</a></li>';*/
-                ?>
-    		</ul>
-
-    	</nav>
-        <?php
-			if(isset($_SESSION["user"])) {
-				require_once("createSideBar.php");
-				createSideBar("create");
-			}
-		?>
-    	<main>
-    		<h2>Add Results</h2>
-    		<form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
-                <table class="addresults">
-                    <tr class="active-row">
-                        <td>Team 1</td>
-                        <td><input type="number" name="score1" required></td>
-                        <td><input type="number" name="score2" required></td>
-                        <td>Team 2</td>
-                    </tr>
-                    <tr>
-                        <td>Team 3</td>
-                        <td><input type="number" name="score3" required></td>
-                        <td><input type="number" name="score4" required></td>
-                        <td>Team 4</td>
-                    </tr>
-                    <tr>
-                        <td>Team 5</td>
-                        <td><input type="number" name="score5" required></td>
-                        <td><input type="number" name="score6" required></td>
-                        <td>Team 6 </td>
-                    </tr>
-                </table>
-                <br>
-                <input type="submit" name="submit" value="Add Results"/>
-            </form>
+        <div class="content">
             <?php
-                if (isset($_POST['submit'])) {
-                    $score1 = $_POST['score1'];
-                    $score2 = $_POST['score2'];
-                    $score3 = $_POST['score3'];
-                    $score4 = $_POST['score4'];
-                    $score5 = $_POST['score5'];
-                    $score6 = $_POST['score6'];
-                    if ($score1 == "" or $score2 == "" or $score3 == "" or $score4 == "" or $score5 == "" or $score6 == "") {
-                        echo '<p style="color: red;">All fields must be completed.</p>';
-                    } else {
-                        require_once 'DBHandler.php';
-                        $conn = connectDB();
-                        print_r($_SESSION);
-                        $user = $_SESSION["user"];
-                        $sql = "SELECT userId FROM users WHERE user = '$user'";
-                        $results = doSQL($conn, $sql);
-                        $out = $results->fetch_assoc();
-                        $out = $out["userId"];
-                        $sql = "INSERT INTO league (creatorId, team1score, team2score, team3score, team4score, team5score, team6score)
-                                VALUES ('$out', '$score1', '$score2', '$score3', '$score4', '$score5', '$score6')";
-                        $results = doSQL($conn, $sql, true);
-                        echo("<br>".$results."<br>");
-                    }
+                // Script used if login is required to view this page
+                session_start();
+                if (!isset($_SESSION["user"]))
+                {
+                    header("Location: index.php");
                 }
             ?>
-            <br><br>
-    	</main>
+            <?php
+                if (isset($_POST['submit']))
+                {
+                    $teams = $_SESSION['teams'];
+                    // require_once('DBHandler.php');
+                    // $conn = connectDB();
+                    // print_r($_SESSION);
+                    for ($i = 0; $i < sizeof($teams); $i++)
+                    {
+                        array_push($teams[$i], $_POST[$teams[$i][0]]);
+                        array_push($teams[$i], $_POST[$teams[$i][1]]);
+                        // $team1Id = $teams[$i][0];
+                        // $team2Id = $teams[$i][1];
+                        // $team1Score = $teams[$i][4];
+                        // $team2Score = $teams[$i][5];
+                        // $sql = "UPDATE results SET team1Score = '$team1Score', team2Score = '$team2Score' WHERE team1Id = '$team1Id' AND team2Id = '$team2Id'";
+                        // $results = doSQL($conn, $sql, true);
+                        // echo("<br>".$results."<br>");
+                    }
+                    // for ($i = 0; $i < sizeof($teams); $i++)
+                    // {
+                    //     for ($j = 0; $j < sizeof($teams[$i]); $j++)
+                    //     {
+                    //         echo $teams[$i][$j];
+                    //         echo '<br>';
+                    //     }
+                    // }
+                }
+            ?>
+            <header>
+        		<img src="Header.png" alt="header" height="80px" width="100%">
+                <div class="imageLogo"><img src="Logo.png" height="130px"></div>
+        		<div class="imageText"><h1>LeagueStar</h1></div>
+        	</header>
+        	<nav>
+        		<?php
+                    if(isset($_SESSION["user"]))
+                    {
+                        require_once("createNavBar.php");
+                        createNavBar($_SESSION["user"]);
+                    }
+                ?>
+        	</nav>
+            <?php
+    			if(isset($_SESSION["user"])) {
+    				require_once("createSideBar.php");
+    				createSideBar("addResult");
+    			}
+    		?>
+        	<main>
+        		<h2>Enter Results</h2>
+                <?php
+                    if (!isset($_SESSION['league']))
+                    {
+                        $_SESSION['league'] = $_GET['league'];
+                    }
+                    $leagueId = $_SESSION['league'];
+                    require_once("DBHandler.php");
+                    $conn = connectDB();
+                    $matchDay = 0;
+                    $teams = array();
+
+                    // $sql = "SELECT * FROM results
+                    //         WHERE leagueId = '$leagueId' AND matchDay = '$matchDay'";
+                    // $results = doSQL($conn, $sql);
+                    // $data = mysqli_fetch_array($results);
+                    // if ($results->num_rows !== 0)
+                    // {
+                    //     while ($result = $results->fetch_assoc())
+                    //     {
+                    //         array_push($teams, array($result["team1Id"], $result["team2Id"]));
+                    //     }
+                    // }
+                    // for ($i = 0; $i < sizeof($teams); $i++)
+                    // {
+                    //     $team1Id = $teams[$i][0];
+                    //     $team2Id = $teams[$i][1];
+                    //     $sql = "SELECT teamName FROM teams
+                    //         WHERE teamId = '$team1Id' OR teamId = '$team2Id'";
+                    //     $results = doSQL($conn, $sql);
+                    //     if ($results->num_rows !== 0)
+                    //     {
+                    //         $teams = array();
+                    //         while ($result = $results->fetch_assoc())
+                    //         {
+                    //             array_push($teams[$i], $result["team1Id"]);
+                    //             array_push($teams[$i], $result["team2Id"]);
+                    //         }
+                    //     }
+                    // }
+
+                    $teams = array(
+                        array("1", "2", "Team 1", "Team 2"),
+                        array("3", "4", "Team 3", "Team 4"),
+                        array("5", "6", "Team 5", "Team 6")
+                    );
+                    // for ($i = 0; $i < sizeof($teams); $i++)
+                    // {
+                    //     for ($j = 0; $j < sizeof($teams[$i]); $j++)
+                    //     {
+                    //         echo $teams[$i][$j];
+                    //         echo '<br>';
+                    //     }
+                    // }
+                    if (!isset($_SESSION['teams']))
+                    {
+                        $_SESSION['teams'] = $teams;
+                    }
+
+                    echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">';
+                    echo '  <table class="addResults">';
+                    for ($i = 0; $i < sizeof($teams); $i++)
+                    {
+                        echo '      <tr>';
+                        echo '          <td>' . $teams[$i][2] . '</td>';
+                        echo '          <td><input type="number" name="' . $teams[$i][0] . '" required></td>';
+                        echo '          <td><input type="number" name="' . $teams[$i][1] . '" required></td>';
+                        echo '          <td>' . $teams[$i][3] . '</td>';
+                        echo '      </tr>';
+                    }
+                    echo '  </table><br><br>';
+                    echo '  <input type="submit" name="submit" value="Add Results"/>';
+                    echo '</form>';
+                ?>
+                <br><br>
+    	   </main>
+           <div class="push"></div>
+        </div>
         <footer>
             <img src="Footer.png" height="80px" width="100%">
             <div class="imageText">
