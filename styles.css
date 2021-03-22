@@ -434,13 +434,13 @@ nav ul a:hover, .navDrop button:hover
 	color: #5e636d;
 }
 
-#selected
+.selected
 {
 	background-color: #e39818;
 	color: #ffffff;
 }
 
-#selected:hover
+.selected:hover
 {
 	color: #5e636d;
 }

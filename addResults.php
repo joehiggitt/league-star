@@ -111,7 +111,8 @@
                     $teams = array(
                         array("1", "2", "Team 1", "Team 2"),
                         array("3", "4", "Team 3", "Team 4"),
-                        array("5", "6", "Team 5", "Team 6")
+                        array("5", "6", "Team 5", "Team 6"),
+                        array("7", "7", "Team 7", "Team 8")
                     );
                     // for ($i = 0; $i < sizeof($teams); $i++)
                     // {
