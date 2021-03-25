@@ -63,13 +63,13 @@
 	       			// Check if user details are valid or not
 	                require_once 'DBHandler.php';
 	                $conn = connectDB();
-	                $sql = "SELECT leagueId , leagueName FROM users WHERE join='$join';
+	                $sql = "SELECT leagueId FROM users WHERE join='$join'";
 	                $results = doSQL($conn, $sql);
-	                if ($row = $results->fetch_assoc()) {
-	                    //take you to the league page 
+	                if ($result -> num_rows!=0) {
+	                    echo "League found";
 	                    exit;
 	            	} else {
-	                echo "fail"; // Go back to self
+	                echo "fail";  Go back to self
 	                    }
 	            }
 	        ?>

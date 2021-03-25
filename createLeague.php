@@ -100,9 +100,18 @@
                         $results = doSQL($conn, $sql);
                         $out = $results->fetch_assoc();
                         $out = $out["userId"];
-                        do{
+                        $flag = 0
+                        while($flag == 0){
                             $code = mt_rand(100000,999999);
-                        }while($code)    
+                             $sql = "SELECT leagueId FROM users WHERE user='$user'";
+                            $results = doSQL($conn, $sql);
+                            if ($result -> num_rows!=0) {
+                                $flag = 1;
+                                exit;
+                            } else {
+                                flag = 0; // Go back to self
+                            }
+                        }    
                         $sql = "INSERT INTO league (leagueId, creatorId, leagueName, preset, maxPlayer, minPlayer, matchDay, matchTime)
                                 VALUES ('$code',$out', '$name', '$preset', '$maxTeams', '$minTeams', '$day', '$time')";
                         $results = doSQL($conn, $sql);
