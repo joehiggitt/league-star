@@ -8,7 +8,7 @@
         } else {
             $leagueId = 0;
         }
-        echo '<aside>';
+        echo '<aside class="asideStl">';
         $conn = connectDB();
         $sql = "SELECT league.leagueId, league.leagueName
                 FROM league
@@ -16,6 +16,7 @@
                 WHERE users.user = '$user'";
         $results = doSQL($conn, $sql);
         $count = 1;
+        echo '<div class="sideMenu">';
         while($row = $results->fetch_assoc()) {
             echo '<button class="asideDropBtn">' . $row["leagueName"] . '</button>';
             echo '<div class="asideDropContainer">';
@@ -52,6 +53,7 @@
         } else {
             echo '<a href="joinLeague.php">Join League</a>';
         }
+        echo '</div>';
         echo '</aside>';
     }
 ?>

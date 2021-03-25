@@ -35,10 +35,11 @@
 			?>
 
 			<main>
-				<h2>Dashboard</h2>
+				<h2 style="text-align: center">Dashboard</h2>
 				<!-- style="text-align: center; margin-top: 90px; background-color: #009879; color: white; width: 400px; height: 50px; margin-left: 250px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); font-size: 33px" -->
 				<div>
-					<table class="styled-table" style="margin-top: 80px; float: left; margin-left: 30px">
+					<br><br>
+					<table class="styled-table">
 					    <thead>
 					        <tr>
 					           <th colspan="4" style="font-size: 28px"> Name of the League </th>
@@ -64,8 +65,9 @@
 					        <!-- and so on... -->
 					    </tbody>
 					</table>
+					<br><br>
 
-					<table class="styled-table" style="margin-top: 80px; float: right; margin-right: 30px">
+					<table class="styled-table">
 					    <thead>
 					        <tr>
 					           <th colspan="4" style="font-size: 28px"> Name of the League </th>
@@ -91,10 +93,11 @@
 					        <!-- and so on... -->
 					    </tbody>
 					</table>
+					<br><br>
 				</div>
 
 				<div>
-				<table class="styled-table" style="margin-top: 80px; float: left; margin-left: 30px; margin-bottom: 40px;">
+				<table class="styled-table">
 					    <thead>
 					        <tr>
 					           <th colspan="4" style="font-size: 28px"> Name of the League </th>
@@ -120,8 +123,9 @@
 					        <!-- and so on... -->
 					    </tbody>
 					</table>
+					<br><br>
 
-					<table class="styled-table" style="margin-top: 80px; float: right; margin-right: 30px; margin-bottom: 40px;">
+					<table class="styled-table">
 					    <thead>
 					        <tr>
 					           <th colspan="4" style="font-size: 28px"> Name of the League </th>
@@ -147,6 +151,7 @@
 					        <!-- and so on... -->
 					    </tbody>
 					</table>
+					<br><br><br>
 				</div>
 			</main>
 			<div class="push"></div>

@@ -1,38 +1,38 @@
 <?php
 	function createNavBar($user, $active = "")
 	{
-		echo '<ul>';
+		echo '<div class="topnav" id="theTopnav">';
 		if ($active == "home")
 		{
-			echo '<li><a href="index.php" id="active">Home</a></li>';
+			echo '<a href="index.php" class="activeHome" id="active">Home</a>';
 		}
 		else 
 		{
-			echo '<li><a href="index.php">Home</a></li>';
+			echo '<a href="index.php">Home</a>';
 		}
 		if ($active == "about")
 		{
-			echo '<li><a href="about.php" id="active">About Us</a></li>';
+			echo '<a href="about.php" id="active">About Us</a>';
 		}
 		else
 		{
-			echo '<li><a href="about.php">About Us</a></li>';
+			echo '<a href="about.php">About Us</a>';
 		}
 		if ($active == "contact")
 		{
-			echo '<li><a href="contact.php" id="active">Contact Us</a></li>';
+			echo '<a href="contact.php" id="active">Contact Us</a>';
 		}
 		else
 		{
-			echo '<li><a href="contact.php">Contact Us</a></li>';
+			echo '<a href="contact.php">Contact Us</a>';
 		}
 		if ($active == "help")
 		{
-			echo '<li><a href="help.php" id="active">Help</a></li>';
+			echo '<a href="help.php" id="active">Help</a>';
 		}
 		else
 		{
-			echo '<li><a href="help.php">Help</a></li>';
+			echo '<a href="help.php">Help</a>';
 		}
 		if ($user != "")
 		{
@@ -54,22 +54,36 @@
 		}
 		else
 		{
+			echo '<div class="navOpt">';
 			if ($active == "register")
 			{
-				echo '<li style="float:right"><a href="register.php" id="active">Register</a></li>';
+				echo '<a href="register.php" id="active">Register</a>';
 			}
 			else
 			{
-				echo '<li style="float:right"><a href="register.php">Register</a></li>';
+				echo '<a href="register.php">Register</a>';
 			}
 			if ($active == "login")
 			{
-				echo '<li style="float:right"><a href="login.php" id="active">Sign In</a></li>';
+				echo '<a href="login.php" id="active">Sign In</a>';
 			}
 			else
 			{
-				echo '<li style="float:right"><a href="login.php">Sign In</a></li>';
+				echo '<a href="login.php">Sign In</a>';
 			}
 		}
+			echo '<a href="javascript:void(0);" class="icon" onclick="responsiveNav()">&#9776;</a>';
+		echo '</div>';
 	}
 ?>
+
+<script type="text/javascript">
+	function responsiveNav() {
+	  var x = document.getElementById("theTopnav");
+	  if (x.className === "topnav") {
+	    x.className += " responsive";
+	  } else {
+	    x.className = "topnav";
+	  }
+	}
+</script>
