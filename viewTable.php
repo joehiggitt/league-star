@@ -43,9 +43,9 @@
 							WHERE leagueId = '$leagueId'
 							ORDER BY totalScore DESC, goalDifference DESC";
 					$results = doSQL($conn, $sql);
+					$content = array();
 					if ($results->num_rows !== 0)
 					{
-						$content = array();
 						while ($result = $results->fetch_assoc()) {
 							array_push($content, array($result["teamId"],
 													   $result["matchesPlayed"],
@@ -55,6 +55,8 @@
 												       $result["goalDifference"],
 												       $result["totalScore"]));
 						}
+					} else {
+						array_push($content, array("","","","","","",""));
 					}
 					$sql = "SELECT leagueName FROM league
 							WHERE leagueId = '$leagueId'";
