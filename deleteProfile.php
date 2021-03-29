@@ -22,7 +22,7 @@
 					$results = doSQL($conn, $sql);
 					// Test if account deleted
 					$sql = "SELECT * FROM users WHERE user = '$user'";
-					$results = doSQL($conn, $sql)
+					$results = doSQL($conn, $sql);
 					$data = mysqli_fetch_array($results);
 					if (empty($data))
 					{

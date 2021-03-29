@@ -107,7 +107,7 @@ input[type=submit]/*, button*/
 {
 	background-color: #f9a618;
 	border: none;
-
+	transition: 0.25s ease;
 	color: #3a404c;
 	padding: 10px 20px;
 	text-align: center;
@@ -183,6 +183,7 @@ aside a, aside button
 	text-decoration: none;
 	cursor: pointer;
 	outline: none;
+	transition: 0.1s ease;
 }
 
 aside button
@@ -228,6 +229,7 @@ aside a:hover, aside button:hover
 	padding-right: 15px;
 	color: #3a404c;
 	text-decoration: none;
+	transition: 0.1s ease;
 }
 
 .topnav a:hover, .navDrop button:hover
@@ -236,7 +238,7 @@ aside a:hover, aside button:hover
 	background-color: #ee9f18;
 }
 
-.topnav .icon 
+.topnav .icon
 {
   display: none;
 }
@@ -423,6 +425,50 @@ aside a:hover, aside button:hover
 	height: 80px;
 }
 
+.imageCaption
+{
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.imageCaption p
+{
+	font-size: 40px !important;
+	color: #3a404c;
+}
+
+.imageContainer
+{
+	position: relative;
+	width: 100%;
+}
+
+.imageContainer img
+{
+	opacity: 1;
+	display: block;
+	width: 100%;
+	height: auto;
+	transition: .5s ease;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+}
+
+.imageContainer:hover img
+{
+	opacity: 0.3;
+}
+
+.imageContainer:hover .imageCaption
+{
+	opacity: 1;
+}
 
 .imageText
 {
@@ -437,6 +483,16 @@ aside a:hover, aside button:hover
 	position: absolute;
 	top: -20px;
 	left: -20px;
+}
+
+.index h2
+{
+	font-size: 175%;
+}
+
+.index p
+{
+	font-size: 150%;
 }
 
 .link
