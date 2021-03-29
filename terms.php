@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="LeagueStar's Terms & Conditions">
 		<title>Terms & Conditions - LeagueStar</title>
-		<meta name="description" content="Terms & Conditions">
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>

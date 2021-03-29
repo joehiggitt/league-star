@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>LeagueStar Account</title>
-		<meta name="description" content="Manage your LeagueStar account here.">
+		<meta charset="utf-8">
+		<meta name="description" content="Manage your LeagueStar Account.">
+		<title>My LeagueStar Account</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>

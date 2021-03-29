@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
-		<title>League Star - viewTable</title>
+		<meta charset="utf-8">
+		<meta name="description" content="View your leagues's current table.">
+		<title>League - LeagueStar</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
-	    <script src="javaScript.js"></script>
+		<script src="javaScript.js"></script>
 	</head>
 	<body onload="addDropdownEvent()">
 		<div class="content">
@@ -49,11 +52,11 @@
 						while ($result = $results->fetch_assoc()) {
 							array_push($content, array($result["teamId"],
 													   $result["matchesPlayed"],
-												   	   $result["wins"],
-												       $result["draws"],
-												       $result["losses"],
-												       $result["goalDifference"],
-												       $result["totalScore"]));
+													   $result["wins"],
+													   $result["draws"],
+													   $result["losses"],
+													   $result["goalDifference"],
+													   $result["totalScore"]));
 						}
 					} else {
 						array_push($content, array("","","","","","",""));

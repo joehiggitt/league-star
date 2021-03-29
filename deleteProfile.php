@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Delete Your LeagueStar Account</title>
-		<meta name="description" content="Delete your LeagueStar account here.">
+		<meta charset="utf-8">
+		<meta name="description" content="Delete your LeagueStar account.">
+		<title>Delete Account - My LeagueStar Account</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>

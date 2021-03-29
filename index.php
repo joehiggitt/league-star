@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
-		<title>LeagueStar - Create your league for free</title>
+		<meta charset="utf-8">
 		<meta name="description" content="LeagueStar is the perfect tool to create your own league with your friends.">
+		<title>LeagueStar - Create your league for free</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 	</head>

@@ -2,9 +2,11 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <meta name="description" content="Create a new league.">
+        <title>Create A New League - LeagueStar</title>
+        <link rel="shortcut icon" type="image/png" href="Logo.png">
         <link rel="stylesheet" type="text/css" href="styles.css">
     	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
-        <title></title>
 		<script src="javaScript.js"></script>
     </head>
     <body onload="addDropdownEvent()">
