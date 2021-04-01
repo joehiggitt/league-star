@@ -18,16 +18,33 @@
                 }
             ?>
             <?php
+                require_once("DBHandler.php");
                 if (isset($_POST['submit']))
                 {
-                    $teams = $_SESSION['teams'];
+                    // $teams = $_SESSION['teams'];
                     // require_once('DBHandler.php');
                     // $conn = connectDB();
-                    // print_r($_SESSION);
-                    for ($i = 0; $i < sizeof($teams); $i++)
-                    {
-                        array_push($teams[$i], $_POST[$teams[$i][0]]);
-                        array_push($teams[$i], $_POST[$teams[$i][1]]);
+                    unset($_POST['submit']);
+                    print_r($_POST);
+                    $keys = array_keys($_POST);
+                    $conn = connectDB();
+                    for ($i=0; $i<sizeof($_POST); $i=$i+2) {
+                        $team1 = $keys[$i];
+                        $team2 = $keys[$i+1];
+                        $score1 = $_POST[$team1];
+                        $score2 = $_POST[$team2];
+                        if ($score1 != "" and $score2 != "") {
+                            $sql = "UPDATE results
+                                    SET team1Score = '$score1', team2Score = '$score2'
+                                    WHERE team1Id = '$team1' AND team2Id = '$team2'"; // Only works if no rematch. Needs to be updated for matchday
+                            $results = doSQL($conn, $sql, true);
+                            print_r($results);
+                        }
+                    }
+                    // for ($i = 0; $i < sizeof($teams); $i++)
+                    // {
+                    //     array_push($teams[$i], $_POST[$teams[$i][0]]);
+                    //     array_push($teams[$i], $_POST[$teams[$i][1]]);
                         // $team1Id = $teams[$i][0];
                         // $team2Id = $teams[$i][1];
                         // $team1Score = $teams[$i][4];
@@ -35,7 +52,7 @@
                         // $sql = "UPDATE results SET team1Score = '$team1Score', team2Score = '$team2Score' WHERE team1Id = '$team1Id' AND team2Id = '$team2Id'";
                         // $results = doSQL($conn, $sql, true);
                         // echo("<br>".$results."<br>");
-                    }
+                    // }
                     // for ($i = 0; $i < sizeof($teams); $i++)
                     // {
                     //     for ($j = 0; $j < sizeof($teams[$i]); $j++)
@@ -69,27 +86,21 @@
         	<main>
         		<h2>Enter Results</h2>
                 <?php
-                    if (!isset($_SESSION['league']))
-                    {
-                        $_SESSION['league'] = $_GET['league'];
-                    }
-                    $leagueId = $_SESSION['league'];
-                    require_once("DBHandler.php");
-                    $conn = connectDB();
+                    $leagueId = $_GET['league'];
                     $matchDay = 0;
                     $teams = array();
-
-                    // $sql = "SELECT * FROM results
-                    //         WHERE leagueId = '$leagueId' AND matchDay = '$matchDay'";
-                    // $results = doSQL($conn, $sql);
-                    // $data = mysqli_fetch_array($results);
-                    // if ($results->num_rows !== 0)
-                    // {
-                    //     while ($result = $results->fetch_assoc())
-                    //     {
-                    //         array_push($teams, array($result["team1Id"], $result["team2Id"]));
-                    //     }
-                    // }
+                    $conn = connectDB();
+                    $sql = "SELECT team1Id, team2Id
+                            FROM results
+                            WHERE leagueId = '$leagueId' AND
+                                  team1Score IS NULL AND
+                                  team2Score IS NULL";
+                    $results = doSQL($conn, $sql);
+                    $data = mysqli_fetch_array($results);
+                    while ($result = $results->fetch_assoc())
+                    {
+                        array_push($teams, array($result["team1Id"], $result["team2Id"])); // Need to switch to team name
+                    }
                     // for ($i = 0; $i < sizeof($teams); $i++)
                     // {
                     //     $team1Id = $teams[$i][0];
@@ -109,10 +120,10 @@
                     // }
 
                     $teams = array(
-                        array("1", "2", "Team 1", "Team 2"),
-                        array("3", "4", "Team 3", "Team 4"),
-                        array("5", "6", "Team 5", "Team 6"),
-                        array("7", "7", "Team 7", "Team 8")
+                        array("Team 1", "Team 2"),
+                        array("Team 3", "Team 4"),
+                        array("Team 5", "Team 6"),
+                        array("Team 7", "Team 8")
                     );
                     // for ($i = 0; $i < sizeof($teams); $i++)
                     // {
@@ -127,15 +138,15 @@
                         $_SESSION['teams'] = $teams;
                     }
 
-                    echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">';
+                    echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '?league=' . $leagueId . '" method="post">';
                     echo '  <table class="addResults">';
                     for ($i = 0; $i < sizeof($teams); $i++)
                     {
                         echo '      <tr>';
-                        echo '          <td>' . $teams[$i][2] . '</td>';
-                        echo '          <td><input type="number" name="' . $teams[$i][0] . '" required></td>';
-                        echo '          <td><input type="number" name="' . $teams[$i][1] . '" required></td>';
-                        echo '          <td>' . $teams[$i][3] . '</td>';
+                        echo '          <td>' . $teams[$i][0] . '</td>';
+                        echo '          <td><input type="number" name="' . $teams[$i][0] . '"></td>';
+                        echo '          <td><input type="number" name="' . $teams[$i][1] . '"></td>';
+                        echo '          <td>' . $teams[$i][1] . '</td>';
                         echo '      </tr>';
                     }
                     echo '  </table><br><br>';
