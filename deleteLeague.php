@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Delete Your LeagueStar Account</title>
+		<title>Delete Your League</title>
 		<meta name="description" content="Delete your LeagueStar account here.">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
@@ -11,23 +11,24 @@
 		<div class="content">
 			<?php
 				session_start();
-				$user = $_SESSION["user"];
+				$leagueName = $_SESSION["leagueName"];
+				$leagueId = $_SESSION["leagueId"];
 				require_once 'DBHandler.php';
 				$conn = connectDB();
 			?>
 			<?php
 				if (isset($_POST['submit']))
 				{
-					$sql = "DELETE FROM users WHERE user = '$user'";
+					$sql = "DELETE FROM league WHERE leagueId = '$leagueId'";
 					$results = doSQL($conn, $sql);
-					// Test if account deleted
-					$sql = "SELECT * FROM users WHERE user = '$user'";
+					// Test if league deleted
+					$sql = "SELECT * FROM league WHERE leagueId = '$leagueId'";
 					$results = doSQL($conn, $sql);
 					$data = mysqli_fetch_array($results);
 					if (empty($data))
 					{
-						unset($_SESSION['user']);
-						$_SESSION['deleteProfile'] = True;
+						unset($_SESSION['leagueId']);
+						$_SESSION['deleteLeague'] = True;
 					}
 				}
 			?>
@@ -57,25 +58,24 @@
 			?>
 			<main>
 				<?php
-					if (isset($_SESSION['deleteProfile']))
+					if (isset($_SESSION['deleteLeague']))
 					{
-						if ($_SESSION['deleteProfile'] == True)
+						if ($_SESSION['deleteLeague'] == True)
 						{
-							unset($_SESSION['deleteProfile']);
-							echo '<h2>Your LeagueStar Account Was Successfully Deleted</h2>';
-							echo '<p>We\'re sorry to see you go.</p>';
-							echo '<p>You can always create a new account by <a href="register.php" class="link">registering again here</a>.</p>';
+							unset($_SESSION['deleteLeague']);
+							echo '<h2>Your League Was Successfully Deleted</h2>';
+							echo '<p>You can always create a new league by <a href="createLeague.php" class="link">clicking here</a>.</p>';
 						}
 					}
 					elseif (isset($_SESSION['user']))
 					{
-						echo '<h2>Delete Your LeagueStar Account</h2>';
-						echo '<p>Are you sure you want to delete your account? This process is irreversable.</p>';
-						echo '<p>All the leagues you coordinate will be immediately terminated and you will lose your current progress in any league you take part in.</p>';
+						echo '<h2>Delete Your League</h2>';
+						echo '<p>Are you sure you want to delete this league? This process is irreversable.</p>';
+						echo '<p>All the teams you coordinate will be immediately deleted and you will lose your current progress in this league.</p>';
 						echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">';
-						echo '	<input type="submit" name="submit" value="Delete My LeagueStar Account" id="deleteButtton">';
+						echo '	<input type="submit" name="submit" value="Delete League" id="deleteButtton">';
 						echo '</form><br>';
-						echo '<form action="profile.php">';
+						echo '<form action="viewTable.php?leagueId='. $leagueId .'">';
 						echo '	<input type="submit" value="Take Me Back"><br><br>';
 						echo '</form>';
 					}

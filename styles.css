@@ -172,6 +172,12 @@ textarea
 	resize: none;
 }
 
+/*aside
+{
+	padding-bottom: 90%;
+	position: static;
+}*/
+
 aside a, aside button
 {
 	display: block;
@@ -369,6 +375,7 @@ aside a:hover, aside button:hover
 .asideDropContainer
 {
 	display: none;
+	background-color: #F7BB4F;
 }
 
 
