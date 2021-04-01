@@ -33,11 +33,13 @@
                         $team2 = $keys[$i+1];
                         $score1 = $_POST[$team1];
                         $score2 = $_POST[$team2];
-                        $sql = "UPDATE results
-                                SET team1Score = '$score1', team2Score = '$score1'
-                                WHERE team1Id = '$team1' AND team2Id = '$team2'"; // Only works if no rematch. Needs to be updated for matchday
-                        $results = doSQL($conn, $sql, true);
-                        print_r($results);
+                        if ($score1 != "" and $score2 != "") {
+                            $sql = "UPDATE results
+                                    SET team1Score = '$score1', team2Score = '$score2'
+                                    WHERE team1Id = '$team1' AND team2Id = '$team2'"; // Only works if no rematch. Needs to be updated for matchday
+                            $results = doSQL($conn, $sql, true);
+                            print_r($results);
+                        }
                     }
                     // for ($i = 0; $i < sizeof($teams); $i++)
                     // {
@@ -87,7 +89,7 @@
                     $leagueId = $_GET['league'];
                     $matchDay = 0;
                     $teams = array();
-
+                    $conn = connectDB();
                     $sql = "SELECT team1Id, team2Id
                             FROM results
                             WHERE leagueId = '$leagueId' AND
@@ -142,8 +144,8 @@
                     {
                         echo '      <tr>';
                         echo '          <td>' . $teams[$i][0] . '</td>';
-                        echo '          <td><input type="number" name="' . $teams[$i][0] . '" required></td>';
-                        echo '          <td><input type="number" name="' . $teams[$i][1] . '" required></td>';
+                        echo '          <td><input type="number" name="' . $teams[$i][0] . '"></td>';
+                        echo '          <td><input type="number" name="' . $teams[$i][1] . '"></td>';
                         echo '          <td>' . $teams[$i][1] . '</td>';
                         echo '      </tr>';
                     }
