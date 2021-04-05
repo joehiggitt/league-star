@@ -1,4 +1,3 @@
-
 function addDropdownEvent() {
 	var dropdown = document.getElementsByClassName("asideDropBtn");
 	var i;
