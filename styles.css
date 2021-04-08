@@ -125,7 +125,7 @@ input[type=submit]:hover/*, button:hover*/
     background-color: #ee9f18;
 }
 
-input[type=text], input[type=number], input[type=time], input[type=password]
+input[type=text], input[type=number], input[type=time], input[type=email], input[type=password]
 {
 	background-color: #feeccc;
 	border: none;
@@ -156,6 +156,11 @@ select
 	width: 100%;
 	font-size: 20px;
 	padding: 5px;
+}
+
+select option:hover, select option:checked
+{
+	box-shadow: 0 0 10px 100px #fcc972 inset;
 }
 
 textarea
@@ -418,6 +423,78 @@ aside a:hover, aside button:hover
 	font-weight: bold;
 	color: #E56F0E;
 }*/
+
+.checkboxContainer
+{
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.checkboxContainer input
+{
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+
+.checkmark
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 25px;
+	width: 25px;
+	background-color: #feeccc;
+}
+
+.checkboxContainer:hover input ~ .checkmark, .checkboxContainer input:checked:hover ~ .checkmark
+{
+	background-color: #fcc972;
+}
+
+.checkboxContainer input:checked ~ .checkmark
+{
+	background-color: #feeccc;
+}
+
+.checkmark:after
+{
+	content: "";
+	position: absolute;
+	display: none;
+}
+
+.checkboxContainer input:checked ~ .checkmark:after
+{
+	display: block;
+}
+
+.checkboxContainer .checkmark:after
+{
+	left: 9px;
+	top: 5px;
+	width: 5px;
+	height: 10px;
+	border: solid #000000;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.checkboxContainer .checkmark:after:hover
+{
+	border-color: #3a404c;
+}
 
 .content
 {
