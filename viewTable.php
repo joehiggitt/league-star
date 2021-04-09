@@ -3,7 +3,16 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="View your leagues's current table.">
-		<title>League - LeagueStar</title>
+		<?php
+			$leagueId = $_GET['league'];
+			require_once("DBHandler.php");
+			$conn = connectDB();
+			$sql = "SELECT leagueName, joinCode FROM league
+					WHERE leagueId = '$leagueId'";
+			$data = mysqli_fetch_array(doSQL($conn, $sql));
+			$leagueName = $data['leagueName'];
+			echo '<title>' . $leagueName . ' - LeagueStar</title>';
+		?>
 		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
@@ -39,9 +48,6 @@
 			<main style="text-align: center;">
 				<!-- style="text-align: center; margin-top: 90px; color: black; width: 400px; height: 50px; margin-left: auto; margin-right: auto;  font-size: 42px;" -->
 				<?php
-					$leagueId = $_GET['league'];
-					require_once("DBHandler.php");
-					$conn = connectDB();
 					$sql = "SELECT * FROM totalScore
 							WHERE leagueId = '$leagueId'
 							ORDER BY totalScore DESC, goalDifference DESC";
@@ -49,23 +55,26 @@
 					$content = array();
 					if ($results->num_rows !== 0)
 					{
+						$numTeams = 0;
 						while ($result = $results->fetch_assoc()) {
-							array_push($content, array($result["teamId"],
+							$teamId = $result['teamId'];
+							$sql = "SELECT teamName FROM teams
+									WHERE teamId = '$teamId'";
+							$data = mysqli_fetch_array(doSQL($conn, $sql));
+							array_push($content, array($data["teamName"],
 													   $result["matchesPlayed"],
 													   $result["wins"],
 													   $result["draws"],
 													   $result["losses"],
 													   $result["goalDifference"],
 													   $result["totalScore"]));
+							$numTeams++;
 						}
 					} else {
 						array_push($content, array("","","","","","",""));
 					}
-					$sql = "SELECT leagueName FROM league
-							WHERE leagueId = '$leagueId'";
-					$results = doSQL($conn, $sql);
-					$data = mysqli_fetch_array($results);
-					echo '<h2>' . $data['leagueName'] . '</h2>';
+					echo '<h2>' . $leagueName . '</h2>';
+					echo '<p>Join Code: ' . $data['joinCode'] . '</p>';
 					// $_SESSION["leagueName"] = $data['leagueName'];
 					// $_SESSION["leagueId"] = $leagueId;
 				?>
@@ -135,10 +144,25 @@
 					<p>DATE: News</p>
 				</div>
 				<?php
+					$sql = "SELECT minTeams FROM league WHERE leagueId = '$leagueId'";
+					$results = doSQL($conn, $sql);
+					$minTeams = mysqli_fetch_array($results)['minTeams'];
+					if ($numTeams >= $minTeams)
+					{
+						echo '<form action="startLeague.php?league=' . $leagueId . '" method="post">';
+						echo '	<input type="submit" value="Start League"><br><br>';
+						echo '</form>';
+					}
+					else
+					{
+						echo '<p>At least ' . $minTeams . ' are needed to start the league.</p>';
+					}
+
 					echo '<form action="deleteLeague.php?league=' . $leagueId . '" method="post">'
 				?>
 					<input type="submit" value="Delete League" id="deleteButtton">
 				</form>
+				<br><br>
 			</main>
 			<div class="push"></div>
 		</div>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="description" content="Create a new league.">
-        <title>Create A New League - LeagueStar</title>
-        <link rel="shortcut icon" type="image/png" href="Logo.png">
-        <link rel="stylesheet" type="text/css" href="styles.css">
-    	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Create a new league.">
+		<title>Create A League - LeagueStar</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>
 	</head>
 	<body onload="addDropdownEvent()">
@@ -75,15 +75,19 @@
 					<input type="submit" name="submit" value="Create League"/>
 				</form>
 				<?php
-					if (isset($_POST['submit'])) {
+					if (isset($_POST['submit']))
+					{
+						$joinCode = '';
+						for ($i = 0; $i < 8; $i++)
+						{
+							$joinCode = $joinCode . strval(random_int(0, 9));
+						}
 						$name = $_POST['name'];
+						$preset = $_POST['preset'];
+						$isHomeAway = 0;
 						if (isset($_POST['isHomeAway']))
 						{
-							$preset = $_POST['preset'] . 'HA';
-						}
-						else
-						{
-							$preset = $_POST['preset'] . 'SM';
+							$isHomeAway = 1;
 						}
 						$minTeams = $_POST['minTeams'];
 						$maxTeams = $_POST['maxTeams'];
@@ -91,9 +95,12 @@
 						// $maxPlayer = $_POST['maxPlayer'];
 						$day = $_POST['day'];
 						$time = $_POST['time'];
-						if ($minTeams > $maxTeams) {
+						if ($minTeams > $maxTeams)
+						{
 							echo '<p>The minimum number of teams must be less than or equal to the maximum number of teams.</p>';
-						} else {
+						}
+						else
+						{
 							require_once 'DBHandler.php';
 							$conn = connectDB();
 							print_r($_SESSION);
@@ -102,8 +109,8 @@
 							$results = doSQL($conn, $sql);
 							$out = $results->fetch_assoc();
 							$out = $out["userId"];
-							$sql = "INSERT INTO league (creatorId, leagueName, preset, maxTeams, minTeams, matchDay, matchTime)
-									VALUES ('$out', '$name', '$preset', '$maxTeams', '$minTeams', '$day', '$time')";
+							$sql = "INSERT INTO league (userId, joinCode, hasStarted, leagueName, preset, isHomeAway, maxTeams, minTeams, matchDay, matchTime)
+									VALUES ('$out', '$joinCode', 0, '$name', '$preset', '$isHomeAway', '$maxTeams', '$minTeams', '$day', '$time')";
 							$results = doSQL($conn, $sql);
 							echo "<meta http-equiv='refresh' content='0'>";
 						}
