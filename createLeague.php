@@ -71,7 +71,7 @@
 						<option value="sun">Sunday</option>
 					</select><br>
 					<label>Match Time</label><br>
-					<input type="time" name="time"><br><br>
+					<input type="time" name="time" required><br><br> <!-- Has to be required for now -->
 					<input type="submit" name="submit" value="Create League"/>
 				</form>
 				<?php
@@ -104,7 +104,7 @@
 							$out = $out["userId"];
 							$sql = "INSERT INTO league (creatorId, leagueName, preset, maxTeams, minTeams, matchDay, matchTime)
 									VALUES ('$out', '$name', '$preset', '$maxTeams', '$minTeams', '$day', '$time')";
-							$results = doSQL($conn, $sql);
+							$results = doSQL($conn, $sql, true);
 							echo "<meta http-equiv='refresh' content='0'>";
 						}
 					}

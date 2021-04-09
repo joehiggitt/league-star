@@ -97,17 +97,20 @@
                     wins INT(6),
                     draws INT(6),
                     losses INT(6),
+                    goalDifference INT(6),
                     totalScore INT(6),
-                    PRIMARY KEY(leagueId, teamId)
-                    CONSTRAINT fk_league
-                        FOREIGN KEY (leagueId) REFERENCES league(leagueId)
-                        ON DELETE CASCADE
-                        ON UPDATE CASCADE,
+                    CONSTRAINT PK
+                        PRIMARY KEY(leagueId, teamId)
+                    -- CONSTRAINT fk_league
+                    --     FOREIGN KEY (leagueId) REFERENCES league(leagueId)
+                    --     ON DELETE CASCADE
+                    --     ON UPDATE CASCADE,
                     -- CONSTRAINT fk_team
                     --     FOREIGN KEY (teamId) REFERENCES teams(teamId)
                     --     ON DELETE CASCADE
                     --     ON UPDATE CASCADE
         ) ENGINE = InnoDB";
+        doSQL($conn, $sql);
 
 
         // Test user
@@ -131,7 +134,7 @@
         $leagueId = $data["leagueId"];
 
         for ($i = 0; $i < 6; $i++)
-        { 
+        {
             $teamName = "Team" . ($i + 1);
             $sql = "INSERT INTO teams (teamName) VALUES ('$teamName')";
             doSQL($conn, $sql);
@@ -140,7 +143,7 @@
             $data = mysqli_fetch_array($results);
             // echo("<br>" . $data['teamId'] . "<br>");
             $teamId = $data["teamId"];
-            $sql = "INSERT INTO totalScore (leagueId, teamId, matchesPlayed, wins, draws, losses, totalScore) VALUES ('$leagueId', '$teamId', '10', '4', '2', '4', '0')";
+            $sql = "INSERT INTO totalScore (leagueId, teamId, matchesPlayed, wins, draws, losses, goalDifference, totalScore) VALUES ('$leagueId', '$teamId', '10', '4', '2', '4', '0', '0')";
             doSQL($conn, $sql);
         }
     }
