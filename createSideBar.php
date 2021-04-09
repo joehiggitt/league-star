@@ -12,7 +12,7 @@
         $conn = connectDB();
         $sql = "SELECT league.leagueId, league.leagueName
                 FROM league
-                INNER JOIN users ON users.userId=league.creatorId
+                INNER JOIN users ON users.userId=league.userId
                 WHERE users.user = '$user'";
         $results = doSQL($conn, $sql);
         $count = 1;

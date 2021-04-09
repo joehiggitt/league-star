@@ -16,7 +16,7 @@
 				$leagueId = $_GET["league"];
 				$user = $_SESSION["user"];
 				$sql = "SELECT league.leagueName from league
-						INNER JOIN users ON league.creatorId = users.userId
+						INNER JOIN users ON league.userId = users.userId
 						WHERE league.leagueId = '$leagueId'
 						AND users.user = '$user'";
 				$results = doSQL($conn, $sql);
@@ -74,11 +74,11 @@
 					}
 					elseif (isset($_SESSION['user']))
 					{
-						echo '<h2>Delete Your League</h2>';
-						echo '<p>Are you sure you want to delete this league? This process is irreversable.</p>';
-						echo '<p>All the teams you coordinate will be immediately deleted and you will lose your current progress in this league.</p>';
+						echo '<h2>Delete ' . $leagueName . '</h2>';
+						echo '<p>Are you sure you want to delete ' . $leagueName . '? This process is irreversable.</p>';
+						echo '<p>All the teams and their progress in ' . $leagueName . ' will be immediately deleted.</p>';
 						echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">';
-						echo '	<input type="submit" name="submit" value="Delete League" id="deleteButtton">';
+						echo '	<input type="submit" name="submit" value="Delete ' . $leagueName . '" id="deleteButtton">';
 						echo '</form><br>';
 						echo '<form action="viewTable.php?league='. $leagueId .'" method="post">';
 						echo '	<input type="submit" value="Take Me Back"><br><br>';
