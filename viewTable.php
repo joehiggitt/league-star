@@ -66,6 +66,8 @@
 					$results = doSQL($conn, $sql);
 					$data = mysqli_fetch_array($results);
 					echo '<h2>' . $data['leagueName'] . '</h2>';
+					// $_SESSION["leagueName"] = $data['leagueName'];
+					// $_SESSION["leagueId"] = $leagueId;
 				?>
 				<div>
 					<?php
@@ -132,6 +134,11 @@
 					<p>DATE: News</p>
 					<p>DATE: News</p>
 				</div>
+				<?php
+					echo '<form action="deleteLeague.php?league=' . $leagueId . '" method="post">'
+				?>
+					<input type="submit" value="Delete League" id="deleteButtton">
+				</form>
 			</main>
 			<div class="push"></div>
 		</div>
