@@ -3,7 +3,16 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="View your leagues's current table.">
-		<title>League - LeagueStar</title>
+		<?php
+			$leagueId = $_GET['league'];
+			require_once("DBHandler.php");
+			$conn = connectDB();
+			$sql = "SELECT leagueName, joinCode FROM league
+					WHERE leagueId = '$leagueId'";
+			$data = mysqli_fetch_array(doSQL($conn, $sql));
+			$leagueName = $data['leagueName'];
+			echo '<title>' . $leagueName . ' - LeagueStar</title>';
+		?>
 		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
@@ -18,9 +27,6 @@
 				{
 					header("Location: index.php");
 				}
-				$leagueId = $_GET['league'];
-				require_once("DBHandler.php");
-				$conn = connectDB();
 			?>
 			<header>
 				<img src="Header.png" alt="header" height="80px" width="100%">
@@ -67,10 +73,7 @@
 					} else {
 						array_push($content, array("","","","","","",""));
 					}
-					$sql = "SELECT leagueName, joinCode FROM league
-							WHERE leagueId = '$leagueId'";
-					$data = mysqli_fetch_array(doSQL($conn, $sql));
-					echo '<h2>' . $data['leagueName'] . '</h2>';
+					echo '<h2>' . $leagueName . '</h2>';
 					echo '<p>Join Code: ' . $data['joinCode'] . '</p>';
 					// $_SESSION["leagueName"] = $data['leagueName'];
 					// $_SESSION["leagueId"] = $leagueId;

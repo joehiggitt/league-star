@@ -1,8 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Delete Your League</title>
-		<meta name="description" content="Delete your LeagueStar account here.">
+		<meta charset="utf-8">
+		<meta name="description" content="Delete a league here.">
+		<?php
+			$leagueId = $_GET['league'];
+			require_once("DBHandler.php");
+			$conn = connectDB();
+			$sql = "SELECT leagueName, joinCode FROM league
+					WHERE leagueId = '$leagueId'";
+			$data = mysqli_fetch_array(doSQL($conn, $sql));
+			$leagueName = $data['leagueName'];
+			echo '<title>Delete League - ' . $leagueName . ' - LeagueStar</title>';
+		?>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>
@@ -11,9 +22,6 @@
 		<div class="content">
 			<?php
 				session_start();
-				require_once 'DBHandler.php';
-				$conn = connectDB();
-				$leagueId = $_GET["league"];
 				$user = $_SESSION["user"];
 				$sql = "SELECT league.leagueName from league
 						INNER JOIN users ON league.userId = users.userId
