@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Create an account - LeagueStar</title>
-		<meta name="description" content="Create a LeagueStar account to begin creating your custom leagues!">
+		<meta charset="utf-8">
+		<meta name="description" content="Create your LeagueStar Account to begin creating custom leagues!">
+		<title>Create An Account - LeagueStar</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>
@@ -18,34 +20,34 @@
 				}
 			?>
 			<?php
-	            if (isset($_POST['submit'])) {
-	                // Get details from the register form
-	                $user = $_POST['user'];
+				if (isset($_POST['submit'])) {
+					// Get details from the register form
+					$user = $_POST['user'];
 					$email = $_POST['email'];
 					$emailCheck = $_POST['emailCheck'];
-	                $pass = $_POST['pass'];
-	                $passCheck = $_POST['passCheck'];
+					$pass = $_POST['pass'];
+					$passCheck = $_POST['passCheck'];
 
-	                // Checks if the given passwords match and adds details to database
-	                // if they do
-	                if ($pass == $passCheck && $email == $emailCheck) {
-	                    require_once 'DBHandler.php';
-	                    $conn = connectDB();
-	                    $sql = "INSERT INTO users (user, pass, email)
-	                            VALUES ('$user', '$pass', '$email')";
-	                    $results = doSQL($conn, $sql);
-	                    echo("<br>".$results."<br>");
+					// Checks if the given passwords match and adds details to database
+					// if they do
+					if ($pass == $passCheck && $email == $emailCheck) {
+						require_once 'DBHandler.php';
+						$conn = connectDB();
+						$sql = "INSERT INTO users (user, pass, email)
+								VALUES ('$user', '$pass', '$email')";
+						$results = doSQL($conn, $sql);
+						echo("<br>".$results."<br>");
 
-	                    // Log in
-	                    if($results == 1) {
-	                        $_SESSION["user"] = $user;
-	                        header("Location: index.php");
-	                        exit;
-	                    }
+						// Log in
+						if($results == 1) {
+							$_SESSION["user"] = $user;
+							header("Location: index.php");
+							exit;
+						}
 
-	                }
-	            }
-	        ?>
+					}
+				}
+			?>
 			<header>
 				<img src="Header.png" alt="header" height="80px" width="100%">
 				<div class="imageLogo"><img src="Logo.png" height="130px"></div>

@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
-		<title> League Star - Fixture</title>
+		<meta charset="utf-8">
+		<meta name="description" content="View your league's upcoming fixtures.">
+		<title>Fixtures - LeagueStar</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>
@@ -38,54 +41,54 @@
 				<div style="text-align: center;">
 					<h4>Matchday 1 (DATE)</h4>
 					<table class="styled-table">
-					    <!-- <thead>
-					        <tr>
-					            <th>  Team1  </th>
-					            <th>  Match</th>
-					            <th>  Score  </th>
-					            <th>  Team2  </th>
-					        </tr>
-					    </thead> -->
-					    <tbody>
-					        <tr>
-					            <td>  Man City  </td>
-					            <td>  VS  </td>
-					            <td>  Man United  </td>
+						<!-- <thead>
+							<tr>
+								<th>  Team1  </th>
+								<th>  Match</th>
+								<th>  Score  </th>
+								<th>  Team2  </th>
+							</tr>
+						</thead> -->
+						<tbody>
+							<tr>
+								<td>  Man City  </td>
+								<td>  VS  </td>
+								<td>  Man United  </td>
 
-					        </tr>
-					            <td>  Arsenal  </td>
-					            <td>  VS  </td>
-					            <td>  Brighton  </td>
-					        </tr>
-					        <tr>
-					            <td>  Liverpool  </td>
-					            <td>  VS  </td>
-					            <td>  Everton  </td>
-					        </tr>
-					        <!-- and so on... -->
-					    </tbody>
+							</tr>
+								<td>  Arsenal  </td>
+								<td>  VS  </td>
+								<td>  Brighton  </td>
+							</tr>
+							<tr>
+								<td>  Liverpool  </td>
+								<td>  VS  </td>
+								<td>  Everton  </td>
+							</tr>
+							<!-- and so on... -->
+						</tbody>
 					</table>
 				</div>
 				<div>
 					<h4>Matchday 2 (DATE)</h4>
 					<table class="styled-table">
-					    <tbody>
-					        <tr>
-					            <td>  Brighton  </td>
-					            <td>  VS  </td>
-					            <td>  Liverpool  </td>
+						<tbody>
+							<tr>
+								<td>  Brighton  </td>
+								<td>  VS  </td>
+								<td>  Liverpool  </td>
 
-					        </tr>
-					            <td>  Arsenal  </td>
-					            <td>  VS  </td>
-					            <td>  Man City  </td>
-					        </tr>
-					        <tr>
-					            <td>  Man United  </td>
-					            <td>  VS  </td>
-					            <td>  Everton  </td>
-					        </tr>
-					    </tbody>
+							</tr>
+								<td>  Arsenal  </td>
+								<td>  VS  </td>
+								<td>  Man City  </td>
+							</tr>
+							<tr>
+								<td>  Man United  </td>
+								<td>  VS  </td>
+								<td>  Everton  </td>
+							</tr>
+						</tbody>
 					</table>
 				</div>
 				<div style="text-align: center;">
@@ -117,23 +120,23 @@
 					?>
 					<!-- <h4>Matchday 3 (DATE)</h4>
 					<table class="styled-table">
-					    <tbody>
+						<tbody>
 
-					        <tr>
-					            <td>  Arsenal  </td>
-					            <td>  VS  </td>
-					            <td>  Everton  </td>
-					        </tr>
-					            <td>  Liverpool  </td>
-					            <td>  VS  </td>
-					            <td>  Man United  </td>
-					        </tr>
-					        <tr>
-					            <td>  Man City  </td>
-					            <td>  VS  </td>
-					            <td>  Brighton  </td>
-					        </tr>
-					    </tbody>
+							<tr>
+								<td>  Arsenal  </td>
+								<td>  VS  </td>
+								<td>  Everton  </td>
+							</tr>
+								<td>  Liverpool  </td>
+								<td>  VS  </td>
+								<td>  Man United  </td>
+							</tr>
+							<tr>
+								<td>  Man City  </td>
+								<td>  VS  </td>
+								<td>  Brighton  </td>
+							</tr>
+						</tbody>
 					</table> -->
 				</div>
 				<br><br>

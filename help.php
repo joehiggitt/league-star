@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
-		<title>Help Page</title>
+		<meta charset="utf-8">
+		<meta name="description" content="Some FAQs about LeagueStar.">
+		<title>Help - LeagueStar</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>

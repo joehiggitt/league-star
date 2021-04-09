@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
-		<title>LeagueStar - Join a league</title>
-		<meta name="description" content="Join a friend's league">
+		<meta charset="utf-8">
+		<meta name="description" content="Join a league and start competing.">
+		<title>Join A League - LeagueStar</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>

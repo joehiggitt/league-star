@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="styles.css">
-    	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
-        <title></title>
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Add results to your league.">
+		<title>Add Results - LeagueStar</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
+		<title></title>
 		<script src="javaScript.js"></script>
     </head>
     <body onload="addDropdownEvent()">

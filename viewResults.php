@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
-		<title> League Star - Fixture</title>
+		<meta charset="utf-8">
+		<meta name="description" content="View your league's recent results.">
+		<title>Results - League Star</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>
@@ -38,62 +41,62 @@
 				<div>
 					<h4>Matchday 1 (DATE)</h4>
 					<table class="styled-table">
-				    <!-- <thead>
-				        <tr>
-				            <th>  Team1  </th>
-				            <th>  Match</th>
-				            <th>  Score  </th>
-				            <th>  Team2  </th>
-				        </tr>
-				    </thead> -->
-				    <tbody>
-				        <tr class="active-row">
-				            <td>  Manchester City  </td>
-				            <td>  3  </td>
-				            <td>  0  </td>
-				            <td>  Manchester United  </td>
+					<!-- <thead>
+						<tr>
+							<th>  Team1  </th>
+							<th>  Match</th>
+							<th>  Score  </th>
+							<th>  Team2  </th>
+						</tr>
+					</thead> -->
+					<tbody>
+						<tr class="active-row">
+							<td>  Manchester City  </td>
+							<td>  3  </td>
+							<td>  0  </td>
+							<td>  Manchester United  </td>
 
-				        </tr>
-				        <tr>
-				            <td>  Arsenal  </td>
-				            <td>  2  </td>
-				            <td>  2  </td>
-				            <td>  Brighton & Hove Albion  </td>
-				        </tr>
-				        <tr>
-				            <td>  Liverpool  </td>
-				            <td>  1  </td>
-				            <td>  1  </td>
-				            <td>  Everton  </td>
-				        </tr>
-				        <!-- and so on... -->
-				    </tbody>
+						</tr>
+						<tr>
+							<td>  Arsenal  </td>
+							<td>  2  </td>
+							<td>  2  </td>
+							<td>  Brighton & Hove Albion  </td>
+						</tr>
+						<tr>
+							<td>  Liverpool  </td>
+							<td>  1  </td>
+							<td>  1  </td>
+							<td>  Everton  </td>
+						</tr>
+						<!-- and so on... -->
+					</tbody>
 				</table>
 			</div>
 			<div style="text-align: center;">
 				<h4>Matchday 2 (DATE)</h4>
 				<table class="styled-table">
-				    <tbody>
-				        <tr>
-				            <td>  Brighton & Hove Albion  </td>
-				            <td>  0  </td>
-				            <td>  0  </td>
-				            <td>  Liverpool  </td>
+					<tbody>
+						<tr>
+							<td>  Brighton & Hove Albion  </td>
+							<td>  0  </td>
+							<td>  0  </td>
+							<td>  Liverpool  </td>
 
-				        </tr>
-				        <tr>
-				            <td>  Arsenal  </td>
-				            <td>  1  </td>
-				            <td>  2  </td>
-				            <td>  Manchester City  </td>
-				        </tr>
-				        <tr class="active-row">
-				            <td>  Manchester United  </td>
-				            <td>  3  </td>
-				            <td>  0  </td>
-				            <td>  Everton  </td>
-				        </tr>
-				    </tbody>
+						</tr>
+						<tr>
+							<td>  Arsenal  </td>
+							<td>  1  </td>
+							<td>  2  </td>
+							<td>  Manchester City  </td>
+						</tr>
+						<tr class="active-row">
+							<td>  Manchester United  </td>
+							<td>  3  </td>
+							<td>  0  </td>
+							<td>  Everton  </td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
 			<div style="text-align: center;">
@@ -126,27 +129,27 @@
 				?>
 				<!-- <h4>Matchday 3 (DATE)</h4>
 				<table class="styled-table">
-				    <tbody>
-				        <tr>
-				            <td>  Arsenal  </td>
-				            <td>  1  </td>
-				            <td>  3  </td>
-				            <td>  Everton  </td>
+					<tbody>
+						<tr>
+							<td>  Arsenal  </td>
+							<td>  1  </td>
+							<td>  3  </td>
+							<td>  Everton  </td>
 
-				        </tr>
-				        <tr class="active-row">
-				            <td>  Liverpool  </td>
-				            <td>  3  </td>
-				            <td>  2  </td>
-				            <td>  Manchester United  </td>
-				        </tr>
-				        <tr>
-				            <td>  Manchester City  </td>
-				            <td>  5  </td>
-				            <td>  1  </td>
-				            <td>  Brighton & Hove Albion  </td>
-				        </tr>
-				    </tbody>
+						</tr>
+						<tr class="active-row">
+							<td>  Liverpool  </td>
+							<td>  3  </td>
+							<td>  2  </td>
+							<td>  Manchester United  </td>
+						</tr>
+						<tr>
+							<td>  Manchester City  </td>
+							<td>  5  </td>
+							<td>  1  </td>
+							<td>  Brighton & Hove Albion  </td>
+						</tr>
+					</tbody>
 				</table> -->
 				</div>
 				<br><br>

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>LeagueStar - Create your league for free</title>
-		<meta name="description" content="LeagueStar is the perfect tool to create your own league with your friends, family or colleagues. From a new place to score your fantasy football to a fast way of recording your Among Us wins, LeagueStar can cover your needs.">
+		<meta charset="utf-8">
+		<meta name="description" content="Sign in to your LeagueStar Account.">
+		<title>Sign In - LeagueStar</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>
