@@ -11,10 +11,18 @@
 		<div class="content">
 			<?php
 				session_start();
-				$leagueName = $_SESSION["leagueName"];
-				$leagueId = $_SESSION["leagueId"];
 				require_once 'DBHandler.php';
 				$conn = connectDB();
+				$leagueId = $_GET["league"];
+				$user = $_SESSION["user"];
+				$sql = "SELECT league.leagueName from league
+						INNER JOIN users ON league.creatorId = users.userId
+						WHERE league.leagueId = '$leagueId'
+						AND users.user = '$user'";
+				$results = doSQL($conn, $sql);
+				$data = mysqli_fetch_array($results);
+				$leagueName = $data[0];
+				$deleteLeague = false;
 			?>
 			<?php
 				if (isset($_POST['submit']))
@@ -27,8 +35,8 @@
 					$data = mysqli_fetch_array($results);
 					if (empty($data))
 					{
-						unset($_SESSION['leagueId']);
-						$_SESSION['deleteLeague'] = True;
+						unset($_GET['leagueId']);
+						$deleteLeague = true;
 					}
 				}
 			?>
@@ -58,14 +66,11 @@
 			?>
 			<main>
 				<?php
-					if (isset($_SESSION['deleteLeague']))
+					if ($deleteLeague == true)
 					{
-						if ($_SESSION['deleteLeague'] == True)
-						{
-							unset($_SESSION['deleteLeague']);
-							echo '<h2>Your League Was Successfully Deleted</h2>';
-							echo '<p>You can always create a new league by <a href="createLeague.php" class="link">clicking here</a>.</p>';
-						}
+						$deleteLeague = false;
+						echo '<h2>Your League Was Successfully Deleted</h2>';
+						echo '<p>You can always create a new league by <a href="createLeague.php" class="link">clicking here</a>.</p>';
 					}
 					elseif (isset($_SESSION['user']))
 					{
@@ -75,7 +80,7 @@
 						echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">';
 						echo '	<input type="submit" name="submit" value="Delete League" id="deleteButtton">';
 						echo '</form><br>';
-						echo '<form action="viewTable.php?leagueId='. $leagueId .'">';
+						echo '<form action="viewTable.php?league='. $leagueId .'" method="post">';
 						echo '	<input type="submit" value="Take Me Back"><br><br>';
 						echo '</form>';
 					}
