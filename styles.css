@@ -277,6 +277,8 @@ aside a:hover, aside button:hover
 	display: none;
 	background-color: #f9a618;
 	z-index: 1;
+	animation: growDown 0.25s ease-in-out forwards;
+	transform-origin: top center;
 	/*position: relative;*/
 }
 
@@ -297,77 +299,6 @@ aside a:hover, aside button:hover
 	float: right;
 }
 
-@media screen and (max-width: 650px) 
-{
-  .topnav a:not(:first-child), .navDrop 
-  {
-    display: none;
-  }
-  .navOpt a
-  {
-  	display: none;
-  }
-  .topnav a.icon 
-  {
-    float: right;
-    display: block;
-  }
-}
-
-@media screen and (max-width: 650px) 
-{
-  .topnav.responsive {position: relative;}
-  .topnav.responsive a.icon 
-  {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a
-  {
-    float: none;
-    display: block;
-    text-align: left;
-    background-color: #f9a618;
-  }
-  .topnav.responsive .navDrop {float: none;}
-  .topnav.responsive .navDropContent 
-  {
-  	position: relative;
-  	/*width: 650px;*/
-  }
-  .topnav.responsive .navDropContent a 
-  {
-  	background-color: #F7BB4F;
-  }
-  .topnav.responsive .navDrop
-  {
-    display: block;
-    width: 650px;
-    text-align: left;
-  }
-  .topnav.responsive .navDrop button
-  {
-  	width: 100%;
-  	display: block;
-  	text-align: left;
-  }
-}
-
-
-@media screen and (max-width: 650px)
-{
-	aside
-	{
-		/*padding-top: 15px;*/
-		display: none;
-	}
-	/*aside a
-	{
-		font-size: 18px;
-	}*/
-}
-
 /*.asideStl
 {	
 	padding-bottom: 68.4%;
@@ -377,7 +308,9 @@ aside a:hover, aside button:hover
 .asideDropContainer
 {
 	display: none;
-	background-color: #F7BB4F;
+	background-color: #f7bb4f;
+	animation: growDown 0.25s ease-in-out forwards;
+	transform-origin: top center;
 }
 
 
@@ -687,4 +620,94 @@ aside a:hover, aside button:hover
 {
 	color: #5e636d;
 	background-color: #ee9f18;
+}
+
+
+@media screen and (max-width: 650px)
+{
+	aside
+	{
+		/*padding-top: 15px;*/
+		display: none;
+	}
+	/*aside a
+	{
+		font-size: 18px;
+	}*/
+}
+
+@media screen and (max-width: 650px) 
+{
+	.topnav a:not(:first-child), .navDrop 
+	{
+		display: none;
+	}
+	.navOpt a
+	{
+		display: none;
+	}
+	.topnav a.icon 
+	{
+		float: right;
+		display: block;
+	}
+}
+
+@media screen and (max-width: 650px) 
+{
+	.topnav.responsive {position: relative;}
+	.topnav.responsive a.icon 
+	{
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+	.topnav.responsive a
+	{
+		float: none;
+		display: block;
+		text-align: left;
+		background-color: #f9a618;
+	}
+	.topnav.responsive .navDrop {float: none;}
+	.topnav.responsive .navDropContent 
+	{
+		position: relative;
+		/*width: 650px;*/
+	}
+	.topnav.responsive .navDropContent a 
+	{
+		background-color: #F7BB4F;
+	}
+	.topnav.responsive .navDrop
+	{
+		display: block;
+		width: 650px;
+		text-align: left;
+	}
+	.topnav.responsive .navDrop button
+	{
+		width: 100%;
+		display: block;
+		text-align: left;
+	}
+}
+
+
+@keyframes growDown
+{
+	0%
+	{
+		transform: scaleY(0);
+	}
+
+	80%
+	{
+		transform: scaleY(1.1);
+	}
+
+	100%
+	{
+		transform: scaleY(1);
+	}
 }
