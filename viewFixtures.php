@@ -95,7 +95,7 @@
 					<?php
 						$leagueId = $_GET["league"];
 						$conn = connectDB();
-						$sql = "SELECT results.team1Id, results.team2Id
+						$sql = "SELECT results.team1Id, results.team2Id, results.matchday
 								FROM results
 								INNER JOIN league ON league.leagueId = results.leagueId
 								WHERE league.leagueId = '$leagueId' AND
@@ -105,17 +105,33 @@
 						if ($results->num_rows === 0) {
 							echo "<p>There are no fixtures for this league</p>";
 						} else {
-							echo "<h4>Matchday 3 (DATE)</h4>";
-							echo "<table class='styled-table'>";
-							echo "<tbody>";
+							$fixtures = array();
+							$matchDays = array();
 							while ($result = $results->fetch_assoc()) {
-								echo "<tr>";
-								echo "<td> " . $result['team1Id'] . " </td>";
-								echo "<td> VS </td>";
-								echo "<td> " . $result['team2Id'] . " </td>";
+								array_push($fixtures, array($result['team1Id'],
+															$result['team2Id'],
+															$result['matchDay']));
+								if(!in_array($result['matchDay'], $matchDays)) {
+									array_push($matchDays, $result['matchDay']);
+								}
 							}
-							echo "</tbody>";
-							echo "</table>";
+							sort($matchDays);
+							for ($i=0; $i < length($matchDays); $i++) {
+								echo "<h4>" . $matchDays[i] . "</h4>";
+								echo "<table class='styled-table'>";
+								echo "<tbody>";
+								for ($j=0; $j < length($fixtures); $j++) {
+									if ($fixtures[j][3] === $matchDays[i]) {
+										echo "<tr>";
+										echo "<td> " . $fixtures[j][0] . " </td>";
+										echo "<td> VS </td>";
+										echo "<td> " . $fixtures[j][1] . " </td>";
+										echo "</tr>";
+									}
+								}
+								echo "</tbody>";
+								echo "</table>";
+							}
 						}
 					?>
 					<!-- <h4>Matchday 3 (DATE)</h4>
