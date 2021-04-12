@@ -44,7 +44,7 @@
 				<p>LeagueStar is a perfect tool to create, organize and manage your own league. It is a free website, you can create a league by entering your league name, tweaking the settings and inviting your friends! Then you can have online tournament with your friends and league will update itself each match day by entering the result!</p>
 				<p>Some key benefits of LeagueStar include:
 					<ol>
-						<li>Its a hassle free way of adding competition to your sport or games.</li>
+						<li>It's a hassle free way of adding competition to your sport or games.</li>
 						<li>Can add regularity to casual meetups with friends</li>
 						<li>Encourages a physically and mentally healthy lifestyle.</li>
 					</ol>

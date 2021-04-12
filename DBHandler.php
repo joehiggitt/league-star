@@ -34,7 +34,7 @@
 
 		$sql = "CREATE TABLE IF NOT EXISTS league (
 					leagueId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-					userId INT(6) UNSIGNED NOT NULL,
+					creatorId INT(6) UNSIGNED NOT NULL,
 					joinCode INT(8) UNSIGNED NOT NULL UNIQUE,
 					hasStarted BIT(1) NOT NULL,
 					leagueName VARCHAR(30) NOT NULL,
@@ -43,9 +43,9 @@
 					minTeams INT(3) NOT NULL,
 					maxTeams INT(3) NOT NULL,
 					matchDay VARCHAR(10),
-					matchTime TIME,
+					-- matchTime TIME,
 					CONSTRAINT fk_league_user
-						FOREIGN KEY (userId) REFERENCES users(userId)
+						FOREIGN KEY (creatorId) REFERENCES users(userId)
 						ON DELETE CASCADE
 						ON UPDATE CASCADE
 				) ENGINE=InnoDB";

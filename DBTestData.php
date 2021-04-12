@@ -12,11 +12,11 @@
 	$data = mysqli_fetch_array($results);
 	// echo("<br>" . $data['userId'] . "<br>");
 	$userId = $data["userId"];
-	$sql = "INSERT INTO league (userId, joinCode, hasStarted, leagueName, preset, isHomeAway, minTeams, maxTeams, matchDay, matchTime) VALUES ('$userId', '12345678', 0, 'Test League', 'football', 1, '5', '15', 'sat', '15:00:00')";
+	$sql = "INSERT INTO league (creatorId, joinCode, hasStarted, leagueName, preset, isHomeAway, minTeams, maxTeams, matchDay) VALUES ('$userId', '12345678', 0, 'Test League', 'football', 1, '5', '15', 'sat')";
 	$results = doSQL($conn, $sql, true);
 
 	// Test teams
-	$sql = "SELECT * FROM league WHERE leagueName = 'Test League' AND userId = '$userId'";
+	$sql = "SELECT * FROM league WHERE leagueName = 'Test League' AND creatorId = '$userId'";
 	$results = doSQL($conn, $sql, true);
 	$data = mysqli_fetch_array($results);
 	// echo("<br>LeagueId = " . $data['leagueId'] . "<br>");
@@ -32,7 +32,7 @@
 		$data = mysqli_fetch_array($results);
 		// echo("<br>" . $data['teamId'] . "<br>");
 		$teamId = $data["teamId"];
-		$sql = "INSERT INTO totalScore (leagueId, teamId, matchesPlayed, wins, draws, losses, totalScore) VALUES ('$leagueId', '$teamId', '10', '4', '2', '4', '0')";
+		$sql = "INSERT INTO totalScore (leagueId, teamId, matchesPlayed, wins, draws, losses, goalDifference, totalScore) VALUES ('$leagueId', '$teamId', '0', '0', '0', '0', '0', '0')";
 		doSQL($conn, $sql, true);
 	}
 ?>
