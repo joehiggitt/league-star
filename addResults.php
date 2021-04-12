@@ -28,13 +28,22 @@
 				{
 					header("Location: index.php");
 				}
+				require_once('DBHandler.php');
+				$conn = connectDB();
+				$user = $_SESSION['user'];
+				$sql = "SELECT userId FROM users WHERE user = '$user'";
+				$userId = mysqli_fetch_array(doSQL($conn, $sql))['userId'];
+				$sql = "SELECT creatorId, hasStarted, minTeams FROM league WHERE leagueId = '$leagueId'";
+				$creatorId = mysqli_fetch_array(doSQL($conn, $sql))['creatorId'];
+				if ($userId != $creatorId)
+				{
+					header("Location: viewTable.php?league=" . $_GET['league']);
+				}
 			?>
 			<?php
 				if (isset($_POST['submit']))
 				{
 					// $teams = $_SESSION['teams'];
-					// require_once('DBHandler.php');
-					// $conn = connectDB();
 					unset($_POST['submit']);
 					print_r($_POST);
 					$keys = array_keys($_POST);
