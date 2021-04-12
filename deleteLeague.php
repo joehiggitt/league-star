@@ -24,7 +24,7 @@
 				session_start();
 				$user = $_SESSION["user"];
 				$sql = "SELECT league.leagueName from league
-						INNER JOIN users ON league.userId = users.userId
+						INNER JOIN users ON league.creatorId = users.userId
 						WHERE league.leagueId = '$leagueId'
 						AND users.user = '$user'";
 				$results = doSQL($conn, $sql);

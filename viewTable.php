@@ -11,6 +11,7 @@
 					WHERE leagueId = '$leagueId'";
 			$data = mysqli_fetch_array(doSQL($conn, $sql));
 			$leagueName = $data['leagueName'];
+			$joinCode = $data['joinCode'];
 			echo '<title>' . $leagueName . ' - LeagueStar</title>';
 		?>
 		<link rel="shortcut icon" type="image/png" href="Logo.png">
@@ -53,9 +54,9 @@
 							ORDER BY totalScore DESC, goalDifference DESC";
 					$results = doSQL($conn, $sql);
 					$content = array();
+					$numTeams = 0;
 					if ($results->num_rows !== 0)
 					{
-						$numTeams = 0;
 						while ($result = $results->fetch_assoc()) {
 							$teamId = $result['teamId'];
 							$sql = "SELECT teamName FROM teams
@@ -74,7 +75,7 @@
 						array_push($content, array("","","","","","",""));
 					}
 					echo '<h2>' . $leagueName . '</h2>';
-					echo '<p>Join Code: ' . $data['joinCode'] . '</p>';
+					echo '<p>Join Code: ' . $joinCode . '</p>';
 					// $_SESSION["leagueName"] = $data['leagueName'];
 					// $_SESSION["leagueId"] = $leagueId;
 				?>
@@ -136,13 +137,13 @@
 						}
 					?>
 				</div>
-				<div>
+				<!-- <div> -->
 					<!-- style="text-align: center; margin-top: 90px; color: black; width: 400px; height: 50px; margin-left: auto; margin-right: auto;  font-size: 42px;" -->
-					<h2>Latest News</h2>
+					<!-- <h2>Latest News</h2> -->
 					<!-- style="text-align: left; margin-top: 70px; color: black; height: 50px; margin-left: auto; margin-right: auto;  font-size: 25px;" -->
+					<!-- <p>DATE: News</p>
 					<p>DATE: News</p>
-					<p>DATE: News</p>
-				</div>
+				</div> -->
 				<?php
 					$sql = "SELECT minTeams FROM league WHERE leagueId = '$leagueId'";
 					$results = doSQL($conn, $sql);

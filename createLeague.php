@@ -69,9 +69,9 @@
 						<option value="fri">Friday</option>
 						<option value="sat">Saturday</option>
 						<option value="sun">Sunday</option>
-					</select><br>
-					<label>Match Time</label><br>
-					<input type="time" name="time"><br><br>
+					</select><br><br>
+					<!-- <label>Match Time</label><br>
+					<input type="time" name="time"><br><br> -->
 					<input type="submit" name="submit" value="Create League"/>
 				</form>
 				<?php
@@ -94,7 +94,14 @@
 						// $minPlayer = $_POST['minPlayer'];
 						// $maxPlayer = $_POST['maxPlayer'];
 						$day = $_POST['day'];
-						$time = $_POST['time'];
+						// if (isset($_POST['time']))
+						// {
+						// 	$time = $_POST['time'];
+						// }
+						// else
+						// {
+						// 	$time = 
+						// }
 						if ($minTeams > $maxTeams)
 						{
 							echo '<p>The minimum number of teams must be less than or equal to the maximum number of teams.</p>';
@@ -109,10 +116,10 @@
 							$results = doSQL($conn, $sql);
 							$out = $results->fetch_assoc();
 							$out = $out["userId"];
-							$sql = "INSERT INTO league (userId, joinCode, hasStarted, leagueName, preset, isHomeAway, maxTeams, minTeams, matchDay, matchTime)
-									VALUES ('$out', '$joinCode', 0, '$name', '$preset', '$isHomeAway', '$maxTeams', '$minTeams', '$day', '$time')";
+							$sql = "INSERT INTO league (creatorId, joinCode, hasStarted, leagueName, preset, isHomeAway, maxTeams, minTeams, matchDay)
+									VALUES ('$out', '$joinCode', 0, '$name', '$preset', $isHomeAway, '$maxTeams', '$minTeams', '$day')";
 							$results = doSQL($conn, $sql);
-							echo "<meta http-equiv='refresh' content='0'>";
+							// echo "<meta http-equiv='refresh' content='0'>";
 						}
 					}
 				?>

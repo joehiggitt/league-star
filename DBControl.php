@@ -10,8 +10,8 @@
 			$conn = connectDB();
 		?>
 		<?php
-			// $sql = "DROP DATABASE loginTest";
-			// echo doSQL($conn, $sql, true);
+			$sql = "DROP DATABASE loginTest";
+			echo doSQL($conn, $sql, true);
 			
 
 			// $leagueId = 1;
