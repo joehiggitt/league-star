@@ -3,7 +3,16 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="Add results to your league.">
-		<title>Add Results - LeagueStar</title>
+		<?php
+			$leagueId = $_GET['league'];
+			require_once("DBHandler.php");
+			$conn = connectDB();
+			$sql = "SELECT leagueName, joinCode FROM league
+					WHERE leagueId = '$leagueId'";
+			$data = mysqli_fetch_array(doSQL($conn, $sql));
+			$leagueName = $data['leagueName'];
+			echo '<title>Add Results - ' . $leagueName . ' - LeagueStar</title>';
+		?>
 		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
@@ -183,49 +192,49 @@
                     //     }
                     // }
 
-                    $teams = array(
-                        array("Team 1", "Team 2"),
-                        array("Team 3", "Team 4"),
-                        array("Team 5", "Team 6"),
-                        array("Team 7", "Team 8")
-                    );
-                    // for ($i = 0; $i < sizeof($teams); $i++)
-                    // {
-                    //     for ($j = 0; $j < sizeof($teams[$i]); $j++)
-                    //     {
-                    //         echo $teams[$i][$j];
-                    //         echo '<br>';
-                    //     }
-                    // }
-                    if (!isset($_SESSION['teams']))
-                    {
-                        $_SESSION['teams'] = $teams;
-                    }
+					$teams = array(
+						array("Team 1", "Team 2"),
+						array("Team 3", "Team 4"),
+						array("Team 5", "Team 6"),
+						array("Team 7", "Team 8")
+					);
+					// for ($i = 0; $i < sizeof($teams); $i++)
+					// {
+					//     for ($j = 0; $j < sizeof($teams[$i]); $j++)
+					//     {
+					//         echo $teams[$i][$j];
+					//         echo '<br>';
+					//     }
+					// }
+					if (!isset($_SESSION['teams']))
+					{
+						$_SESSION['teams'] = $teams;
+					}
 
-                    echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '?league=' . $leagueId . '" method="post">';
-                    echo '  <table class="addResults">';
-                    for ($i = 0; $i < sizeof($teams); $i++)
-                    {
-                        echo '      <tr>';
-                        echo '          <td>' . $teams[$i][0] . '</td>';
-                        echo '          <td><input type="number" name="' . $teams[$i][0] . '"></td>';
-                        echo '          <td><input type="number" name="' . $teams[$i][1] . '"></td>';
-                        echo '          <td>' . $teams[$i][1] . '</td>';
-                        echo '      </tr>';
-                    }
-                    echo '  </table><br><br>';
-                    echo '  <input type="submit" name="submit" value="Add Results"/>';
-                    echo '</form>';
-                ?>
-                <br><br>
-    	   </main>
-           <div class="push"></div>
-        </div>
-        <footer>
-            <img src="Footer.png" height="80px" width="100%">
-            <div class="imageText">
-                <p><a href="contact.php" class="link">Contact Us</a>&emsp;&emsp;<a href="help.php" class="link">Help</a>&emsp;&emsp;<a href="terms.php" class="link">Terms & Conditions</a></p>
-            </div>
-        </footer>
-    </body>
+					echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '?league=' . $leagueId . '" method="post">';
+					echo '  <table class="addResults">';
+					for ($i = 0; $i < sizeof($teams); $i++)
+					{
+						echo '      <tr>';
+						echo '          <td>' . $teams[$i][0] . '</td>';
+						echo '          <td><input type="number" name="' . $teams[$i][0] . '"></td>';
+						echo '          <td><input type="number" name="' . $teams[$i][1] . '"></td>';
+						echo '          <td>' . $teams[$i][1] . '</td>';
+						echo '      </tr>';
+					}
+					echo '  </table><br><br>';
+					echo '  <input type="submit" name="submit" value="Add Results"/>';
+					echo '</form>';
+				?>
+				<br><br>
+		   </main>
+		   <div class="push"></div>
+		</div>
+		<footer>
+			<img src="Footer.png" height="80px" width="100%">
+			<div class="imageText">
+				<p><a href="contact.php" class="link">Contact Us</a>&emsp;&emsp;<a href="help.php" class="link">Help</a>&emsp;&emsp;<a href="terms.php" class="link">Terms & Conditions</a></p>
+			</div>
+		</footer>
+	</body>
 </html>
