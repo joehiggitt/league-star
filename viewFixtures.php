@@ -3,7 +3,16 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="View your league's upcoming fixtures.">
-		<title>Fixtures - LeagueStar</title>
+		<?php
+			$leagueId = $_GET['league'];
+			require_once("DBHandler.php");
+			$conn = connectDB();
+			$sql = "SELECT leagueName, joinCode FROM league
+					WHERE leagueId = '$leagueId'";
+			$data = mysqli_fetch_array(doSQL($conn, $sql));
+			$leagueName = $data['leagueName'];
+			echo '<title>Fixtures - ' . $leagueName . ' - LeagueStar</title>';
+		?>
 		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
@@ -37,60 +46,7 @@
 				}
 			?>
 			<main style="text-align: center;">
-				<h2>League 1 Fixtures</h2>
-				<div style="text-align: center;">
-					<h4>Matchday 1 (DATE)</h4>
-					<table class="styled-table">
-						<!-- <thead>
-							<tr>
-								<th>  Team1  </th>
-								<th>  Match</th>
-								<th>  Score  </th>
-								<th>  Team2  </th>
-							</tr>
-						</thead> -->
-						<tbody>
-							<tr>
-								<td>  Man City  </td>
-								<td>  VS  </td>
-								<td>  Man United  </td>
-
-							</tr>
-								<td>  Arsenal  </td>
-								<td>  VS  </td>
-								<td>  Brighton  </td>
-							</tr>
-							<tr>
-								<td>  Liverpool  </td>
-								<td>  VS  </td>
-								<td>  Everton  </td>
-							</tr>
-							<!-- and so on... -->
-						</tbody>
-					</table>
-				</div>
-				<div>
-					<h4>Matchday 2 (DATE)</h4>
-					<table class="styled-table">
-						<tbody>
-							<tr>
-								<td>  Brighton  </td>
-								<td>  VS  </td>
-								<td>  Liverpool  </td>
-
-							</tr>
-								<td>  Arsenal  </td>
-								<td>  VS  </td>
-								<td>  Man City  </td>
-							</tr>
-							<tr>
-								<td>  Man United  </td>
-								<td>  VS  </td>
-								<td>  Everton  </td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<?php echo '<h2>' . $leagueName . ' Fixtures</h2>'; ?>
 				<div style="text-align: center;">
 					<?php
 						$leagueId = $_GET["league"];

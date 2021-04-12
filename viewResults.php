@@ -3,7 +3,16 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="View your league's recent results.">
-		<title>Results - League Star</title>
+		<?php
+			$leagueId = $_GET['league'];
+			require_once("DBHandler.php");
+			$conn = connectDB();
+			$sql = "SELECT leagueName, joinCode FROM league
+					WHERE leagueId = '$leagueId'";
+			$data = mysqli_fetch_array(doSQL($conn, $sql));
+			$leagueName = $data['leagueName'];
+			echo '<title>Results - ' . $leagueName . ' - LeagueStar</title>';
+		?>
 		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
@@ -37,70 +46,9 @@
 				}
 			?>
 			<main style="text-align: center;">
-				<h2>League 1 Results</h2>
-				<div>
-					<h4>Matchday 1 (DATE)</h4>
-					<table class="styled-table">
-					<!-- <thead>
-						<tr>
-							<th>  Team1  </th>
-							<th>  Match</th>
-							<th>  Score  </th>
-							<th>  Team2  </th>
-						</tr>
-					</thead> -->
-					<tbody>
-						<tr class="active-row">
-							<td>  Manchester City  </td>
-							<td>  3  </td>
-							<td>  0  </td>
-							<td>  Manchester United  </td>
-
-						</tr>
-						<tr>
-							<td>  Arsenal  </td>
-							<td>  2  </td>
-							<td>  2  </td>
-							<td>  Brighton & Hove Albion  </td>
-						</tr>
-						<tr>
-							<td>  Liverpool  </td>
-							<td>  1  </td>
-							<td>  1  </td>
-							<td>  Everton  </td>
-						</tr>
-						<!-- and so on... -->
-					</tbody>
-				</table>
-			</div>
-			<div style="text-align: center;">
-				<h4>Matchday 2 (DATE)</h4>
-				<table class="styled-table">
-					<tbody>
-						<tr>
-							<td>  Brighton & Hove Albion  </td>
-							<td>  0  </td>
-							<td>  0  </td>
-							<td>  Liverpool  </td>
-
-						</tr>
-						<tr>
-							<td>  Arsenal  </td>
-							<td>  1  </td>
-							<td>  2  </td>
-							<td>  Manchester City  </td>
-						</tr>
-						<tr class="active-row">
-							<td>  Manchester United  </td>
-							<td>  3  </td>
-							<td>  0  </td>
-							<td>  Everton  </td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div style="text-align: center;">
-				<?php
+				<?php echo '<h2>' . $leagueName . ' Results</h2>'; ?>
+				<div style="text-align: center;">
+					<?php
 					$leagueId = $_GET["league"];
 					$conn = connectDB();
 					$sql = "SELECT results.team1Id, results.team2Id, results.team1Score, results.team2Score, results.matchDay
@@ -145,30 +93,6 @@
 						}
 					}
 				?>
-				<!-- <h4>Matchday 3 (DATE)</h4>
-				<table class="styled-table">
-					<tbody>
-						<tr>
-							<td>  Arsenal  </td>
-							<td>  1  </td>
-							<td>  3  </td>
-							<td>  Everton  </td>
-
-						</tr>
-						<tr class="active-row">
-							<td>  Liverpool  </td>
-							<td>  3  </td>
-							<td>  2  </td>
-							<td>  Manchester United  </td>
-						</tr>
-						<tr>
-							<td>  Manchester City  </td>
-							<td>  5  </td>
-							<td>  1  </td>
-							<td>  Brighton & Hove Albion  </td>
-						</tr>
-					</tbody>
-				</table> -->
 				</div>
 				<br><br>
 			</main>

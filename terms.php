@@ -41,7 +41,7 @@
 			<main>
 				<h3>Terms & Conditions</h3>
 				<p>LeagueStar does not take responsibility for data loss if your password is not safe. USE A SAFE PASSWORD!!!</p>
-				<p>Even with a strong password, LeagueStar cannot guarantee a zero-percent chance of your security being comprimised. This is why we take no personal details other than your email.</p>
+				<p>Even with a strong password, LeagueStar cannot guarantee a zero-percent chance of your security being compromised. This is why we take no personal details other than your email.</p>
 				<p>LeagueStar will only use your email to send you reminders of upcoming fixtures and join requests if you consent to this.</p>
 				<p>LeagueStar is not responsible for any minor or fatal injury that occurs when playing a sport which LeagueStar coordinates.</p>
 				<p>LeagueStar cannot be used for the creation of nuclear or biological weapons.</p>
