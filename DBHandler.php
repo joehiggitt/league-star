@@ -21,18 +21,18 @@
 		$sql = "CREATE DATABASE IF NOT EXISTS loginTest";
 		doSQL($conn, $sql);
 
-		// Connect to database and create table
-		$conn = connectDB();
-
-		$sql = "CREATE TABLE IF NOT EXISTS users (
-					userId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-					user VARCHAR(30) NOT NULL UNIQUE,
-					pass VARCHAR(128) NOT NULL,
-					email VARCHAR(128) NOT NULL UNIQUE
-				) ENGINE=InnoDB";
-		doSQL($conn, $sql);
-
-		$sql = "CREATE TABLE IF NOT EXISTS league (
+        // Connect to database and create table
+        $conn = connectDB();
+        
+        $sql = "CREATE TABLE IF NOT EXISTS users (
+                    userId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                    user VARCHAR(30) NOT NULL UNIQUE,
+                    pass VARCHAR(128) NOT NULL,
+                    email VARCHAR(128) NOT NULL UNIQUE
+                ) ENGINE=InnoDB";
+        doSQL($conn, $sql);
+        
+        $sql = "CREATE TABLE IF NOT EXISTS league (
 					leagueId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 					creatorId INT(6) UNSIGNED NOT NULL,
 					joinCode INT(8) UNSIGNED NOT NULL UNIQUE,
@@ -49,9 +49,9 @@
 						ON DELETE CASCADE
 						ON UPDATE CASCADE
 				) ENGINE=InnoDB";
-		doSQL($conn, $sql);
-
-		$sql = "CREATE TABLE IF NOT EXISTS teams (
+        doSQL($conn, $sql);
+        
+        $sql = "CREATE TABLE IF NOT EXISTS teams (
 					teamId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 					userId INT(6) UNSIGNED,
 					leagueId INT(6) UNSIGNED NOT NULL,
@@ -61,15 +61,8 @@
 						ON DELETE CASCADE
 						ON UPDATE CASCADE
 				) ENGINE=InnoDB";
-
-				// userId INT(6) UNSIGNED NOT NULL,
-
-				// CONSTRAINT fk_teams_user
-				// 		FOREIGN KEY (userId) REFERENCES users(userId)
-				// 		ON DELETE CASCADE
-				// 		ON UPDATE CASCADE,
-		doSQL($conn, $sql);
-
+        doSQL($conn, $sql);
+        
 		// $sql = "CREATE TABLE IF NOT EXISTS players (
 		// 			playerId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		// 			teamId INT(6),
@@ -84,15 +77,16 @@
 		// 				ON UPDATE CASCADE
 		// 		) ENGINE=InnoDB";
 		// doSQL($conn, $sql);
-
-		// $sql = "SHOW ENGINE InnoDB STATUS";
-		// $results = doSQL($conn, $sql);
-		// while ($row = $results->fetch_assoc()) {
-		//     foreach ($row as $cell) {
-		//         echo $cell;
-		//     }
-		// }
-		$sql = "CREATE TABLE IF NOT EXISTS results (
+		
+        // $sql = "SHOW ENGINE InnoDB STATUS";
+        // $results = doSQL($conn, $sql);
+        // while ($row = $results->fetch_assoc()) {
+        //     foreach ($row as $cell) {
+        //         echo $cell;
+        //     }
+        // }
+        
+        $sql = "CREATE TABLE IF NOT EXISTS results (
 					resultId INT(8) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 					leagueId INT(6) UNSIGNED NOT NULL,
 					team1Id INT(6) UNSIGNED NOT NULL,
@@ -113,8 +107,9 @@
 						ON DELETE CASCADE
 						ON UPDATE CASCADE
 				) ENGINE=InnoDB";
-		doSQL($conn, $sql);
-		$sql = "CREATE TABLE IF NOT EXISTS totalScore (
+        doSQL($conn, $sql);
+        
+        $sql = "CREATE TABLE IF NOT EXISTS totalScore (
 					leagueId INT(6) UNSIGNED NOT NULL,
 					teamId INT(6) UNSIGNED NOT NULL,
 					matchesPlayed INT(6),
@@ -133,8 +128,22 @@
 						ON DELETE CASCADE
 						ON UPDATE CASCADE
 				) ENGINE = InnoDB";
-		doSQL($conn, $sql);
-	}
+        doSQL($conn, $sql);
+
+        // for ($i = 0; $i < 6; $i++)
+        // {
+        //     $teamName = "Team" . ($i + 1);
+        //     $sql = "INSERT INTO teams (teamName) VALUES ('$teamName')";
+        //     doSQL($conn, $sql);
+        //     $sql = "SELECT teamId FROM teams WHERE teamName = '$teamName'";
+        //     $results = doSQL($conn, $sql);
+        //     $data = mysqli_fetch_array($results);
+        //     // echo("<br>" . $data['teamId'] . "<br>");
+        //     $teamId = $data["teamId"];
+        //     $sql = "INSERT INTO totalScore (leagueId, teamId, matchesPlayed, wins, draws, losses, goalDifference, totalScore) VALUES ('$leagueId', '$teamId', '10', '4', '2', '4', '0', '0')";
+        //     doSQL($conn, $sql);
+        // }
+    }
 
 	// Connects to the database and returns the connection
 	function connectDB() {

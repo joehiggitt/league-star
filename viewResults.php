@@ -49,54 +49,50 @@
 				<?php echo '<h2>' . $leagueName . ' Results</h2>'; ?>
 				<div style="text-align: center;">
 					<?php
-						$sql = "SELECT results.team1Id, results.team2Id, results.team1Score, results.team2Score
-								FROM results
-								INNER JOIN league ON league.leagueId = results.leagueId
-								WHERE league.leagueId = '$leagueId' AND
-									  NOT results.team1Score IS NULL AND
-									  NOT results.team2Score IS NULL";
-						$results = doSQL($conn, $sql);
-						if ($results->num_rows === 0) {
-							echo "<p>There are no results for this league</p>";
-						} else {
-							echo "<h4>Matchday 3 (DATE)</h4>";
+					$leagueId = $_GET["league"];
+					$conn = connectDB();
+					$sql = "SELECT results.team1Id, results.team2Id, results.team1Score, results.team2Score, results.matchDay
+							FROM results
+							INNER JOIN league ON league.leagueId = results.leagueId
+							WHERE league.leagueId = '$leagueId' AND
+								  NOT results.team1Score IS NULL AND
+								  NOT results.team2Score IS NULL";
+					$results = doSQL($conn, $sql);
+					if ($results->num_rows === 0) {
+						echo "<p>There are no results for this league</p>";
+					} else {
+						$resultArr = array();
+						$matchDays = array();
+						while ($result = $results->fetch_assoc()) {
+							array_push($resultArr, array($result['team1Id'],
+														 $result['team2Id'],
+														 $result['team1Score'],
+														 $result['team2Score'],
+														 $result['matchDay']));
+							if(!in_array($result['matchDay'], $matchDays)) {
+								array_push($matchDays, $resultArr['matchDay']);
+							}
+						}
+						sort($matchDays);
+						for ($i=0; $i < length($matchDays); $i++) {
+							echo "<h4>" . $matchDays[i] . "</h4>";
 							echo "<table class='styled-table'>";
 							echo "<tbody>";
-							while ($result = $results->fetch_assoc()) {
-								echo "<tr>";
-								echo "<td> " . $result['team1Id'] . " </td>";
-								echo "<td> " . $result['team1Score'] . " </td>";
-								echo "<td> " . $result['team2Score'] . " </td>";
-								echo "<td> " . $result['team2Id'] . " </td>";
+							for ($j=0; $j < length($resultArr); $j++) {
+								if ($resultArr[j][4] === $matchDays[i]) {
+									echo "<tr>";
+									echo "<td> " . $resultArr[j][0] . " </td>";
+									echo "<td> " . $resultArr[j][2] . " </td>";
+									echo "<td> " . $resultArr[j][3] . " </td>";
+									echo "<td> " . $resultArr[j][1] . " </td>";
+									echo "</tr>";
+								}
 							}
 							echo "</tbody>";
 							echo "</table>";
 						}
-					?>
-					<!-- <h4>Matchday 3 (DATE)</h4>
-					<table class="styled-table">
-						<tbody>
-							<tr>
-								<td>  Arsenal  </td>
-								<td>  1  </td>
-								<td>  3  </td>
-								<td>  Everton  </td>
-
-							</tr>
-							<tr class="active-row">
-								<td>  Liverpool  </td>
-								<td>  3  </td>
-								<td>  2  </td>
-								<td>  Manchester United  </td>
-							</tr>
-							<tr>
-								<td>  Manchester City  </td>
-								<td>  5  </td>
-								<td>  1  </td>
-								<td>  Brighton & Hove Albion  </td>
-							</tr>
-						</tbody>
-					</table> -->
+					}
+				?>
 				</div>
 				<br><br>
 			</main>
