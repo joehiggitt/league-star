@@ -10,12 +10,17 @@
         }
         echo '<aside class="asideStl">';
         $conn = connectDB();
-        $sql = "SELECT league.leagueId, league.leagueName
+        $sql = "SELECT league.leagueId, league.leagueName, creatorId
                 FROM league
                 INNER JOIN users ON users.userId=league.creatorId
                 WHERE users.user = '$user'";
         $results = doSQL($conn, $sql);
         $count = 1;
+
+        $sql = "SELECT userId FROM users WHERE user = '$user'";
+        $data = doSQL($conn, $sql);
+        $currentUser = mysqli_fetch_array($data)["userId"];
+
         echo '<div class="sideMenu">';
         while($row = $results->fetch_assoc()) {
             echo '<button class="asideDropBtn">' . $row["leagueName"] . '</button>';
@@ -35,7 +40,7 @@
             } else {
                 echo '<a href="viewResults.php?league=' . $row["leagueId"] . '">&emsp;Results</a>';
             }
-            if ($active == "addResult" && $leagueId == $count) {
+            if ($active == "addResult" && $leagueId == $count && $row["creatorId"] == $currentUser) {
                 echo '<a href="addResults.php?league=' . $row["leagueId"] . '" id="active">&emsp;Enter Results</a>';
             } else {
                 echo '<a href="addResults.php?league=' . $row["leagueId"] . '">&emsp;Enter Results</a>';

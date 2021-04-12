@@ -39,11 +39,68 @@
                         if ($score1 != "" and $score2 != "") {
                             $sql = "UPDATE results
                                     SET team1Score = '$score1', team2Score = '$score2'
-                                    WHERE team1Id = '$team1' AND team2Id = '$team2'"; // Only works if no rematch. Needs to be updated for matchday
+                                    WHERE team1Id = '$team1' AND team2Id = '$team2' AND matchDay = '$matchDay'"; // Only works if no rematch. Needs to be updated for matchday
                             $results = doSQL($conn, $sql, true);
-                            print_r($results);
+                            print_r($results); 
+                            $sql = "SELECT * FROM totalScore WHERE leagueId = '$leagueId' AND teamId = '$team1'";
+                            $results = doSQL($conn, $sql);
+                            $team1Data = mysqli_fetch_array($results);
+                            $sql = "SELECT * FROM totalScore WHERE leagueId = '$leagueId' AND teamId = '$team2'";
+                            $results = doSQL($conn, $sql);
+                            $team2Data = mysqli_fetch_array($results);
+                            if ($score1 > $score2) {
+                                $team1Data["wins"]++;
+                                $team2Data["losses"]++;
+                                $team1Data["totalScore"] += 3;
+                                $score = $score1 - $score2;
+                                $team1Data["goalDifference"] += $score;
+                                $team2Data["goalDifference"] -= $score;
+                            }
+                            else if ($score1 < $score2){
+                                $team1Data["losses"]++;
+                                $team2Data["wins"]++;
+                                $team2Data["totalScore"] += 3;
+                                $score = $score2 - $score1;
+                                $team1Data["goalDifference"] -= $score;
+                                $team2Data["goalDifference"] += $score;
+                            }
+                            else {
+                                $team1Data["draws"]++;
+                                $team2Data["draws"]++;
+                                $team1Data["totalScore"]++;
+                                $team2Data["totalScore"]++;
+                            }
+                            $team1Data["matchesPlayed"]++;
+                            $team2Data["matchesPlayed"]++;
+                            $matchesPlayed = $team1Data["matchesPlayed"];
+                            $wins = $team1Data["wins"];
+                            $losses = $team1Data["losses"];
+                            $draws = $team1Data["draws"];
+                            $goalDifferece = $team1Data["goalDifferece"];
+                            $totalScore = $team1Data["totalScore"];
+                            $sql = "UPDATE totalScore
+                                    SET matchesPlayed = '$matchesPlayed', wins = '$wins', losses = '$losses', draws = '$draws', goalDifference = '$goalDifference', totalScore = '$totalScore'
+                                    WHERE leagueId = '$leagueId' AND teamId = '$team1'";
+                            doSQL($conn, $sql);
+
+                            $matchesPlayed = $team2Data["matchesPlayed"];
+                            $wins = $team2Data["wins"];
+                            $losses = $team2Data["losses"];
+                            $draws = $team2Data["draws"];
+                            $goalDifferece = $team2Data["goalDifferece"];
+                            $totalScore = $team2Data["totalScore"];
+                            $sql = "UPDATE totalScore
+                                    SET matchesPlayed = '$matchesPlayed', wins = '$wins', losses = '$losses', draws = '$draws', goalDifference = '$goalDifference', totalScore = '$totalScore'
+                                    WHERE leagueId = '$leagueId' AND teamId = '$team2'";
+                            doSQL($conn, $sql);
                         }
                     }
+                    $matchDay++;
+                    $sql = "UPDATE totalScore
+                        SET matchesPlayed = '$matchDay' 
+                        WHERE leagueId = '$leagueId'";
+                    $results = doSQL($conn, $sql, true);
+                    print_r($results);
                     // for ($i = 0; $i < sizeof($teams); $i++)
                     // {
                     //     array_push($teams[$i], $_POST[$teams[$i][0]]);
@@ -93,11 +150,15 @@
                     $matchDay = 0;
                     $teams = array();
                     $conn = connectDB();
+                    $sql = "SELECT matchesPlayed FROM totalScore WHERE leagueId = '$leagueId'";
+                    $results = doSQL($conn, $sql);
+                    $matchesPlayed = mysqli_fetch_array($results)["matchesPlayed"];
                     $sql = "SELECT team1Id, team2Id
                             FROM results
                             WHERE leagueId = '$leagueId' AND
                                   team1Score IS NULL AND
-                                  team2Score IS NULL";
+                                  team2Score IS NULL AND
+                                  matchDay = '$matchDay'";
                     $results = doSQL($conn, $sql);
                     $data = mysqli_fetch_array($results);
                     while ($result = $results->fetch_assoc())
