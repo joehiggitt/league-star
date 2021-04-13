@@ -2,6 +2,7 @@
 	function createNavBar($user, $active = "")
 	{
 		echo '<div class="topnav" id="theTopnav">';
+		echo '<a href="javascript:void(0);" class="iconn" onclick="responsiveAside()">&#8595;</a>';
 		if ($active == "home")
 		{
 			echo '<a href="index.php" class="activeHome" id="active">Home</a>';
@@ -81,9 +82,40 @@
 	function responsiveNav() {
 	  var x = document.getElementById("theTopnav");
 	  if (x.className === "topnav") {
+	  	/*document.getElementById("openbtn").style.display = "none";*/
 	    x.className += " responsive";
 	  } else {
+	  	/*document.getElementById("openbtn").style.display = "block";*/
 	    x.className = "topnav";
 	  }
 	}
+
+	function responsiveAside() {
+	  var y = document.getElementById("asideDBtn");
+	  var z = document.getElementById("thesideMenu");
+	  if (y.className === "asideDropBtn") {
+	  	y.className += " responsivv"
+	  } else {
+	  	y.className = "asideDropBtn"
+	  }
+
+	  if (z.className === "sideMenu") {
+	    z.className += " responsiv";
+	  } else {
+	    z.className = "sideMenu";
+	  }
+	}
+	/*var open = 0;
+	function openNav() {
+		if (open === 0) {
+	  		document.getElementById("asideStl").style.display = "block";
+	  		document.getElementById("openbtn").style.marginLeft = "275px";
+	  		open = 1;
+		}
+	  	else {
+	  		document.getElementById("asideStl").style.display = "none";
+	  		document.getElementById("openbtn").style.marginLeft = "0px";
+	  		open = 0;
+	  	}
+	}*/
 </script>
