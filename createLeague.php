@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <meta name="description" content="Create a new league.">
-        <title>Create A New League - LeagueStar</title>
-        <link rel="shortcut icon" type="image/png" href="Logo.png">
-        <link rel="stylesheet" type="text/css" href="styles.css">
-    	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Create a new league.">
+		<title>Create A League - LeagueStar</title>
+		<link rel="shortcut icon" type="image/png" href="Logo.png">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
 		<script src="javaScript.js"></script>
 	</head>
 	<body onload="addDropdownEvent()">
@@ -69,31 +69,45 @@
 						<option value="fri">Friday</option>
 						<option value="sat">Saturday</option>
 						<option value="sun">Sunday</option>
-					</select><br>
-					<label>Match Time</label><br>
-					<input type="time" name="time"><br><br>
+					</select><br><br>
+					<!-- <label>Match Time</label><br>
+					<input type="time" name="time"><br><br> -->
 					<input type="submit" name="submit" value="Create League"/>
 				</form>
 				<?php
-					if (isset($_POST['submit'])) {
+					if (isset($_POST['submit']))
+					{
+						$joinCode = '';
+						for ($i = 0; $i < 8; $i++)
+						{
+							$joinCode = $joinCode . strval(random_int(0, 9));
+						}
 						$name = $_POST['name'];
+						$preset = $_POST['preset'];
+						$isHomeAway = 0;
 						if (isset($_POST['isHomeAway']))
 						{
-							$preset = $_POST['preset'] . 'HA';
-						}
-						else
-						{
-							$preset = $_POST['preset'] . 'SM';
+							$isHomeAway = 1;
 						}
 						$minTeams = $_POST['minTeams'];
 						$maxTeams = $_POST['maxTeams'];
 						// $minPlayer = $_POST['minPlayer'];
 						// $maxPlayer = $_POST['maxPlayer'];
 						$day = $_POST['day'];
-						$time = $_POST['time'];
-						if ($minTeams > $maxTeams) {
+						// if (isset($_POST['time']))
+						// {
+						// 	$time = $_POST['time'];
+						// }
+						// else
+						// {
+						// 	$time = 
+						// }
+						if ($minTeams > $maxTeams)
+						{
 							echo '<p>The minimum number of teams must be less than or equal to the maximum number of teams.</p>';
-						} else {
+						}
+						else
+						{
 							require_once 'DBHandler.php';
 							$conn = connectDB();
 							print_r($_SESSION);
@@ -101,11 +115,14 @@
 							$sql = "SELECT userId FROM users WHERE user = '$user'";
 							$results = doSQL($conn, $sql);
 							$out = $results->fetch_assoc();
-							$out = $out["userId"];
-							$sql = "INSERT INTO league (creatorId, leagueName, preset, maxTeams, minTeams, matchDay, matchTime)
-									VALUES ('$out', '$name', '$preset', '$maxTeams', '$minTeams', '$day', '$time')";
-							$results = doSQL($conn, $sql);
+							$userId = $out["userId"];
+							$sql = "INSERT INTO league (creatorId, joinCode, hasStarted, leagueName, preset, isHomeAway, maxTeams, minTeams, matchDay)
+									VALUES ('$userId', '$joinCode', 0, '$name', '$preset', $isHomeAway, '$maxTeams', '$minTeams', '$day')";
+							doSQL($conn, $sql);
+							$sql = "SELECT leagueId FROM league WHERE joinCode = '$joinCode'";
+							$leagueId = mysqli_fetch_array(doSQL($conn, $sql))["leagueId"];
 							echo "<meta http-equiv='refresh' content='0'>";
+							header("Location: viewTable.php?league=" . $leagueId);
 						}
 					}
 				?>

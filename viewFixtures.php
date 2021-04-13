@@ -3,7 +3,16 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="View your league's upcoming fixtures.">
-		<title>Fixtures - LeagueStar</title>
+		<?php
+			$leagueId = $_GET['league'];
+			require_once("DBHandler.php");
+			$conn = connectDB();
+			$sql = "SELECT leagueName, joinCode FROM league
+					WHERE leagueId = '$leagueId'";
+			$data = mysqli_fetch_array(doSQL($conn, $sql));
+			$leagueName = $data['leagueName'];
+			echo '<title>Fixtures - ' . $leagueName . ' - LeagueStar</title>';
+		?>
 		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
@@ -18,6 +27,14 @@
 				{
 					header("Location: index.php");
 				}
+				if (!isset($_GET["league"]))
+                {
+                    header("Location: dashboard.php");
+                }
+                elseif (strlen($_GET["league"]) != 1)
+                {
+                    header("Location: dashboard.php");
+                }
 			?>
 			<header>
 				<img src="Header.png" alt="header" height="80px" width="100%">
@@ -37,65 +54,12 @@
 				}
 			?>
 			<main style="text-align: center;">
-				<h2>League 1 Fixtures</h2>
-				<div style="text-align: center;">
-					<h4>Matchday 1 (DATE)</h4>
-					<table class="styled-table">
-						<!-- <thead>
-							<tr>
-								<th>  Team1  </th>
-								<th>  Match</th>
-								<th>  Score  </th>
-								<th>  Team2  </th>
-							</tr>
-						</thead> -->
-						<tbody>
-							<tr>
-								<td>  Man City  </td>
-								<td>  VS  </td>
-								<td>  Man United  </td>
-
-							</tr>
-								<td>  Arsenal  </td>
-								<td>  VS  </td>
-								<td>  Brighton  </td>
-							</tr>
-							<tr>
-								<td>  Liverpool  </td>
-								<td>  VS  </td>
-								<td>  Everton  </td>
-							</tr>
-							<!-- and so on... -->
-						</tbody>
-					</table>
-				</div>
-				<div>
-					<h4>Matchday 2 (DATE)</h4>
-					<table class="styled-table">
-						<tbody>
-							<tr>
-								<td>  Brighton  </td>
-								<td>  VS  </td>
-								<td>  Liverpool  </td>
-
-							</tr>
-								<td>  Arsenal  </td>
-								<td>  VS  </td>
-								<td>  Man City  </td>
-							</tr>
-							<tr>
-								<td>  Man United  </td>
-								<td>  VS  </td>
-								<td>  Everton  </td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<?php echo '<h2>' . $leagueName . ' Fixtures</h2>'; ?>
 				<div style="text-align: center;">
 					<?php
 						$leagueId = $_GET["league"];
 						$conn = connectDB();
-						$sql = "SELECT results.team1Id, results.team2Id
+						$sql = "SELECT results.team1Id, results.team2Id, results.matchDay
 								FROM results
 								INNER JOIN league ON league.leagueId = results.leagueId
 								WHERE league.leagueId = '$leagueId' AND
@@ -103,41 +67,40 @@
 									  results.team2Score IS NULL";
 						$results = doSQL($conn, $sql);
 						if ($results->num_rows === 0) {
-							echo "<p>There are no fixtures for this league</p>";
+							echo "<p>There are no fixtures for this league.</p>";
 						} else {
-							echo "<h4>Matchday 3 (DATE)</h4>";
-							echo "<table class='styled-table'>";
-							echo "<tbody>";
+							$fixtures = array();
+							$matchDays = array();
 							while ($result = $results->fetch_assoc()) {
-								echo "<tr>";
-								echo "<td> " . $result['team1Id'] . " </td>";
-								echo "<td> VS </td>";
-								echo "<td> " . $result['team2Id'] . " </td>";
+								$team1Id = $result["team1Id"];
+								$team2Id = $result["team2Id"];
+								$sql = "SELECT teamName FROM teams WHERE teamId = ";
+								$team1Name = mysqli_fetch_array(doSQL($conn, $sql . "'$team1Id'"))["teamName"];
+								$team2Name = mysqli_fetch_array(doSQL($conn, $sql . "'$team2Id'"))["teamName"];
+								array_push($fixtures, array($team1Name, $team2Name, $result['matchDay']));
+								if(!in_array($result['matchDay'], $matchDays)) {
+									array_push($matchDays, $result['matchDay']);
+								}
 							}
-							echo "</tbody>";
-							echo "</table>";
+							sort($matchDays);
+							for ($i=0; $i < count($matchDays); $i++) {
+								echo "<h3>Matchday " . ($matchDays[$i] + 1) . "</h3>";
+								echo "<table id='scoreTable'>";
+								echo "<tbody>";
+								for ($j=0; $j < count($fixtures); $j++) {
+									if ($fixtures[$j][2] === $matchDays[$i]) {
+										echo "<tr>";
+										echo "<td class='homeColumn'>" . $fixtures[$j][0] . "</td>";
+										echo "<td class='scoreColumn'>VS</td>";
+										echo "<td class='awayColumn'>" . $fixtures[$j][1] . "</td>";
+										echo "</tr>";
+									}
+								}
+								echo "</tbody>";
+								echo "</table>";
+							}
 						}
 					?>
-					<!-- <h4>Matchday 3 (DATE)</h4>
-					<table class="styled-table">
-						<tbody>
-
-							<tr>
-								<td>  Arsenal  </td>
-								<td>  VS  </td>
-								<td>  Everton  </td>
-							</tr>
-								<td>  Liverpool  </td>
-								<td>  VS  </td>
-								<td>  Man United  </td>
-							</tr>
-							<tr>
-								<td>  Man City  </td>
-								<td>  VS  </td>
-								<td>  Brighton  </td>
-							</tr>
-						</tbody>
-					</table> -->
 				</div>
 				<br><br>
 			</main>

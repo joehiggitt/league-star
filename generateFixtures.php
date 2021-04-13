@@ -7,7 +7,7 @@
 		return $array;
 	}
 
-	function generateFixturesFootball($teams, $isHomeAway)
+	function generateFixtures($teams, $isHomeAway)
 	{
 		$numTeams = count($teams);
 		if ($numTeams < 2)
@@ -132,43 +132,6 @@
 ?>
 
 <?php
-	// if (isset($_POST['submit']))
-	// {
-	// 	$fixtures = generateFixturesFootball();
-
-	// 	if ($fixtures != false)
-	// 	{
-	// 		for ($i = 0; $i < sizeof($fixtures); $i++)
-	// 		{
-	// 			for ($j = 0; $j < sizeof($fixtures[$i]); $j++)
-	// 			{
-	// 				echo("Team " . ($fixtures[$i][$j][0] + 1) . " v Team " . ($fixtures[$i][$j][1] + 1) . "<br>");
-	// 			}
-	// 			echo("<br>");
-	// 		}
-	// 	}
-	// }
-?>
-
-<?php
-	// $form = 
-	// '<form method="post">
-	// 	Number of teams&emsp;<input type="number" name="numTeams" required><br>
-	// 	<input type="submit" name="submit" value="Submit"/>
-	// </form>';
-	// echo($form);
-?>
-
-<?php
-	require_once 'DBHandler.php';
-	$conn = connectDB();
-	// $leagueId = $_GET['league'];
-	$leagueId = 1;
-	$sql = "SELECT teamId FROM totalScore WHERE leagueId = '$leagueId'";
-	$results = doSQL($sql, $conn);
-	$data = mysqli_fetch_array($results);
-	print_r($data);
-
 	// $teamList = array(
 	// 	"West Brom",
 	// 	"Wolves",
@@ -177,17 +140,17 @@
 	// 	"Coventry"
 	// );
 
-	$fixtureList = generateFixturesFootball($teamList, true);
+	// $fixtureList = generateFixtures($teamList, true);
 
-	if ($fixtureList != false)
-	{
-		for ($i = 0; $i < sizeof($fixtureList); $i++)
-		{
-			for ($j = 0; $j < sizeof($fixtureList[$i]); $j++)
-			{
-				echo($fixtureList[$i][$j][0] . " v " . $fixtureList[$i][$j][1] . "<br>");
-			}
-			echo("<br>");
-		}
-	}
+	// if ($fixtureList != false)
+	// {
+	// 	for ($i = 0; $i < sizeof($fixtureList); $i++)
+	// 	{
+	// 		for ($j = 0; $j < sizeof($fixtureList[$i]); $j++)
+	// 		{
+	// 			echo($fixtureList[$i][$j][0] . " v " . $fixtureList[$i][$j][1] . "<br>");
+	// 		}
+	// 		echo("<br>");
+	// 	}
+	// }
 ?>

@@ -23,18 +23,18 @@
 				if (isset($_POST['submit']))
 				{
 					// Get details from login form
-					$user = $_POST['user'];
+					$email = $_POST['email'];
 					$pass = $_POST['pass'];
 
 					// Check if user details are valid or not
 					require_once 'DBHandler.php';
 					$conn = connectDB();
-					$sql = "SELECT user, pass FROM users WHERE user='$user' AND pass='$pass'";
+					$sql = "SELECT user FROM users WHERE email='$email' AND pass='$pass'";
 					$results = doSQL($conn, $sql);
 					if ($row = $results->fetch_assoc())
 					{
 						// Log in
-						$_SESSION["user"] = $user;
+						$_SESSION["user"] = $row["user"];
 						header("Location: dashboard.php");
 						exit;
 					}
@@ -75,8 +75,8 @@
 					}
 				?>
 				<form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
-					<label>Username</label><br>
-					<input type="text" name="user" required><br>
+					<label>Email</label><br>
+					<input type="email" name="email" required><br>
 					<label>Password</label><br>
 					<input type="password" name="pass" required><br><br>
 					<input type="submit" name="submit" value="Sign In"/>

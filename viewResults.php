@@ -3,7 +3,16 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="View your league's recent results.">
-		<title>Results - League Star</title>
+		<?php
+			$leagueId = $_GET['league'];
+			require_once("DBHandler.php");
+			$conn = connectDB();
+			$sql = "SELECT leagueName, joinCode FROM league
+					WHERE leagueId = '$leagueId'";
+			$data = mysqli_fetch_array(doSQL($conn, $sql));
+			$leagueName = $data['leagueName'];
+			echo '<title>Results - ' . $leagueName . ' - LeagueStar</title>';
+		?>
 		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
@@ -37,120 +46,54 @@
 				}
 			?>
 			<main style="text-align: center;">
-				<h2>League 1 Results</h2>
-				<div>
-					<h4>Matchday 1 (DATE)</h4>
-					<table class="styled-table">
-					<!-- <thead>
-						<tr>
-							<th>  Team1  </th>
-							<th>  Match</th>
-							<th>  Score  </th>
-							<th>  Team2  </th>
-						</tr>
-					</thead> -->
-					<tbody>
-						<tr class="active-row">
-							<td>  Manchester City  </td>
-							<td>  3  </td>
-							<td>  0  </td>
-							<td>  Manchester United  </td>
-
-						</tr>
-						<tr>
-							<td>  Arsenal  </td>
-							<td>  2  </td>
-							<td>  2  </td>
-							<td>  Brighton & Hove Albion  </td>
-						</tr>
-						<tr>
-							<td>  Liverpool  </td>
-							<td>  1  </td>
-							<td>  1  </td>
-							<td>  Everton  </td>
-						</tr>
-						<!-- and so on... -->
-					</tbody>
-				</table>
-			</div>
-			<div style="text-align: center;">
-				<h4>Matchday 2 (DATE)</h4>
-				<table class="styled-table">
-					<tbody>
-						<tr>
-							<td>  Brighton & Hove Albion  </td>
-							<td>  0  </td>
-							<td>  0  </td>
-							<td>  Liverpool  </td>
-
-						</tr>
-						<tr>
-							<td>  Arsenal  </td>
-							<td>  1  </td>
-							<td>  2  </td>
-							<td>  Manchester City  </td>
-						</tr>
-						<tr class="active-row">
-							<td>  Manchester United  </td>
-							<td>  3  </td>
-							<td>  0  </td>
-							<td>  Everton  </td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div style="text-align: center;">
-				<?php
-					$leagueId = $_GET["league"];
-					$conn = connectDB();
-					$sql = "SELECT results.team1Id, results.team2Id, results.team1Score, results.team2Score
-							FROM results
-							INNER JOIN league ON league.leagueId = results.leagueId
-							WHERE league.leagueId = '$leagueId' AND
-								  NOT results.team1Score IS NULL AND
-								  NOT results.team2Score IS NULL";
-					$results = doSQL($conn, $sql);
-					if ($results->num_rows === 0) {
-						echo "<p>There are no results for this league</p>";
-					} else {
-						echo "<h4>Matchday 3 (DATE)</h4>";
-						echo "<table class='styled-table'>";
-						echo "<tbody>";
-						while ($result = $results->fetch_assoc()) {
-							echo "<tr>";
-							echo "<td> " . $result['team1Id'] . " </td>";
-							echo "<td> " . $result['team1Score'] . " </td>";
-							echo "<td> " . $result['team2Score'] . " </td>";
-							echo "<td> " . $result['team2Id'] . " </td>";
+				<?php echo '<h2>' . $leagueName . ' Results</h2>'; ?>
+				<div style="text-align: center;">
+					<?php
+						$leagueId = $_GET["league"];
+						$conn = connectDB();
+						$sql = "SELECT results.team1Id, results.team2Id, results.team1Score, results.team2Score, results.matchDay
+								FROM results
+								INNER JOIN league ON league.leagueId = results.leagueId
+								WHERE league.leagueId = '$leagueId' AND
+									  NOT results.team1Score IS NULL AND
+									  NOT results.team2Score IS NULL";
+						$results = doSQL($conn, $sql);
+						if ($results->num_rows === 0) {
+							echo "<p>There are no results for this league.</p>";
+						} else {
+							$resultArr = array();
+							$matchDays = array();
+							while ($result = $results->fetch_assoc()) {
+								$team1Id = $result["team1Id"];
+								$team2Id = $result["team2Id"];
+								$sql = "SELECT teamName FROM teams WHERE teamId = ";
+								$team1Name = mysqli_fetch_array(doSQL($conn, $sql . "'$team1Id'"))["teamName"];
+								$team2Name = mysqli_fetch_array(doSQL($conn, $sql . "'$team2Id'"))["teamName"];
+								array_push($resultArr, array($team1Name, $team2Name, $result['team1Score'], $result['team2Score'], $result['matchDay']));
+								if(!in_array($result['matchDay'], $matchDays)) {
+									array_push($matchDays, $result['matchDay']);
+								}
+							}
+							sort($matchDays);
+							for ($i=0; $i < count($matchDays); $i++) {
+								echo "<h3>Matchday " . ($matchDays[$i] + 1) . "</h3>";
+								echo "<table id='scoreTable'>";
+								echo "<tbody>";
+								for ($j=0; $j < count($resultArr); $j++) {
+									if ($resultArr[$j][4] === $matchDays[$i]) {
+										echo "<tr>";
+										echo "<td class='homeColumn'> " . $resultArr[$j][0] . " </td>";
+										echo "<td class='scoreColumn'> " . $resultArr[$j][2] . " </td>";
+										echo "<td class='scoreColumn'> " . $resultArr[$j][3] . " </td>";
+										echo "<td class='awayColumn'> " . $resultArr[$j][1] . " </td>";
+										echo "</tr>";
+									}
+								}
+								echo "</tbody>";
+								echo "</table>";
+							}
 						}
-						echo "</tbody>";
-						echo "</table>";
-					}
-				?>
-				<!-- <h4>Matchday 3 (DATE)</h4>
-				<table class="styled-table">
-					<tbody>
-						<tr>
-							<td>  Arsenal  </td>
-							<td>  1  </td>
-							<td>  3  </td>
-							<td>  Everton  </td>
-
-						</tr>
-						<tr class="active-row">
-							<td>  Liverpool  </td>
-							<td>  3  </td>
-							<td>  2  </td>
-							<td>  Manchester United  </td>
-						</tr>
-						<tr>
-							<td>  Manchester City  </td>
-							<td>  5  </td>
-							<td>  1  </td>
-							<td>  Brighton & Hove Albion  </td>
-						</tr>
-					</tbody>
-				</table> -->
+					?>
 				</div>
 				<br><br>
 			</main>

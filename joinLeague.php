@@ -38,13 +38,31 @@
 			?>
 			<main>
 				<h2>Join League</h2>
-		        <form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
-		            <label>* Join Code</label><br>
-					<input type="text" name="join" required><br><br>
-					<input type="submit" name="submit" value="Join League"/>
-		        </form>
-		        <!-- Need to add php for joining a league at a later point -->
-		        <br><br>
+				<p>To join a league, enter the Join Code given to you by the league coordinator and search for that league.</p>
+				<?php
+					if (isset($_POST['submit']))
+					{
+						$joinCode = $_POST['joinCode'];
+						require_once("DBHandler.php");
+						$conn = connectDB();
+						$sql = "SELECT leagueId FROM league WHERE joinCode = '$joinCode'";
+						$leagueId = mysqli_fetch_array(doSQL($conn, $sql))["leagueId"];
+						if ($results->num_rows !== 0)
+						{
+							header("Location: joiningLeague.php?league=" . $leagueId);
+						}
+						else
+						{
+							echo '<p>We couldn\'t find a league that matches the Join Code entered.</p>';
+						}
+					}
+				?>
+				<form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
+					<label>* Join Code</label><br>
+					<input type="text" name="joinCode" maxlength="8" minlength="8" required><br><br>
+					<input type="submit" name="submit" value="Search For League"/>
+				</form>
+				<br><br>
 			</main>
 			<div class="push"></div>
 		</div>

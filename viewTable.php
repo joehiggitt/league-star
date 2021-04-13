@@ -3,7 +3,17 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="description" content="View your leagues's current table.">
-		<title>League - LeagueStar</title>
+		<?php
+			$leagueId = $_GET['league'];
+			require_once("DBHandler.php");
+			$conn = connectDB();
+			$sql = "SELECT leagueName, joinCode FROM league
+					WHERE leagueId = '$leagueId'";
+			$data = mysqli_fetch_array(doSQL($conn, $sql));
+			$leagueName = $data['leagueName'];
+			$joinCode = $data['joinCode'];
+			echo '<title>' . $leagueName . ' - LeagueStar</title>';
+		?>
 		<link rel="shortcut icon" type="image/png" href="Logo.png">
 		<link rel="stylesheet" type="text/css" href="styles.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Didact Gothic">
@@ -18,6 +28,14 @@
 				{
 					header("Location: index.php");
 				}
+				if (!isset($_GET["league"]))
+                {
+                    header("Location: dashboard.php");
+                }
+                elseif (strlen($_GET["league"]) != 1)
+                {
+                    header("Location: dashboard.php");
+                }
 			?>
 			<header>
 				<img src="Header.png" alt="header" height="80px" width="100%">
@@ -39,33 +57,33 @@
 			<main style="text-align: center;">
 				<!-- style="text-align: center; margin-top: 90px; color: black; width: 400px; height: 50px; margin-left: auto; margin-right: auto;  font-size: 42px;" -->
 				<?php
-					$leagueId = $_GET['league'];
-					require_once("DBHandler.php");
-					$conn = connectDB();
 					$sql = "SELECT * FROM totalScore
 							WHERE leagueId = '$leagueId'
 							ORDER BY totalScore DESC, goalDifference DESC";
 					$results = doSQL($conn, $sql);
 					$content = array();
+					$numTeams = 0;
 					if ($results->num_rows !== 0)
 					{
 						while ($result = $results->fetch_assoc()) {
-							array_push($content, array($result["teamId"],
+							$teamId = $result['teamId'];
+							$sql = "SELECT teamName FROM teams
+									WHERE teamId = '$teamId'";
+							$data = mysqli_fetch_array(doSQL($conn, $sql));
+							array_push($content, array($data["teamName"],
 													   $result["matchesPlayed"],
 													   $result["wins"],
 													   $result["draws"],
 													   $result["losses"],
 													   $result["goalDifference"],
 													   $result["totalScore"]));
+							$numTeams++;
 						}
 					} else {
 						array_push($content, array("","","","","","",""));
 					}
-					$sql = "SELECT leagueName FROM league
-							WHERE leagueId = '$leagueId'";
-					$results = doSQL($conn, $sql);
-					$data = mysqli_fetch_array($results);
-					echo '<h2>' . $data['leagueName'] . '</h2>';
+					echo '<h2>' . $leagueName . '</h2>';
+					echo '<p>Join Code: ' . $joinCode . '</p>';
 					// $_SESSION["leagueName"] = $data['leagueName'];
 					// $_SESSION["leagueId"] = $leagueId;
 				?>
@@ -82,7 +100,7 @@
 
 						if ($results->num_rows === 0)
 						{
-							echo "<p>There are no teams in this league</p>";
+							echo "<p>There are no teams in this league.</p>";
 						}
 						else
 						{
@@ -127,18 +145,45 @@
 						}
 					?>
 				</div>
-				<div>
+				<!-- <div> -->
 					<!-- style="text-align: center; margin-top: 90px; color: black; width: 400px; height: 50px; margin-left: auto; margin-right: auto;  font-size: 42px;" -->
-					<h2>Latest News</h2>
+					<!-- <h2>Latest News</h2> -->
 					<!-- style="text-align: left; margin-top: 70px; color: black; height: 50px; margin-left: auto; margin-right: auto;  font-size: 25px;" -->
+					<!-- <p>DATE: News</p>
 					<p>DATE: News</p>
-					<p>DATE: News</p>
-				</div>
+				</div> -->
 				<?php
-					echo '<form action="deleteLeague.php?league=' . $leagueId . '" method="post">'
+					$user = $_SESSION['user'];
+					$sql = "SELECT userId FROM users WHERE user = '$user'";
+					$userId = mysqli_fetch_array(doSQL($conn, $sql))['userId'];
+					$sql = "SELECT creatorId, hasStarted, minTeams FROM league WHERE leagueId = '$leagueId'";
+					$data = mysqli_fetch_array(doSQL($conn, $sql));
+					$creatorId = $data['creatorId'];
+					$hasStarted = $data['hasStarted'];
+					$minTeams = $data['minTeams'];
+					if ($userId == $creatorId)
+					{
+						if (($numTeams >= $minTeams) and ($hasStarted == 0))
+						{
+							echo '<br><form action="startLeague.php?league=' . $leagueId . '" method="post">';
+							echo '	<input type="submit" value="Start League"><br><br>';
+							echo '</form>';
+						}
+						elseif ($numTeams < $minTeams)
+						{
+							echo '<p>At least ' . $minTeams . ' teams are needed to start the league.</p>';
+						}
+						else
+						{
+							echo '<br>';
+						}
+
+						echo '<form action="deleteLeague.php?league=' . $leagueId . '" method="post">';
+						echo '	<input type="submit" value="Delete League" id="deleteButtton">';
+						echo '</form>';
+					}
 				?>
-					<input type="submit" value="Delete League" id="deleteButtton">
-				</form>
+				<br><br>
 			</main>
 			<div class="push"></div>
 		</div>

@@ -36,7 +36,6 @@
 						$sql = "INSERT INTO users (user, pass, email)
 								VALUES ('$user', '$pass', '$email')";
 						$results = doSQL($conn, $sql);
-						echo("<br>".$results."<br>");
 
 						// Log in
 						if($results == 1) {
@@ -95,13 +94,13 @@
 
 					echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">';
 					echo '	<label>Username</label><br>';
-					echo '	<input type="text" name="user" value = "' . $user . '" required><br>';
+					echo '	<input type="text" name="user" minlength="4" value = "' . $user . '" required><br>';
 					echo '	<label>Email</label><br>';
 					echo '	<input type="email" name="email" value = "' . $email . '" required><br>';
 					echo '	<label>Confirm Email</label><br>';
 					echo '	<input type="email" name="emailCheck" required><br>';
 					echo '	<label>Password</label><br>';
-					echo '	<input type="password" name="pass" required><br>';
+					echo '	<input type="password" name="pass" minlength="8" required><br>';
 					echo '	<label>Confirm Password</label><br>';
 					echo '	<input type="password" name="passCheck" required><br>';
 					echo '	<br><label class="checkboxContainer">';
