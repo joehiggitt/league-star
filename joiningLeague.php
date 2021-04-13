@@ -62,8 +62,12 @@
 						$user = $_SESSION["user"];
 						$sql = "SELECT userId FROM users WHERE user = '$user'";
 						$userId = mysqli_fetch_array(doSQL($conn, $sql))["userId"];
-						$sql = "SELECT maxTeams FROM league WHERE leagueId = '$leagueId'";
-						$maxTeams = mysqli_fetch_array(doSQL($conn, $sql))["maxTeams"];
+						$sql = "SELECT maxTeams, hasStarted FROM league WHERE leagueId = '$leagueId'";
+						$data = mysqli_fetch_array(doSQL($conn, $sql));
+						$maxTeams = $data["maxTeams"];
+						$hasStarted = $data["hasStarted"];
+						$sql = "SELECT * FROM teams WHERE leagueId = '$leagueId' AND teamName = '$teamName'";
+						$data = mysqli_fetch_array(doSQL($conn, $sql));
 						$sql = "SELECT * FROM totalScore WHERE leagueId = '$leagueId'";
 						$results = doSQL($conn, $sql);
 						$numTeams = 0;
@@ -78,48 +82,47 @@
 						{
 							echo '<p>Unfortunately ' . $leagueName . ' is already full.</p>';
 						}
+						elseif ($hasStarted == 1)
+						{
+							echo '<p>Unfortunately ' . $leagueName . ' has already started.</p>';
+						}
+						elseif (isset($data))
+						{
+							echo '<p>\'' . $teamName . '\' is already taken.';
+						}
 						else
 						{
-							$sql = "SELECT * FROM teams WHERE leagueId = '$leagueId' AND teamName = '$teamName'";
-							$data = mysqli_fetch_array(doSQL($conn, $sql));
-							if (isset($data))
+							$sql = "INSERT INTO teams (teamName, userId, leagueId) VALUES ('$teamName', '$userId', '$leagueId')";
+							doSQL($conn, $sql);
+							$sql = "SELECT teamId FROM teams WHERE teamName = '$teamName'";
+							$results = doSQL($conn, $sql);
+							if ($results->num_rows == 0)
 							{
-								echo '<p>\'' . $teamName . '\' is already taken.';
+								echo '<p>Unfortunately we couldn\'t add your team to ' . $leagueName . ' right now.</p>';
+								$sql = "DELETE FROM teams WHERE teamId = '$teamId'";
+								doSQL($conn, $sql);
 							}
 							else
 							{
-								$sql = "INSERT INTO teams (teamName, userId, leagueId) VALUES ('$teamName', '$userId', '$leagueId')";
-								doSQL($conn, $sql);
-								$sql = "SELECT teamId FROM teams WHERE teamName = '$teamName'";
+								$teamId = mysqli_fetch_array($results)["teamId"];
+								$sql = "INSERT INTO totalScore (leagueId, teamId, matchesPlayed, wins, draws, losses, goalDifference, totalScore) VALUES ('$leagueId', '$teamId', '0', '0', '0', '0', '0', '0')";
 								$results = doSQL($conn, $sql);
+								print_r("\$results = " . $results);
+								$sql = "SELECT * FROM totalScore WHERE teamId = '$teamId' AND leagueId='$leagueId'";
+								$results = doSQL($conn, $sql);
+								echo("\$results = ");
+								print_r($results);
 								if ($results->num_rows == 0)
 								{
 									echo '<p>Unfortunately we couldn\'t add your team to ' . $leagueName . ' right now.</p>';
 									$sql = "DELETE FROM teams WHERE teamId = '$teamId'";
 									doSQL($conn, $sql);
+									$sql = "DELETE FROM totalScore WHERE teamId = '$teamId' AND leagueId = '$leagueId'";
+									doSQL($conn, $sql);
 								}
 								else
 								{
-									$teamId = mysqli_fetch_array($results)["teamId"];
-									$sql = "INSERT INTO totalScore (leagueId, teamId, matchesPlayed, wins, draws, losses, goalDifference, totalScore) VALUES ('$leagueId', '$teamId', '0', '0', '0', '0', '0', '0')";
-									$results = doSQL($conn, $sql);
-									print_r("\$results = " . $results);
-									$sql = "SELECT * FROM totalScore WHERE teamId = '$teamId' AND leagueId='$leagueId'";
-									$results = doSQL($conn, $sql);
-									echo("\$results = ");
-									print_r($results);
-									if ($results->num_rows == 0)
-									{
-										echo '<p>Unfortunately we couldn\'t add your team to ' . $leagueName . ' right now.</p>';
-										$sql = "DELETE FROM teams WHERE teamId = '$teamId'";
-										doSQL($conn, $sql);
-										$sql = "DELETE FROM totalScore WHERE teamId = '$teamId' AND leagueId = '$leagueId'";
-										doSQL($conn, $sql);
-									}
-									else
-									{
-										header("Location: viewTable.php?league=" . $leagueId);
-									}
+									header("Location: viewTable.php?league=" . $leagueId);
 								}
 							}
 						}

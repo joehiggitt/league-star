@@ -169,9 +169,13 @@
 							echo '	<input type="submit" value="Start League"><br><br>';
 							echo '</form>';
 						}
-						else
+						elseif ($numTeams < $minTeams)
 						{
 							echo '<p>At least ' . $minTeams . ' teams are needed to start the league.</p>';
+						}
+						else
+						{
+							echo '<br>';
 						}
 
 						echo '<form action="deleteLeague.php?league=' . $leagueId . '" method="post">';

@@ -10,26 +10,17 @@
 			$conn = connectDB();
 		?>
 		<?php
-			$sql = "DROP DATABASE loginTest";
-			echo doSQL($conn, $sql, true);
+			// $sql = "DROP DATABASE loginTest";
+			// echo doSQL($conn, $sql, true);
 			
 
-			// $leagueId = 1;
-			// $sql = "SELECT * FROM teams WHERE leagueId = '$leagueId'";
-			// $results = doSQL($conn, $sql);
-			// echo('<br>---<br>');
-			// print_r($results);
-			// echo('<br>---<br>');
-			// $teams = $results->fetch_all();
-			// echo('<br>---<br>');
-			// print_r($teams);
-			// echo('<br>---<br>');
-			// echo('<br>---<br>');
-
-			// for ($i = 0; $i < sizeof($teams); $i++)
-			// {
-			// 	echo($teams[$i] . "<br>");
-			// }
+			$sql = "SELECT team1Id, team2Id, matchDay FROM results WHERE leagueId = '1'";
+			$results = doSQL($conn, $sql, true);
+			while ($result = $results->fetch_assoc())
+			{
+				echo("<br>");
+				print_r($result);
+			}
 		?>
 	</body>
 </html>

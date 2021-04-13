@@ -39,15 +39,12 @@
 			?>
 			<?php
 				require_once("DBHandler.php");
+				$conn = connectDB();
 				if (isset($_POST['submit']))
 				{
-					// $teams = $_SESSION['teams'];
-					// require_once('DBHandler.php');
-					// $conn = connectDB();
 					unset($_POST['submit']);
 					print_r($_POST);
 					$keys = array_keys($_POST);
-					$conn = connectDB();
 					for ($i=0; $i<sizeof($_POST); $i=$i+2) {
 						$team1 = $keys[$i];
 						$team2 = $keys[$i+1];
@@ -60,10 +57,10 @@
 							$results = doSQL($conn, $sql, true);
 							print_r($results); 
 							$sql = "SELECT * FROM totalScore WHERE leagueId = '$leagueId' AND teamId = '$team1'";
-							$results = doSQL($conn, $sql);
+							$results = doSQL($conn, $sql, true);
 							$team1Data = mysqli_fetch_array($results);
 							$sql = "SELECT * FROM totalScore WHERE leagueId = '$leagueId' AND teamId = '$team2'";
-							$results = doSQL($conn, $sql);
+							$results = doSQL($conn, $sql, true);
 							$team2Data = mysqli_fetch_array($results);
 							if ($score1 > $score2) {
 								$team1Data["wins"]++;
@@ -98,7 +95,7 @@
 							$sql = "UPDATE totalScore
 									SET matchesPlayed = '$matchesPlayed', wins = '$wins', losses = '$losses', draws = '$draws', goalDifference = '$goalDifference', totalScore = '$totalScore'
 									WHERE leagueId = '$leagueId' AND teamId = '$team1'";
-							doSQL($conn, $sql);
+							doSQL($conn, $sql, true);
 
 							$matchesPlayed = $team2Data["matchesPlayed"];
 							$wins = $team2Data["wins"];
@@ -109,7 +106,7 @@
 							$sql = "UPDATE totalScore
 									SET matchesPlayed = '$matchesPlayed', wins = '$wins', losses = '$losses', draws = '$draws', goalDifference = '$goalDifference', totalScore = '$totalScore'
 									WHERE leagueId = '$leagueId' AND teamId = '$team2'";
-							doSQL($conn, $sql);
+							doSQL($conn, $sql, true);
 						}
 					}
 					$matchDay++;
@@ -168,19 +165,23 @@
 					$teams = array();
 					$conn = connectDB();
 					$sql = "SELECT matchesPlayed FROM totalScore WHERE leagueId = '$leagueId'";
-					$results = doSQL($conn, $sql);
-					$matchesPlayed = mysqli_fetch_array($results)["matchesPlayed"];
+					$matchDay = mysqli_fetch_array(doSQL($conn, $sql, true))["matchesPlayed"];
 					$sql = "SELECT team1Id, team2Id
 							FROM results
 							WHERE leagueId = '$leagueId' AND
 								  team1Score IS NULL AND
 								  team2Score IS NULL AND
 								  matchDay = '$matchDay'";
-					$results = doSQL($conn, $sql);
+					$results = doSQL($conn, $sql, true);
 					$data = mysqli_fetch_array($results);
 					while ($result = $results->fetch_assoc())
 					{
-						array_push($teams, array($result["team1Id"], $result["team2Id"])); // Need to switch to team name
+						$team1Id = $result["team1Id"];
+						$team2Id = $result["team2Id"];
+						$sql = "SELECT teamName FROM teams WHERE teamId = ";
+						$team1Name = mysqli_fetch_array(doSQL($conn, $sql . "'$team1Id'"))["teamName"];
+						$team2Name = mysqli_fetch_array(doSQL($conn, $sql . "'$team2Id'"))["teamName"];
+						array_push($teams, array($team1Id, $team2Id, $team1Name, $team2Name)); // Need to switch to team name
 					}
 					// for ($i = 0; $i < sizeof($teams); $i++)
 					// {
@@ -200,12 +201,12 @@
 					//     }
 					// }
 
-					$teams = array(
-						array("Team 1", "Team 2"),
-						array("Team 3", "Team 4"),
-						array("Team 5", "Team 6"),
-						array("Team 7", "Team 8")
-					);
+					// $teams = array(
+					// 	array("Team 1", "Team 2"),
+					// 	array("Team 3", "Team 4"),
+					// 	array("Team 5", "Team 6"),
+					// 	array("Team 7", "Team 8")
+					// );
 					// for ($i = 0; $i < sizeof($teams); $i++)
 					// {
 					//     for ($j = 0; $j < sizeof($teams[$i]); $j++)
@@ -214,20 +215,21 @@
 					//         echo '<br>';
 					//     }
 					// }
-					if (!isset($_SESSION['teams']))
-					{
-						$_SESSION['teams'] = $teams;
-					}
-
+					
+					// if (!isset($_SESSION['teams']))
+					// {
+					// 	$_SESSION['teams'] = $teams;
+					// }
+					print_r($teams);
 					echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '?league=' . $leagueId . '" method="post">';
 					echo '  <table class="addResults">';
 					for ($i = 0; $i < sizeof($teams); $i++)
 					{
 						echo '      <tr>';
-						echo '          <td>' . $teams[$i][0] . '</td>';
+						echo '          <td>' . $teams[$i][2] . '</td>';
 						echo '          <td><input type="number" name="' . $teams[$i][0] . '"></td>';
 						echo '          <td><input type="number" name="' . $teams[$i][1] . '"></td>';
-						echo '          <td>' . $teams[$i][1] . '</td>';
+						echo '          <td>' . $teams[$i][3] . '</td>';
 						echo '      </tr>';
 					}
 					echo '  </table><br><br>';
