@@ -114,6 +114,7 @@
 							doSQL($conn, $sql);
 						}
 					}
+					header("Location: viewTable.php?league=" . $leagueId);
 				}
 			?>
 			<header>

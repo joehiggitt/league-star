@@ -117,7 +117,7 @@
 					wins INT(6) UNSIGNED NOT NULL,
 					draws INT(6) UNSIGNED NOT NULL,
 					losses INT(6) UNSIGNED NOT NULL,
-					goalDifference INT(6) UNSIGNED NOT NULL,
+					goalDifference INT(6) NOT NULL,
 					totalScore INT(6) UNSIGNED NOT NULL,
 					PRIMARY KEY(leagueId, teamId),
 					CONSTRAINT fk_totalScore_league

@@ -31,5 +31,5 @@
 		}
 	}
 
-	header("Location: viewTable.php?league='. $leagueId .'");
+	header("Location: viewTable.php?league=" . $leagueId);
 ?>
