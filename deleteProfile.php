@@ -21,7 +21,7 @@
 				if (isset($_POST['submit']))
 				{
 					$sql = "DELETE FROM users WHERE user = '$user'";
-					$results = doSQL($conn, $sql);
+					doSQL($conn, $sql);
 					// Test if account deleted
 					$sql = "SELECT * FROM users WHERE user = '$user'";
 					$results = doSQL($conn, $sql);

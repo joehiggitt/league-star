@@ -40,8 +40,8 @@
 					leagueName VARCHAR(30) NOT NULL,
 					preset VARCHAR(20) NOT NULL,
 					isHomeAway BIT(1) NOT NULL,
-					minTeams INT(3) NOT NULL,
-					maxTeams INT(3) NOT NULL,
+					minTeams INT(3) UNSIGNED NOT NULL,
+					maxTeams INT(3) UNSIGNED NOT NULL,
 					matchDay VARCHAR(10),
 					-- matchTime TIME,
 					CONSTRAINT fk_league_user
@@ -91,9 +91,10 @@
 					leagueId INT(6) UNSIGNED NOT NULL,
 					team1Id INT(6) UNSIGNED NOT NULL,
 					team2Id INT(6) UNSIGNED NOT NULL,
-					matchDay INT(8),
-					team1Score INT(6),
-					team2Score INT(6),
+					matchDay INT(8) UNSIGNED NOT NULL,
+					team1Score INT(6) UNSIGNED,
+					team2Score INT(6) UNSIGNED,
+                    -- PRIMARY KEY(leagueId, team1Id, team2Id, matchDay),
 					CONSTRAINT fk_results_league
 						FOREIGN KEY (leagueId) REFERENCES league(leagueId)
 						ON DELETE CASCADE
@@ -112,12 +113,12 @@
         $sql = "CREATE TABLE IF NOT EXISTS totalScore (
 					leagueId INT(6) UNSIGNED NOT NULL,
 					teamId INT(6) UNSIGNED NOT NULL,
-					matchesPlayed INT(6),
-					wins INT(6),
-					draws INT(6),
-					losses INT(6),
-					goalDifference INT(6),
-					totalScore INT(6),
+					matchesPlayed INT(6) UNSIGNED NOT NULL,
+					wins INT(6) UNSIGNED NOT NULL,
+					draws INT(6) UNSIGNED NOT NULL,
+					losses INT(6) UNSIGNED NOT NULL,
+					goalDifference INT(6) NOT NULL,
+					totalScore INT(6) UNSIGNED NOT NULL,
 					PRIMARY KEY(leagueId, teamId),
 					CONSTRAINT fk_totalScore_league
 						FOREIGN KEY (leagueId) REFERENCES league(leagueId)

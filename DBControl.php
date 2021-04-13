@@ -13,22 +13,15 @@
 			$sql = "DROP DATABASE loginTest";
 			echo doSQL($conn, $sql, true);
 			
-
 			// $leagueId = 1;
-			// $sql = "SELECT * FROM teams WHERE leagueId = '$leagueId'";
-			// $results = doSQL($conn, $sql);
-			// echo('<br>---<br>');
+			// $matchDay = 0;
+			// $sql = "SELECT team1Id, team2Id, team1Score, team2Score FROM results WHERE leagueId = '$leagueId' AND matchDay = '$matchDay'";
+			// $results = doSQL($conn, $sql, true);
 			// print_r($results);
-			// echo('<br>---<br>');
-			// $teams = $results->fetch_all();
-			// echo('<br>---<br>');
-			// print_r($teams);
-			// echo('<br>---<br>');
-			// echo('<br>---<br>');
-
-			// for ($i = 0; $i < sizeof($teams); $i++)
+			// while ($result = $results->fetch_assoc())
 			// {
-			// 	echo($teams[$i] . "<br>");
+			// 	echo("<br>");
+			// 	print_r($result);
 			// }
 		?>
 	</body>

@@ -115,11 +115,14 @@
 							$sql = "SELECT userId FROM users WHERE user = '$user'";
 							$results = doSQL($conn, $sql);
 							$out = $results->fetch_assoc();
-							$out = $out["userId"];
+							$userId = $out["userId"];
 							$sql = "INSERT INTO league (creatorId, joinCode, hasStarted, leagueName, preset, isHomeAway, maxTeams, minTeams, matchDay)
-									VALUES ('$out', '$joinCode', 0, '$name', '$preset', $isHomeAway, '$maxTeams', '$minTeams', '$day')";
-							$results = doSQL($conn, $sql);
-							// echo "<meta http-equiv='refresh' content='0'>";
+									VALUES ('$userId', '$joinCode', 0, '$name', '$preset', $isHomeAway, '$maxTeams', '$minTeams', '$day')";
+							doSQL($conn, $sql);
+							$sql = "SELECT leagueId FROM league WHERE joinCode = '$joinCode'";
+							$leagueId = mysqli_fetch_array(doSQL($conn, $sql))["leagueId"];
+							echo "<meta http-equiv='refresh' content='0'>";
+							header("Location: viewTable.php?league=" . $leagueId);
 						}
 					}
 				?>

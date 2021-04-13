@@ -28,6 +28,14 @@
 				{
 					header("Location: index.php");
 				}
+				if (!isset($_GET["league"]))
+                {
+                    header("Location: dashboard.php");
+                }
+                elseif (strlen($_GET["league"]) != 1)
+                {
+                    header("Location: dashboard.php");
+                }
 			?>
 			<header>
 				<img src="Header.png" alt="header" height="80px" width="100%">
@@ -81,18 +89,18 @@
 				?>
 				<div>
 					<?php
-						$content = array(
-							array("Oak FC", "10", "9", "1", "0", "16", "28"),
-							array("Owens United", "10", "6", "3", "1", "8", "21"),
-							array("Richmond Rovers", "10", "4", "3", "3", "5", "15"),
-							array("Sheavyn City", "10", "2", "2", "6", "-9", "8"),
-							array("Asburne Albion", "10", "0", "6", "4", "-14", "6"),
-							array("Unsworth Town", "10", "0", "2", "8", "-17", "2"),
-						);
+						// $content = array(
+						// 	array("Oak FC", "10", "9", "1", "0", "16", "28"),
+						// 	array("Owens United", "10", "6", "3", "1", "8", "21"),
+						// 	array("Richmond Rovers", "10", "4", "3", "3", "5", "15"),
+						// 	array("Sheavyn City", "10", "2", "2", "6", "-9", "8"),
+						// 	array("Asburne Albion", "10", "0", "6", "4", "-14", "6"),
+						// 	array("Unsworth Town", "10", "0", "2", "8", "-17", "2"),
+						// );
 
 						if ($results->num_rows === 0)
 						{
-							echo "<p>There are no teams in this league</p>";
+							echo "<p>There are no teams in this league.</p>";
 						}
 						else
 						{
@@ -149,8 +157,7 @@
 					$sql = "SELECT userId FROM users WHERE user = '$user'";
 					$userId = mysqli_fetch_array(doSQL($conn, $sql))['userId'];
 					$sql = "SELECT creatorId, hasStarted, minTeams FROM league WHERE leagueId = '$leagueId'";
-					$results = doSQL($conn, $sql);
-					$data = mysqli_fetch_array($results);
+					$data = mysqli_fetch_array(doSQL($conn, $sql));
 					$creatorId = $data['creatorId'];
 					$hasStarted = $data['hasStarted'];
 					$minTeams = $data['minTeams'];
@@ -162,9 +169,13 @@
 							echo '	<input type="submit" value="Start League"><br><br>';
 							echo '</form>';
 						}
+						elseif ($numTeams < $minTeams)
+						{
+							echo '<p>At least ' . $minTeams . ' teams are needed to start the league.</p>';
+						}
 						else
 						{
-							echo '<p>At least ' . $minTeams . ' are needed to start the league.</p>';
+							echo '<br>';
 						}
 
 						echo '<form action="deleteLeague.php?league=' . $leagueId . '" method="post">';

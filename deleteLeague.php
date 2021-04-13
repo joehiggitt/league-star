@@ -7,10 +7,9 @@
 			$leagueId = $_GET['league'];
 			require_once("DBHandler.php");
 			$conn = connectDB();
-			$sql = "SELECT leagueName, joinCode FROM league
+			$sql = "SELECT leagueName FROM league
 					WHERE leagueId = '$leagueId'";
-			$data = mysqli_fetch_array(doSQL($conn, $sql));
-			$leagueName = $data['leagueName'];
+			$leagueName = mysqli_fetch_array(doSQL($conn, $sql))['leagueName'];
 			echo '<title>Delete League - ' . $leagueName . ' - LeagueStar</title>';
 		?>
 		<link rel="shortcut icon" type="image/png" href="Logo.png">
@@ -35,8 +34,15 @@
 			<?php
 				if (isset($_POST['submit']))
 				{
+					$leagueId = $_GET['league'];
 					$sql = "DELETE FROM league WHERE leagueId = '$leagueId'";
-					$results = doSQL($conn, $sql);
+					doSQL($conn, $sql);
+					$sql = "DELETE FROM teams WHERE leagueId = '$leagueId'";
+					doSQL($conn, $sql);
+					$sql = "DELETE FROM totalScore WHERE leagueId = '$leagueId'";
+					doSQL($conn, $sql);
+					$sql = "DELETE FROM results WHERE leagueId = '$leagueId'";
+					doSQL($conn, $sql);
 					// Test if league deleted
 					$sql = "SELECT * FROM league WHERE leagueId = '$leagueId'";
 					$results = doSQL($conn, $sql);

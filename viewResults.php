@@ -49,50 +49,51 @@
 				<?php echo '<h2>' . $leagueName . ' Results</h2>'; ?>
 				<div style="text-align: center;">
 					<?php
-					$leagueId = $_GET["league"];
-					$conn = connectDB();
-					$sql = "SELECT results.team1Id, results.team2Id, results.team1Score, results.team2Score, results.matchDay
-							FROM results
-							INNER JOIN league ON league.leagueId = results.leagueId
-							WHERE league.leagueId = '$leagueId' AND
-								  NOT results.team1Score IS NULL AND
-								  NOT results.team2Score IS NULL";
-					$results = doSQL($conn, $sql);
-					if ($results->num_rows === 0) {
-						echo "<p>There are no results for this league</p>";
-					} else {
-						$resultArr = array();
-						$matchDays = array();
-						while ($result = $results->fetch_assoc()) {
-							array_push($resultArr, array($result['team1Id'],
-														 $result['team2Id'],
-														 $result['team1Score'],
-														 $result['team2Score'],
-														 $result['matchDay']));
-							if(!in_array($result['matchDay'], $matchDays)) {
-								array_push($matchDays, $resultArr['matchDay']);
-							}
-						}
-						sort($matchDays);
-						for ($i=0; $i < length($matchDays); $i++) {
-							echo "<h4>" . $matchDays[i] . "</h4>";
-							echo "<table class='styled-table'>";
-							echo "<tbody>";
-							for ($j=0; $j < length($resultArr); $j++) {
-								if ($resultArr[j][4] === $matchDays[i]) {
-									echo "<tr>";
-									echo "<td> " . $resultArr[j][0] . " </td>";
-									echo "<td> " . $resultArr[j][2] . " </td>";
-									echo "<td> " . $resultArr[j][3] . " </td>";
-									echo "<td> " . $resultArr[j][1] . " </td>";
-									echo "</tr>";
+						$leagueId = $_GET["league"];
+						$conn = connectDB();
+						$sql = "SELECT results.team1Id, results.team2Id, results.team1Score, results.team2Score, results.matchDay
+								FROM results
+								INNER JOIN league ON league.leagueId = results.leagueId
+								WHERE league.leagueId = '$leagueId' AND
+									  NOT results.team1Score IS NULL AND
+									  NOT results.team2Score IS NULL";
+						$results = doSQL($conn, $sql);
+						if ($results->num_rows === 0) {
+							echo "<p>There are no results for this league.</p>";
+						} else {
+							$resultArr = array();
+							$matchDays = array();
+							while ($result = $results->fetch_assoc()) {
+								$team1Id = $result["team1Id"];
+								$team2Id = $result["team2Id"];
+								$sql = "SELECT teamName FROM teams WHERE teamId = ";
+								$team1Name = mysqli_fetch_array(doSQL($conn, $sql . "'$team1Id'"))["teamName"];
+								$team2Name = mysqli_fetch_array(doSQL($conn, $sql . "'$team2Id'"))["teamName"];
+								array_push($resultArr, array($team1Name, $team2Name, $result['team1Score'], $result['team2Score'], $result['matchDay']));
+								if(!in_array($result['matchDay'], $matchDays)) {
+									array_push($matchDays, $result['matchDay']);
 								}
 							}
-							echo "</tbody>";
-							echo "</table>";
+							sort($matchDays);
+							for ($i=0; $i < count($matchDays); $i++) {
+								echo "<h3>Matchday " . ($matchDays[$i] + 1) . "</h3>";
+								echo "<table id='scoreTable'>";
+								echo "<tbody>";
+								for ($j=0; $j < count($resultArr); $j++) {
+									if ($resultArr[$j][4] === $matchDays[$i]) {
+										echo "<tr>";
+										echo "<td class='homeColumn'> " . $resultArr[$j][0] . " </td>";
+										echo "<td class='scoreColumn'> " . $resultArr[$j][2] . " </td>";
+										echo "<td class='scoreColumn'> " . $resultArr[$j][3] . " </td>";
+										echo "<td class='awayColumn'> " . $resultArr[$j][1] . " </td>";
+										echo "</tr>";
+									}
+								}
+								echo "</tbody>";
+								echo "</table>";
+							}
 						}
-					}
-				?>
+					?>
 				</div>
 				<br><br>
 			</main>
