@@ -390,6 +390,7 @@ aside a:hover, aside button:hover
 	height: 25px;
 	width: 25px;
 	background-color: #feeccc;
+	transition: 0.25s ease;
 }
 
 .checkboxContainer:hover input ~ .checkmark, .checkboxContainer input:checked:hover ~ .checkmark

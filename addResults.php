@@ -156,7 +156,7 @@
         		<h2>Enter Results</h2>
                 <?php
                     $leagueId = $_GET['league'];
-                    $matchDay = 0;
+                    // $matchDay = 0;
                     $teams = array();
                     $conn = connectDB();
                     $sql = "SELECT matchesPlayed FROM totalScore WHERE leagueId = '$leagueId'";
