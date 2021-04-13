@@ -8,7 +8,7 @@
         } else {
             $leagueId = 0;
         }
-        echo '<aside class="asideStl">';
+        echo '<aside id="asideStl">';
         $conn = connectDB();
         $sql = "SELECT league.leagueId, league.leagueName, creatorId
                 FROM league
@@ -21,9 +21,9 @@
         $data = doSQL($conn, $sql);
         $currentUser = mysqli_fetch_array($data)["userId"];
 
-        echo '<div class="sideMenu">';
+        echo '<div class="sideMenu" id="thesideMenu">';
         while($row = $results->fetch_assoc()) {
-            echo '<button class="asideDropBtn">' . $row["leagueName"] . '</button>';
+            echo '<button class="asideDropBtn" id="asideDBtn">' . $row["leagueName"] . '</button>';
             echo '<div class="asideDropContainer">';
             if ($active == "table" && $leagueId == $count) {
                 echo '<a href="viewTable.php?league=' . $row["leagueId"] . ' id="active"">&emsp;Table</a>';
