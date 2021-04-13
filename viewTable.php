@@ -92,7 +92,7 @@
 
 						if ($results->num_rows === 0)
 						{
-							echo "<p>There are no teams in this league</p>";
+							echo "<p>There are no teams in this league.</p>";
 						}
 						else
 						{
@@ -164,7 +164,7 @@
 						}
 						else
 						{
-							echo '<p>At least ' . $minTeams . ' are needed to start the league.</p>';
+							echo '<p>At least ' . $minTeams . ' teams are needed to start the league.</p>';
 						}
 
 						echo '<form action="deleteLeague.php?league=' . $leagueId . '" method="post">';

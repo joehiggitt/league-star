@@ -74,11 +74,3 @@
 		</footer>
 	</body>
 </html>
-
-<!-- 
-	Checks:
-	* Join code must be correct - league must exist
-	* User must not own league
-	* User must not already have a team in the league
-	* Team name must not be already taken
- -->

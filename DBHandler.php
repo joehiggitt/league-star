@@ -94,6 +94,7 @@
 					matchDay INT(8) UNSIGNED NOT NULL,
 					team1Score INT(6) UNSIGNED,
 					team2Score INT(6) UNSIGNED,
+                    -- PRIMARY KEY(leagueId, team1Id, team2Id, matchDay),
 					CONSTRAINT fk_results_league
 						FOREIGN KEY (leagueId) REFERENCES league(leagueId)
 						ON DELETE CASCADE
