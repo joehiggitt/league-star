@@ -41,7 +41,7 @@
 		$sql = "SELECT userId FROM users WHERE user = '$user'";
 		$currentUser = mysqli_fetch_array(doSQL($conn, $sql))["userId"];
 		$sql = "SELECT leagueId FROM teams WHERE userId = '$currentUser'";
-		$leagues = array_unique(mysqli_fetch_array(doSQL($conn, $sql)));
+		$leagues = mysqli_fetch_array(doSQL($conn, $sql));
 		$sql = "SELECT league.leagueId, league.leagueName, league.creatorId
 				FROM league
 				INNER JOIN users ON users.userId=league.creatorId
@@ -54,12 +54,15 @@
 			$count = printLeague($count, $active, $row["leagueName"], $row["leagueId"], $currentUser, $row["creatorId"]);
 			array_push($leaguesPrinted, $row["leagueId"]);
 		}
-		$leagues = array_diff($leagues, $leaguesPrinted);
-		foreach ($leagues as $league)
+		if ($leagues != null)
 		{
-			$sql = "SELECT leagueName, creatorId FROM league WHERE leagueId = '$leagueId'";
-			$data = mysqli_fetch_array(doSQL($conn, $sql));
-			printLeague($data["leagueName"], $active, $league, $currentUser, $data["creatorId"]);
+			$leagues = array_diff(array_unique($leagues), $leaguesPrinted);
+			foreach ($leagues as $league)
+			{
+				$sql = "SELECT leagueName, creatorId FROM league WHERE leagueId = '$league'";
+				$data = mysqli_fetch_array(doSQL($conn, $sql));
+				printLeague($count, $active, $data["leagueName"], $league, $currentUser, $data["creatorId"]);
+			}
 		}
 		if ($active == "create") {
 			echo '<a href="createLeague.php" id="active">Create New League</a>';
