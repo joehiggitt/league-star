@@ -81,14 +81,14 @@
 				?>
 				<div>
 					<?php
-						$content = array(
-							array("Oak FC", "10", "9", "1", "0", "16", "28"),
-							array("Owens United", "10", "6", "3", "1", "8", "21"),
-							array("Richmond Rovers", "10", "4", "3", "3", "5", "15"),
-							array("Sheavyn City", "10", "2", "2", "6", "-9", "8"),
-							array("Asburne Albion", "10", "0", "6", "4", "-14", "6"),
-							array("Unsworth Town", "10", "0", "2", "8", "-17", "2"),
-						);
+						// $content = array(
+						// 	array("Oak FC", "10", "9", "1", "0", "16", "28"),
+						// 	array("Owens United", "10", "6", "3", "1", "8", "21"),
+						// 	array("Richmond Rovers", "10", "4", "3", "3", "5", "15"),
+						// 	array("Sheavyn City", "10", "2", "2", "6", "-9", "8"),
+						// 	array("Asburne Albion", "10", "0", "6", "4", "-14", "6"),
+						// 	array("Unsworth Town", "10", "0", "2", "8", "-17", "2"),
+						// );
 
 						if ($results->num_rows === 0)
 						{
