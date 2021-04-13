@@ -111,9 +111,9 @@ p
 input[type=submit]/*, button*/
 {
 	background-color: #f9a618;
+	color: #3a404c;
 	border: none;
 	transition: 0.25s ease;
-	color: #3a404c;
 	padding: 10px 20px;
 	text-align: center;
 	text-decoration: none;
@@ -325,45 +325,68 @@ aside a:hover, aside button:hover
 }
 
 
-.addResults
+#scoreTable
 {
-	border-collapse: collapse;
-	/*margin: 25px 0;
-	font-size: 0.9em;
-	min-width: 400px;  setting the width of cells 
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);*/
+	border: none;
 	align-content: center;
 	margin: auto;
+	width: 80%;
 }
 
-.addResults th, .addResults td
+#scoreTable th, #scoreTable td
 {
 	padding: 12px 20px;
 	font-size: 20px;
 }
-.addResults tr
+#scoreTable tr
 {
-	border-bottom: 1px solid #dddddd;
-}
-.addResults tr:nth-of-type(even)
-{
-	background-color: #f3f3f3;
+	height: 20px;
 }
 
-.addResults tr:last-of-type
+#scoreTable .dataColumn input[type=number]
 {
-	border-bottom: 3px solid #f9a618;
-}
-
-.addResults input[type=number]
-{
-	width: 50px;
-}
-
-/*.addresults tr.active-row {
+	width: 35px;
+	font-size: 25px;
 	font-weight: bold;
-	color: #E56F0E;
-}*/
+}
+
+#scoreTable .scoreColumn
+{
+	background-color: #f9a618;
+	color: #3a404c;
+	font-weight: bold;
+	width: 20px;
+	font-size: 25px;
+	padding: 6px 12px;
+	border-top: solid 5px #ffffff;
+	border-bottom: solid 5px #ffffff;
+	border-left: solid 1px #ffffff;
+	border-right: solid 1px #ffffff;
+}
+
+#scoreTable .dataColumn
+{
+	background-color: #feeccc;
+	width: 20px;
+	font-size: 25px;
+	padding: 5px 5px;
+	border-top: solid 5px #ffffff;
+	border-bottom: solid 5px #ffffff;
+	border-left: solid 1px #ffffff;
+	border-right: solid 1px #ffffff;
+}
+
+#scoreTable .homeColumn
+{
+	text-align: right;
+	margin-right: 5px;
+}
+
+#scoreTable .awayColumn
+{
+	text-align: left;
+	margin-left: 5px;
+}
 
 .checkboxContainer
 {
@@ -533,54 +556,6 @@ aside a:hover, aside button:hover
 .link:hover
 {
 	color: #565d6b;
-}
-
-.styled-table
-{
-	border-collapse: collapse; /* for smooth borders */
-	margin: 25px 0;
-	font-size: 0.9em;
-	min-width: 400px; /* setting the width of cells */
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-	align-content: center;
-	margin: auto;
-}
-
-	/* Styling the header */
-.styled-table thead tr
-{
-	background-color: #f9a618;
-	color: #ffffff;
-	text-align: center;
-}
-
-	/* Moving onto the table cells */
-.styled-table th, .styled-table td
-{
-	padding: 12px 15px;
-} /* setting padding for all cells */
-
-	/* the table rows */
-.styled-table tbody tr
-{
-	border-bottom: 1px solid #dddddd;
-} /* for nice finishing, setting the colour of bottom border same colour as header */
-
-.styled-table tbody tr:nth-of-type(even)
-{
-	background-color: #f3f3f3;
-}
-
-.styled-table tbody tr:last-of-type
-{
-	border-bottom: 2px solid #f9a618;
-}
-
-	/* make the active row look different */
-.styled-table tbody tr.active-row
-{
-	font-weight: bold;
-	color: #E56F0E;
 }
 
 #active

@@ -27,14 +27,6 @@
 				{
 					header("Location: index.php");
 				}
-				if (!isset($_GET["league"]))
-                {
-                    header("Location: dashboard.php");
-                }
-                elseif (strlen($_GET["league"]) != 1)
-                {
-                    header("Location: dashboard.php");
-                }
 			?>
 			<header>
 				<img src="Header.png" alt="header" height="80px" width="100%">
@@ -52,7 +44,6 @@
 					require_once("createSideBar.php");
 					createSideBar("result");
 				}
-						
 			?>
 			<main style="text-align: center;">
 				<?php echo '<h2>' . $leagueName . ' Results</h2>'; ?>
@@ -70,7 +61,7 @@
 						if ($results->num_rows === 0) {
 							echo "<p>There are no results for this league.</p>";
 						} else {
-							$results = array();
+							$resultArr = array();
 							$matchDays = array();
 							while ($result = $results->fetch_assoc()) {
 								$team1Id = $result["team1Id"];
@@ -78,7 +69,7 @@
 								$sql = "SELECT teamName FROM teams WHERE teamId = ";
 								$team1Name = mysqli_fetch_array(doSQL($conn, $sql . "'$team1Id'"))["teamName"];
 								$team2Name = mysqli_fetch_array(doSQL($conn, $sql . "'$team2Id'"))["teamName"];
-								array_push($results, array($team1Name, $team2Name, $result['matchDay']));
+								array_push($resultArr, array($team1Name, $team2Name, $result['team1Score'], $result['team2Score'], $result['matchDay']));
 								if(!in_array($result['matchDay'], $matchDays)) {
 									array_push($matchDays, $result['matchDay']);
 								}
@@ -86,14 +77,15 @@
 							sort($matchDays);
 							for ($i=0; $i < count($matchDays); $i++) {
 								echo "<h3>Matchday " . ($matchDays[$i] + 1) . "</h3>";
-								echo "<table class='styled-table'>";
+								echo "<table id='scoreTable'>";
 								echo "<tbody>";
-								for ($j=0; $j < count($results); $j++) {
-									if ($results[$j][2] === $matchDays[$i]) {
+								for ($j=0; $j < count($resultArr); $j++) {
+									if ($resultArr[$j][4] === $matchDays[$i]) {
 										echo "<tr>";
-										echo "<td> " . $results[$j][0] . " </td>";
-										echo "<td> VS </td>";
-										echo "<td> " . $results[$j][1] . " </td>";
+										echo "<td class='homeColumn'> " . $resultArr[$j][0] . " </td>";
+										echo "<td class='scoreColumn'> " . $resultArr[$j][2] . " </td>";
+										echo "<td class='scoreColumn'> " . $resultArr[$j][3] . " </td>";
+										echo "<td class='awayColumn'> " . $resultArr[$j][1] . " </td>";
 										echo "</tr>";
 									}
 								}

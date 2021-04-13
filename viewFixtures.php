@@ -85,14 +85,14 @@
 							sort($matchDays);
 							for ($i=0; $i < count($matchDays); $i++) {
 								echo "<h3>Matchday " . ($matchDays[$i] + 1) . "</h3>";
-								echo "<table class='styled-table'>";
+								echo "<table id='scoreTable'>";
 								echo "<tbody>";
 								for ($j=0; $j < count($fixtures); $j++) {
 									if ($fixtures[$j][2] === $matchDays[$i]) {
 										echo "<tr>";
-										echo "<td> " . $fixtures[$j][0] . " </td>";
-										echo "<td> VS </td>";
-										echo "<td> " . $fixtures[$j][1] . " </td>";
+										echo "<td class='homeColumn'>" . $fixtures[$j][0] . "</td>";
+										echo "<td class='scoreColumn'>VS</td>";
+										echo "<td class='awayColumn'>" . $fixtures[$j][1] . "</td>";
 										echo "</tr>";
 									}
 								}
