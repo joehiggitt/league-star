@@ -149,8 +149,7 @@
 					$sql = "SELECT userId FROM users WHERE user = '$user'";
 					$userId = mysqli_fetch_array(doSQL($conn, $sql))['userId'];
 					$sql = "SELECT creatorId, hasStarted, minTeams FROM league WHERE leagueId = '$leagueId'";
-					$results = doSQL($conn, $sql);
-					$data = mysqli_fetch_array($results);
+					$data = mysqli_fetch_array(doSQL($conn, $sql));
 					$creatorId = $data['creatorId'];
 					$hasStarted = $data['hasStarted'];
 					$minTeams = $data['minTeams'];
