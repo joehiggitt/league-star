@@ -18,10 +18,13 @@
 		} else {
 			echo '<a href="viewResults.php?league=' . $leagueId . '">&emsp;Results</a>';
 		}
-		if ($active == "addResult" && $leagueId == $count && $creatorId == $currentUser) {
-			echo '<a href="addResults.php?league=' . $leagueId . '" id="active">&emsp;Enter Results</a>';
-		} else {
-			echo '<a href="addResults.php?league=' . $leagueId . '">&emsp;Enter Results</a>';
+		if ($creatorId == $currentUser)
+		{
+			if ($active == "addResult" && $leagueId == $count) {
+				echo '<a href="addResults.php?league=' . $leagueId . '" id="active">&emsp;Enter Results</a>';
+			} else {
+				echo '<a href="addResults.php?league=' . $leagueId . '">&emsp;Enter Results</a>';
+			}
 		}
 		echo '</div>';
 		return $count++;

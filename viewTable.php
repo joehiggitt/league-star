@@ -28,6 +28,14 @@
 				{
 					header("Location: index.php");
 				}
+				if (!isset($_GET["league"]))
+                {
+                    header("Location: dashboard.php");
+                }
+                elseif (strlen($_GET["league"]) != 1)
+                {
+                    header("Location: dashboard.php");
+                }
 			?>
 			<header>
 				<img src="Header.png" alt="header" height="80px" width="100%">
