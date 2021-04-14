@@ -23,7 +23,7 @@
 
         // Connect to database and create table
         $conn = connectDB();
-        
+
         $sql = "CREATE TABLE IF NOT EXISTS users (
                     userId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                     user VARCHAR(30) NOT NULL UNIQUE,
@@ -31,7 +31,7 @@
                     email VARCHAR(128) NOT NULL UNIQUE
                 ) ENGINE=InnoDB";
         doSQL($conn, $sql);
-        
+
         $sql = "CREATE TABLE IF NOT EXISTS league (
 					leagueId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 					creatorId INT(6) UNSIGNED NOT NULL,
@@ -50,7 +50,7 @@
 						ON UPDATE CASCADE
 				) ENGINE=InnoDB";
         doSQL($conn, $sql);
-        
+
         $sql = "CREATE TABLE IF NOT EXISTS teams (
 					teamId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 					userId INT(6) UNSIGNED,
@@ -62,7 +62,7 @@
 						ON UPDATE CASCADE
 				) ENGINE=InnoDB";
         doSQL($conn, $sql);
-        
+
 		// $sql = "CREATE TABLE IF NOT EXISTS players (
 		// 			playerId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 		// 			teamId INT(6),
@@ -77,7 +77,7 @@
 		// 				ON UPDATE CASCADE
 		// 		) ENGINE=InnoDB";
 		// doSQL($conn, $sql);
-		
+
         // $sql = "SHOW ENGINE InnoDB STATUS";
         // $results = doSQL($conn, $sql);
         // while ($row = $results->fetch_assoc()) {
@@ -85,7 +85,7 @@
         //         echo $cell;
         //     }
         // }
-        
+
         $sql = "CREATE TABLE IF NOT EXISTS results (
 					resultId INT(8) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 					leagueId INT(6) UNSIGNED NOT NULL,
@@ -109,7 +109,7 @@
 						ON UPDATE CASCADE
 				) ENGINE=InnoDB";
         doSQL($conn, $sql);
-        
+
         $sql = "CREATE TABLE IF NOT EXISTS totalScore (
 					leagueId INT(6) UNSIGNED NOT NULL,
 					teamId INT(6) UNSIGNED NOT NULL,

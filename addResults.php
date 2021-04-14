@@ -49,18 +49,20 @@
 					$matchDay = mysqli_fetch_array(doSQL($conn, $sql))["matchesPlayed"];
 					$keys = array_keys($_POST);
 					for ($i = 0; $i < sizeof($_POST); $i += 2) {
-						$team1Id = $keys[$i];
-						$team2Id = $keys[$i+1];
-						$score1 = $_POST[$team1Id];
-						$score2 = $_POST[$team2Id];
+						$team1Key = $keys[$i];
+						$team2Key = $keys[$i+1];
+						$team1Id = substr($team1Key, 0, 1);
+						$team2Id = substr($team2Key, 0, 1);
+						$score1 = $_POST[$team1Key];
+						$score2 = $_POST[$team2Key];
 						if ($score1 != "" and $score2 != "") {
+							$day = substr($team1Key, 1, 1);
 							$sql = "UPDATE results
 									SET team1Score = '$score1', team2Score = '$score2'
-									WHERE team1Id = '$team1Id' AND
-										  team2Id = '$team2Id' AND
-										  matchDay = '$matchDay'";
-							$results = doSQL($conn, $sql);
-							// print_r($results); 
+									WHERE leagueId = '$leagueId' AND team1Id = '$team1Id'
+									AND team2Id = '$team2Id' AND matchDay = '$day'";
+							$results = doSQL($conn, $sql, true);
+							// print_r($results);
 							$sql = "SELECT * FROM totalScore WHERE leagueId = '$leagueId' AND teamId = '$team1Id'";
 							$results = doSQL($conn, $sql);
 							$team1Data = mysqli_fetch_array($results);
@@ -145,9 +147,9 @@
 						$teams = array();
 						$conn = connectDB();
 						$sql = "SELECT matchesPlayed FROM totalScore WHERE leagueId = '$leagueId'";
-						$matchDay = mysqli_fetch_array(doSQL($conn, $sql))["matchesPlayed"];
-						echo '<p>Enter the results for Matchday ' . ($matchDay + 1) . '.</p>';
-						$sql = "SELECT team1Id, team2Id FROM results WHERE leagueId = '$leagueId' AND team1Score IS NULL AND team2Score IS NULL AND matchDay = '$matchDay'";
+						// $currentMatchDay = mysqli_fetch_array(doSQL($conn, $sql))["matchesPlayed"];
+						$matchDays = array();
+						$sql = "SELECT team1Id, team2Id, matchDay FROM results WHERE leagueId = '$leagueId' AND team1Score IS NULL AND team2Score IS NULL";
 						$results = doSQL($conn, $sql);
 						while ($result = $results->fetch_assoc())
 						{
@@ -156,20 +158,30 @@
 							$sql = "SELECT teamName FROM teams WHERE teamId = ";
 							$team1Name = mysqli_fetch_array(doSQL($conn, $sql . "'$team1Id'"))["teamName"];
 							$team2Name = mysqli_fetch_array(doSQL($conn, $sql . "'$team2Id'"))["teamName"];
-							array_push($teams, array($team1Id, $team2Id, $team1Name, $team2Name));
+							$day = $result["matchDay"];
+							array_push($teams, array($team1Id, $team2Id, $team1Name, $team2Name, $day));
+							if(!in_array($result['matchDay'], $matchDays)) {
+								array_push($matchDays, $result['matchDay']);
+							}
 						}
+						sort($matchDays);
 						echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '?league=' . $leagueId . '" method="post">';
-						echo '  <table id="scoreTable">';
-						for ($i = 0; $i < sizeof($teams); $i++)
-						{
-							echo '<tr>';
-							echo '	<td class="homeColumn">' . $teams[$i][2] . '</td>';
-							echo '	<td class="dataColumn"><input type="number" min="0" name="' . $teams[$i][0] . '"></td>';
-							echo '	<td class="dataColumn"><input type="number" min="0" name="' . $teams[$i][1] . '"></td>';
-							echo '	<td class="awayColumn">' . $teams[$i][3] . '</td>';
-							echo '</tr>';
+						for ($j=0; $j < count($matchDays); $j++) {
+							echo '<p>Enter the results for Matchday ' . ($matchDays[$j] + 1) . '.</p>';
+							echo '<table id="scoreTable">';
+							for ($i = 0; $i < sizeof($teams); $i++)
+							{
+								if ($teams[$i][4] == $matchDays[$j]) {
+									echo '<tr>';
+									echo '	<td class="homeColumn">' . $teams[$i][2] . '</td>';
+									echo '	<td class="dataColumn"><input type="number" min="0" name="' . $teams[$i][0] . $j . '"></td>';
+									echo '	<td class="dataColumn"><input type="number" min="0" name="' . $teams[$i][1] . $j . '"></td>';
+									echo '	<td class="awayColumn">' . $teams[$i][3] . '</td>';
+									echo '</tr>';
+								}
+							}
+							echo '  </table><br><br>';
 						}
-						echo '  </table><br><br>';
 						echo '  <input type="submit" name="submit" value="Add Results"/>';
 						echo '</form>';
 					?>
