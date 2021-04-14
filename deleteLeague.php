@@ -91,7 +91,7 @@
 						echo '<h2>Delete ' . $leagueName . '</h2>';
 						echo '<p>Are you sure you want to delete ' . $leagueName . '? This process is irreversable.</p>';
 						echo '<p>All the teams and their progress in ' . $leagueName . ' will be immediately deleted.</p>';
-						echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '" method="post">';
+						echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '?league=' . $leagueId . '" method="post">';
 						echo '	<input type="submit" name="submit" value="Delete ' . $leagueName . '" id="deleteButtton">';
 						echo '</form><br>';
 						echo '<form action="viewTable.php?league='. $leagueId .'" method="post">';
