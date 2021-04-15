@@ -93,10 +93,11 @@
 	function responsiveAside() {
 	  var y = document.getElementById("asideDBtn");
 	  var z = document.getElementById("thesideMenu");
+	  console.log("lkkjasd");
 	  if (y.className === "asideDropBtn") {
-	  	y.className += " responsivv"
+	  	y.className += " responsivv";
 	  } else {
-	  	y.className = "asideDropBtn"
+	  	y.className = "asideDropBtn";
 	  }
 
 	  if (z.className === "sideMenu") {
