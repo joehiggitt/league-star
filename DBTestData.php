@@ -3,7 +3,8 @@
 	$conn = connectDB();
 
 	// Test user
-	$sql = 'INSERT INTO users(user, pass, email) VALUES ("user", "pass", "user@test.com")';
+	$hash = password_hash("pass", PASSWORD_DEFAULT);
+	$sql = 'INSERT INTO users(user, pass, email) VALUES ("user", "' . $hash . '", "user@test.com")';
 	doSQL($conn, $sql, true);
 
 	// Test league
@@ -23,7 +24,7 @@
 	$leagueId = $data["leagueId"];
 
 	for ($i = 0; $i < 6; $i++)
-	{ 
+	{
 		$teamName = "Team" . ($i + 1);
 		$sql = "INSERT INTO teams (teamName, leagueId) VALUES ('$teamName', '$leagueId')";
 		doSQL($conn, $sql, true);
