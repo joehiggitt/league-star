@@ -27,7 +27,7 @@
         $sql = "CREATE TABLE IF NOT EXISTS users (
                     userId INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                     user VARCHAR(30) NOT NULL UNIQUE,
-                    pass VARCHAR(128) NOT NULL,
+                    pass VARCHAR(255) NOT NULL,
                     email VARCHAR(128) NOT NULL UNIQUE
                 ) ENGINE=InnoDB";
         doSQL($conn, $sql);
