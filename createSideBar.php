@@ -1,7 +1,7 @@
 <?php
 	function printLeague($count, $active, $leagueName, $leagueId, $currentUser, $creatorId)
 	{
-		echo '<button class="asideDropBtn">' . $leagueName . '</button>';
+		echo '<button class="asideDropBtn" id="asideDBtn">' . $leagueName . '</button>';
 		echo '<div class="asideDropContainer">';
 		if ($active == "table" && $leagueId == $count) {
 			echo '<a href="viewTable.php?league=' . $leagueId . ' id="active"">&emsp;Table</a>';
@@ -52,7 +52,7 @@
 		$results = doSQL($conn, $sql);
 		$count = 1;
 		$leaguesPrinted = array();
-		echo '<div class="sideMenu">';
+		echo '<div class="sideMenu" id="thesideMenu">';
 		while($row = $results->fetch_assoc()) {
 			$count = printLeague($count, $active, $row["leagueName"], $row["leagueId"], $currentUser, $row["creatorId"]);
 			array_push($leaguesPrinted, $row["leagueId"]);
