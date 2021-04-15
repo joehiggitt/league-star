@@ -31,10 +31,11 @@
 					// Checks if the given passwords match and adds details to database
 					// if they do
 					if ($pass == $passCheck && $email == $emailCheck) {
+						$hash = password_hash($pass, PASSWORD_DEFAULT);
 						require_once 'DBHandler.php';
 						$conn = connectDB();
 						$sql = "INSERT INTO users (user, pass, email)
-								VALUES ('$user', '$pass', '$email')";
+								VALUES ('$user', '$hash', '$email')";
 						$results = doSQL($conn, $sql);
 
 						// Log in

@@ -28,15 +28,18 @@
 
 					// Check if user details are valid or not
 					require_once 'DBHandler.php';
+					$hash = password_hash($pass, PASSWORD_DEFAULT);
 					$conn = connectDB();
-					$sql = "SELECT user FROM users WHERE email='$email' AND pass='$pass'";
+					$sql = "SELECT user, pass FROM users WHERE email='$email'";
 					$results = doSQL($conn, $sql);
 					if ($row = $results->fetch_assoc())
 					{
 						// Log in
-						$_SESSION["user"] = $row["user"];
-						header("Location: dashboard.php");
-						exit;
+						if (password_verify($pass, $row["pass"])) {
+							$_SESSION["user"] = $row["user"];
+							header("Location: dashboard.php");
+							exit;
+						}
 					}
 					else
 					{
