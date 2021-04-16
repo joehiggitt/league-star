@@ -852,3 +852,20 @@ a.iconn
 		transform: scaleY(1);
 	}
 }
+
+.arrow 
+{
+  margin-top: 10px;
+  margin-right: 15px;
+  float: right;
+  border: solid #3a404c;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.down 
+{
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}

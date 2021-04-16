@@ -1,7 +1,7 @@
 <?php
 	function printLeague($count, $active, $leagueName, $leagueId, $currentUser, $creatorId, $hasStarted = 0)
 	{
-		echo '<button class="asideDropBtn" id="asideDBtn">' . $leagueName . '</button>';
+		echo '<button class="asideDropBtn" id="asideDBtn">' . $leagueName . '<i class="arrow down"></i></button>';
 		echo '<div class="asideDropContainer">';
 		if ($active == "table" && $leagueId == $count) {
 			echo '<a href="viewTable.php?league=' . $leagueId . ' id="active"">&emsp;Table</a>';
