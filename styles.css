@@ -10,14 +10,11 @@ header
 {
 	height: 80px;
 	color: #000000;
-	/*text-align: center;*/
 	position: relative;
 }
 
 nav
 {
-	/* resize: both; */
-    /* overflow: hidden; */
 	background-color: #f9a618;
 	font-weight: bold;
 	font-size: 22px;
@@ -27,6 +24,7 @@ nav
 	position: sticky;
 	top: 0%;
 	width: 100%;
+	z-index: 1;
 }
 
 aside
