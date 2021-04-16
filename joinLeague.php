@@ -47,7 +47,7 @@
 						$conn = connectDB();
 						$sql = "SELECT leagueId FROM league WHERE joinCode = '$joinCode'";
 						$leagueId = mysqli_fetch_array(doSQL($conn, $sql))["leagueId"];
-						if ($results->num_rows !== 0)
+						if ($leagueId->num_rows !== 0)
 						{
 							header("Location: joiningLeague.php?league=" . $leagueId);
 						}

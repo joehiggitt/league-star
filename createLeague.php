@@ -64,7 +64,7 @@
 						// }
 						// else
 						// {
-						// 	$time = 
+						// 	$time =
 						// }
 						if ($minTeams > $maxTeams)
 						{
