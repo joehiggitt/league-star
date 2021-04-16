@@ -100,7 +100,7 @@
 						// }
 						// else
 						// {
-						// 	$time = 
+						// 	$time =
 						// }
 						if ($minTeams > $maxTeams)
 						{
@@ -110,7 +110,6 @@
 						{
 							require_once 'DBHandler.php';
 							$conn = connectDB();
-							print_r($_SESSION);
 							$user = $_SESSION["user"];
 							$sql = "SELECT userId FROM users WHERE user = '$user'";
 							$results = doSQL($conn, $sql);
@@ -122,7 +121,7 @@
 							$sql = "SELECT leagueId FROM league WHERE joinCode = '$joinCode'";
 							$leagueId = mysqli_fetch_array(doSQL($conn, $sql))["leagueId"];
 							echo "<meta http-equiv='refresh' content='0'>";
-							header("Location: viewTable.php?league=" . $leagueId);
+							// header("Location: viewTable.php?league=" . $leagueId);
 						}
 					}
 				?>
