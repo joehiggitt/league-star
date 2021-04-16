@@ -33,129 +33,82 @@
 			<?php
 				if(isset($_SESSION["user"])) {
 					require_once("createSideBar.php");
-					createSideBar();
+					$leagues = createSideBar();
 				}
 			?>
 
-			<main>
-				<h2 style="text-align: center">Dashboard</h2>
+			<main style="align-content: center; text-align: center;">
+				<h2>Dashboard</h2>
 				<!-- style="text-align: center; margin-top: 90px; background-color: #009879; color: white; width: 400px; height: 50px; margin-left: 250px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); font-size: 33px" -->
-				<div>
-					<br><br>
-					<table class="styled-table">
-					    <thead>
-					        <tr>
-					           <th colspan="4" style="font-size: 28px"> Name of the League </th>
-					        </tr>
-					    </thead>
-					    <tbody>
-					        <tr class="active-row">
-					            <td>  1  </td>
-					            <td colspan="2">  Man City  </td>
-					            <td>  53  </td>
-
-					        </tr>
-					        <tr>
-					            <td>  2  </td>
-					            <td colspan="2">  Arsenal  </td>
-					            <td>  40  </td>
-					        </tr>
-					        <tr>
-					            <td>  3  </td>
-					            <td colspan="2">  Liverpool  </td>
-					            <td>  39  </td>
-					        </tr>
-					        <!-- and so on... -->
-					    </tbody>
-					</table>
-					<br><br>
-
-					<table class="styled-table">
-					    <thead>
-					        <tr>
-					           <th colspan="4" style="font-size: 28px"> Name of the League </th>
-					        </tr>
-					    </thead>
-					    <tbody>
-					        <tr class="active-row">
-					            <td>  1  </td>
-					            <td colspan="2">  Man City  </td>
-					            <td>  53  </td>
-
-					        </tr>
-					        <tr>
-					            <td>  2  </td>
-					            <td colspan="2">  Arsenal  </td>
-					            <td>  40  </td>
-					        </tr>
-					        <tr>
-					            <td>  3  </td>
-					            <td colspan="2">  Liverpool  </td>
-					            <td>  39  </td>
-					        </tr>
-					        <!-- and so on... -->
-					    </tbody>
-					</table>
-					<br><br>
+				<div id="dash">
+					<?php
+						require_once("DBHandler.php");
+						$conn = connectDB();
+						$content = array();
+						for ($i = 0; $i < count($leagues); $i++)
+						{ 
+							$sql = "SELECT teamId, matchesPlayed, totalScore FROM totalScore
+								WHERE leagueId = '$leagues[$i]'
+								ORDER BY totalScore DESC, goalDifference DESC";
+							$results = doSQL($conn, $sql);
+							array_push($content, array());
+							if ($results->num_rows !== 0)
+							{
+								while ($result = $results->fetch_assoc())
+								{
+									if ($result["matchesPlayed"] == "0")
+									{
+										array_push($content[$i], "<p>League hasn't started yet.</p>");
+										break;
+									}
+									$teamId = $result['teamId'];
+									$sql = "SELECT teamName FROM teams
+											WHERE teamId = '$teamId'";
+									$data = mysqli_fetch_array(doSQL($conn, $sql));
+									array_push($content[$i], array($data["teamName"], $result["totalScore"]));
+								}
+							}
+							else
+							{
+								array_push($content[$i], "<p>League hasn't started yet.</p>");
+							}
+						}
+						for ($i = 0; $i < count($content); $i++)
+						{
+							$sql = "SELECT leagueName FROM league WHERE leagueId = '$leagues[$i]'";
+							$leagueName = mysqli_fetch_array(doSQL($conn, $sql))["leagueName"];
+							echo '<div class="dashContainer"><a href="viewTable.php?league=' . $leagues[$i] . '" class="dashTableContainer"><div>';
+							echo '	<h3>' . $leagueName . '</h3>';
+							if (count($content[$i]) == 1)
+							{
+								echo $content[$i][0];
+							}
+							else
+							{
+								echo '	<table class="dashTable">';
+								for ($j = 0; $j < 3; $j++)
+								{
+									if ($j == 0)
+									{
+										echo '		<tr class="winnerRow">';
+									}
+									else
+									{
+										echo '		<tr class="runnerUpRow">';
+									}
+									echo '			<td class="posColumn">' . ($j + 1) . '</td>';
+									echo '			<td class="teamColumn">' . $content[$i][$j][0] . '</td>';
+									echo '			<td class="pointsColumn">' . $content[$i][$j][1] . '</td>';
+									echo '		</tr>';
+								}
+								echo '	</table>';
+							}
+							echo '</div></a></div>';
+							// echo '<br><br>';
+						}
+					?>
 				</div>
-
-				<div>
-				<table class="styled-table">
-					    <thead>
-					        <tr>
-					           <th colspan="4" style="font-size: 28px"> Name of the League </th>
-					        </tr>
-					    </thead>
-					    <tbody>
-					        <tr class="active-row">
-					            <td>  1  </td>
-					            <td colspan="2">  Man City  </td>
-					            <td>  53  </td>
-
-					        </tr>
-					        <tr>
-					            <td>  2  </td>
-					            <td colspan="2">  Arsenal  </td>
-					            <td>  40  </td>
-					        </tr>
-					        <tr>
-					            <td>  3  </td>
-					            <td colspan="2">  Liverpool  </td>
-					            <td>  39  </td>
-					        </tr>
-					        <!-- and so on... -->
-					    </tbody>
-					</table>
-					<br><br>
-
-					<table class="styled-table">
-					    <thead>
-					        <tr>
-					           <th colspan="4" style="font-size: 28px"> Name of the League </th>
-					        </tr>
-					    </thead>
-					    <tbody>
-					        <tr class="active-row">
-					            <td>  1  </td>
-					            <td colspan="2">  Man City  </td>
-					            <td>  53  </td>
-
-					        </tr>
-					        <tr>
-					            <td>  2  </td>
-					            <td colspan="2">  Arsenal  </td>
-					            <td>  40  </td>
-					        </tr>
-					        <tr>
-					            <td>  3  </td>
-					            <td colspan="2">  Liverpool  </td>
-					            <td>  39  </td>
-					        </tr>
-					        <!-- and so on... -->
-					    </tbody>
-					</table>
-					<br><br><br>
-				</div>
+				<br><br>
 			</main>
 			<div class="push"></div>
 		</div>

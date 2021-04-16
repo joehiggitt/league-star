@@ -38,42 +38,6 @@
 			?>
 			<main>
 				<h2>Create New League</h2>
-				<form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
-					<label>* League Name</label><br>
-					<input type="text" name="name" required><br>
-					<label>* League Preset</label><br>
-					<select name="preset" required>
-						<option hidden disabled selected value>Select A Preset</option>
-						<option value="football">Football</option>
-					</select><br>
-					<br><label class="checkboxContainer">
-						Home & Away?
-						<input type="checkbox" name="isHomeAway"><br>
-						<span class="checkmark"></span>
-					</label>
-					<label>* Minimum Number Of Teams</label><br>
-					<input type="number" name="minTeams" min="3" max="100" required><br>
-					<label>* Maximum Number Of Teams</label><br>
-					<input type="number" name="maxTeams" min="3" max="100" required><br>
-					<!-- <label>* Minimum Number Of Players</label><br>
-					<input type="number" name="minPlayers" required><br>
-					<label>* Maximum Number Of Players</label><br>
-					<input type="number" name="maxPlayers" required><br> -->
-					<label>Match Day</label><br>
-					<select name="day">
-						<option value selected>None</option>
-						<option value="mon">Monday</option>
-						<option value="tue">Tuesday</option>
-						<option value="wed">Wednesday</option>
-						<option value="thu">Thursday</option>
-						<option value="fri">Friday</option>
-						<option value="sat">Saturday</option>
-						<option value="sun">Sunday</option>
-					</select><br><br>
-					<!-- <label>Match Time</label><br>
-					<input type="time" name="time"><br><br> -->
-					<input type="submit" name="submit" value="Create League"/>
-				</form>
 				<?php
 					if (isset($_POST['submit']))
 					{
@@ -110,7 +74,6 @@
 						{
 							require_once 'DBHandler.php';
 							$conn = connectDB();
-							print_r($_SESSION);
 							$user = $_SESSION["user"];
 							$sql = "SELECT userId FROM users WHERE user = '$user'";
 							$results = doSQL($conn, $sql);
@@ -121,11 +84,46 @@
 							doSQL($conn, $sql);
 							$sql = "SELECT leagueId FROM league WHERE joinCode = '$joinCode'";
 							$leagueId = mysqli_fetch_array(doSQL($conn, $sql))["leagueId"];
-							echo "<meta http-equiv='refresh' content='0'>";
 							header("Location: viewTable.php?league=" . $leagueId);
 						}
 					}
 				?>
+				<form action="<?php htmlentities($_SERVER['PHP_SELF']) ?>" method="post">
+					<label>* League Name</label><br>
+					<input type="text" name="name" required><br>
+					<label>* League Preset</label><br>
+					<select name="preset" required>
+						<option hidden disabled selected value>Select A Preset</option>
+						<option value="football">Football</option>
+					</select><br>
+					<br><label class="checkboxContainer">
+						Home & Away?
+						<input type="checkbox" name="isHomeAway"><br>
+						<span class="checkmark"></span>
+					</label>
+					<label>* Minimum Number Of Teams</label><br>
+					<input type="number" name="minTeams" min="3" max="100" required><br>
+					<label>* Maximum Number Of Teams</label><br>
+					<input type="number" name="maxTeams" min="3" max="100" required><br>
+					<!-- <label>* Minimum Number Of Players</label><br>
+					<input type="number" name="minPlayers" required><br>
+					<label>* Maximum Number Of Players</label><br>
+					<input type="number" name="maxPlayers" required><br> -->
+					<label>Match Day</label><br>
+					<select name="day">
+						<option value selected>None</option>
+						<option value="mon">Monday</option>
+						<option value="tue">Tuesday</option>
+						<option value="wed">Wednesday</option>
+						<option value="thu">Thursday</option>
+						<option value="fri">Friday</option>
+						<option value="sat">Saturday</option>
+						<option value="sun">Sunday</option>
+					</select><br><br>
+					<!-- <label>Match Time</label><br>
+					<input type="time" name="time"><br><br> -->
+					<input type="submit" name="submit" value="Create League"/>
+				</form>
 				<br><br>
 			</main>
 			<div class="push"></div>
