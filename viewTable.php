@@ -32,7 +32,7 @@
                 {
                     header("Location: dashboard.php");
                 }
-                elseif (strlen($_GET["league"]) != 1)
+                elseif (strlen($_GET["league"]) < 1)
                 {
                     header("Location: dashboard.php");
                 }
