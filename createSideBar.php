@@ -1,33 +1,32 @@
 <?php
-	function printLeague($count, $active, $leagueName, $leagueId, $currentUser, $creatorId, $hasStarted = 0)
+	function printLeague($active, $leagueName, $leagueId, $currentLeague, $currentUser, $creatorId, $hasStarted = 0)
 	{
 		echo '<button class="asideDropBtn" id="asideDBtn">' . $leagueName . '</button>';
 		echo '<div class="asideDropContainer">';
-		if ($active == "table" && $leagueId == $count) {
-			echo '<a href="viewTable.php?league=' . $leagueId . ' id="active"">&emsp;Table</a>';
+		if ($active == "table" && $leagueId == $currentLeague) {
+			echo '<a href="viewTable.php?league=' . $leagueId . '" id="active">&emsp;Table</a>';
 		} else {
 			echo '<a href="viewTable.php?league=' . $leagueId . '">&emsp;Table</a>';
 		}
-		if ($active == "fixture" && $leagueId == $count) {
+		if ($active == "fixture" && $leagueId == $currentLeague) {
 			echo '<a href="viewFixtures.php?league=' . $leagueId . '" id="active">&emsp;Fixtures</a>';
 		} else {
 			echo '<a href="viewFixtures.php?league=' . $leagueId . '">&emsp;Fixtures</a>';
 		}
-		if ($active == "result" && $leagueId == $count) {
+		if ($active == "result" && $leagueId == $currentLeague) {
 			echo '<a href="viewResults.php?league=' . $leagueId . '" id="active">&emsp;Results</a>';
 		} else {
 			echo '<a href="viewResults.php?league=' . $leagueId . '">&emsp;Results</a>';
 		}
 		if ($creatorId == $currentUser && $hasStarted == 1)
 		{
-			if ($active == "addResult" && $leagueId == $count) {
+			if ($active == "addResult" && $leagueId == $currentLeague) {
 				echo '<a href="addResults.php?league=' . $leagueId . '" id="active">&emsp;Enter Results</a>';
 			} else {
 				echo '<a href="addResults.php?league=' . $leagueId . '">&emsp;Enter Results</a>';
 			}
 		}
 		echo '</div>';
-		return $count++;
 	}
 
 	// Script for dynamically creating sidebar
@@ -50,11 +49,10 @@
 				INNER JOIN users ON users.userId=league.creatorId
 				WHERE users.user = '$user'";
 		$results = doSQL($conn, $sql);
-		$count = 1;
 		$leaguesPrinted = array();
 		echo '<div class="sideMenu" id="thesideMenu">';
 		while($row = $results->fetch_assoc()) {
-			$count = printLeague($count, $active, $row["leagueName"], $row["leagueId"], $currentUser, $row["creatorId"], $row["hasStarted"]);
+			printLeague($active, $row["leagueName"], $row["leagueId"], $leagueId, $currentUser, $row["creatorId"], $row["hasStarted"]);
 			array_push($leaguesPrinted, $row["leagueId"]);
 		}
 		if ($leagues != null)
@@ -64,7 +62,7 @@
 			{
 				$sql = "SELECT leagueName, creatorId FROM league WHERE leagueId = '$league'";
 				$data = mysqli_fetch_array(doSQL($conn, $sql));
-				printLeague($count, $active, $data["leagueName"], $league, $currentUser, $data["creatorId"]);
+				printLeague($active, $data["leagueName"], $league, $leagueId, $currentUser, $data["creatorId"]);
 				array_push($leaguesPrinted, $league);
 			}
 		}
