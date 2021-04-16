@@ -36,10 +36,15 @@
 				{
 					header("Location: dashboard.php");
 				}
-			?>
-			<?php
 				require_once("DBHandler.php");
 				$conn = connectDB();
+				$sql = "SELECT hasStarted FROM league WHERE leagueId = '$leagueId'";
+				if (!mysqli_fetch_array(doSQL($conn, $sql))["hasStarted"])
+				{
+					header("Location: viewTable.php?league=" . $leagueId);
+				}
+			?>
+			<?php
 				if (isset($_POST['submit']))
 				{
 					unset($_POST['submit']);
@@ -141,6 +146,7 @@
 			?>
 			<main style="text-align: center; align-content: center;">
 				<h2>Enter Results</h2>
+				<p>You can enter the results for any fixture in any matchday. If a game needs to be postponed, leave the entry blank.</p>
 					<?php
 						$leagueId = $_GET['league'];
 						// $matchDay = 0;
@@ -165,7 +171,7 @@
 							}
 						}
 						sort($matchDays);
-						echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '?league=' . $leagueId . '" method="post">';
+						echo '<form action="' . htmlentities($_SERVER['PHP_SELF']) . '?league=' . $leagueId . '" method="post" class="centredForm">';
 						for ($j=0; $j < count($matchDays); $j++) {
 							echo '<p>Enter the results for Matchday ' . ($matchDays[$j] + 1) . '.</p>';
 							echo '<table id="scoreTable">';

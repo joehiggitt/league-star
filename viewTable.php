@@ -115,17 +115,17 @@
 							echo '		<td class="dataColumn">L</td>';
 							echo '		<td class="dataColumn">GD</td>';
 							echo '		<td class="pointsColumn" style="font-weight: normal;">P</td>';
+							echo '	</tr>';
 
 							for ($i = 0; $i < count($content); $i++)
 							{
-								echo '	</tr>';
 								if ($i == 0)
 								{
 									echo '	<tr id="winnerRow">';
 								}
 								elseif ($i < 3)
 								{
-									echo '	<tr class="runnersUpRow">';
+									echo '	<tr class="runnerUpRow">';
 								}
 								else
 								{
@@ -165,7 +165,7 @@
 					{
 						if (($numTeams >= $minTeams) and ($hasStarted == 0))
 						{
-							echo '<br><form action="startLeague.php?league=' . $leagueId . '" method="post">';
+							echo '<br><form action="startLeague.php?league=' . $leagueId . '" method="post" class="centredForm">';
 							echo '	<input type="submit" value="Start League"><br><br>';
 							echo '</form>';
 						}
@@ -178,7 +178,7 @@
 							echo '<br>';
 						}
 
-						echo '<form action="deleteLeague.php?league=' . $leagueId . '" method="post">';
+						echo '<form action="deleteLeague.php?league=' . $leagueId . '" method="post" class="centredForm">';
 						echo '	<input type="submit" value="Delete League" id="deleteButtton">';
 						echo '</form>';
 					}

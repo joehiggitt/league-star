@@ -1,5 +1,5 @@
 <?php
-	function printLeague($count, $active, $leagueName, $leagueId, $currentUser, $creatorId)
+	function printLeague($count, $active, $leagueName, $leagueId, $currentUser, $creatorId, $hasStarted = 0)
 	{
 		echo '<button class="asideDropBtn" id="asideDBtn">' . $leagueName . '</button>';
 		echo '<div class="asideDropContainer">';
@@ -18,7 +18,7 @@
 		} else {
 			echo '<a href="viewResults.php?league=' . $leagueId . '">&emsp;Results</a>';
 		}
-		if ($creatorId == $currentUser)
+		if ($creatorId == $currentUser && $hasStarted == 1)
 		{
 			if ($active == "addResult" && $leagueId == $count) {
 				echo '<a href="addResults.php?league=' . $leagueId . '" id="active">&emsp;Enter Results</a>';
@@ -45,7 +45,7 @@
 		$currentUser = mysqli_fetch_array(doSQL($conn, $sql))["userId"];
 		$sql = "SELECT leagueId FROM teams WHERE userId = '$currentUser'";
 		$leagues = mysqli_fetch_array(doSQL($conn, $sql));
-		$sql = "SELECT league.leagueId, league.leagueName, league.creatorId
+		$sql = "SELECT league.leagueId, league.leagueName, league.creatorId, league.hasStarted
 				FROM league
 				INNER JOIN users ON users.userId=league.creatorId
 				WHERE users.user = '$user'";
@@ -54,7 +54,7 @@
 		$leaguesPrinted = array();
 		echo '<div class="sideMenu" id="thesideMenu">';
 		while($row = $results->fetch_assoc()) {
-			$count = printLeague($count, $active, $row["leagueName"], $row["leagueId"], $currentUser, $row["creatorId"]);
+			$count = printLeague($count, $active, $row["leagueName"], $row["leagueId"], $currentUser, $row["creatorId"], $row["hasStarted"]);
 			array_push($leaguesPrinted, $row["leagueId"]);
 		}
 		if ($leagues != null)
@@ -65,6 +65,7 @@
 				$sql = "SELECT leagueName, creatorId FROM league WHERE leagueId = '$league'";
 				$data = mysqli_fetch_array(doSQL($conn, $sql));
 				printLeague($count, $active, $data["leagueName"], $league, $currentUser, $data["creatorId"]);
+				array_push($leaguesPrinted, $league);
 			}
 		}
 		if ($active == "create") {
@@ -79,5 +80,6 @@
 		}
 		echo '</div>';
 		echo '</aside>';
+		return $leaguesPrinted;
 	}
 ?>

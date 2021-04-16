@@ -20,8 +20,27 @@
 			<?php
 				if (isset($_POST['submit']))
 				{
+					$sql = "SELECT userId FROM users WHERE user = '$user'";
+					$userId = mysqli_fetch_array(doSQL($conn, $sql))["userId"];
+					$sql = "SELECT leagueId FROM league WHERE creatorId = '$userId'";
+					$results = doSQL($conn, $sql);
+					while ($resuslt = $results->fetch_assoc())
+					{
+						$leagueId = $result["leagueId"];
+						$sql = "DELETE FROM results WHERE leagueId = '$leagueId'";
+						doSQL($conn, $sql);
+						$sql = "DELETE FROM teams WHERE leagueId = '$leagueId'";
+						doSQL($conn, $sql);
+						$sql = "DELETE FROM totalScore WHERE leagueId = '$leagueId'";
+						doSQL($conn, $sql);
+					}
+					$sql = "UPDATE teams SET userId = NULL WHERE user = '$userId'";
+						$results = doSQL($conn, $sql);
+					$sql = "DELETE FROM league WHERE creatorId = '$userId'";
+					doSQL($conn, $sql);
 					$sql = "DELETE FROM users WHERE user = '$user'";
 					doSQL($conn, $sql);
+					
 					// Test if account deleted
 					$sql = "SELECT * FROM users WHERE user = '$user'";
 					$results = doSQL($conn, $sql);
