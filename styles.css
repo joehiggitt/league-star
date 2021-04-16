@@ -307,7 +307,7 @@ aside a:hover, aside button:hover
 
 .asideStl
 {
-	max-height: 75vh;
+	height: 75vh;
 	overflow-y: auto;
 }
 
