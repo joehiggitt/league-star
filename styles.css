@@ -289,7 +289,7 @@ aside a:hover, aside button:hover
 }
 
 .navDropContent a
-{	
+{
 	float: none;
 	text-decoration: none;
 	display: block;
@@ -305,11 +305,11 @@ aside a:hover, aside button:hover
 	float: right;
 }
 
-/*#asideStl
-{	
-	display: block;
-
-}*/
+.asideStl
+{
+	max-height: 75vh;
+	overflow-y: auto;
+}
 
 .asideDropContainer
 {
@@ -733,9 +733,9 @@ a.iconn
 	}
 }
 
-@media screen and (max-width: 650px) 
+@media screen and (max-width: 650px)
 {
-	.topnav a:not(:nth-child(2)), .navDrop 
+	.topnav a:not(:nth-child(2)), .navDrop
 	{
 		display: none;
 	}
@@ -754,10 +754,10 @@ a.iconn
 	}
 }
 
-@media screen and (max-width: 650px) 
+@media screen and (max-width: 650px)
 {
 	.topnav.responsive {position: relative;}
-	.topnav.responsive a.icon 
+	.topnav.responsive a.icon
 	{
 		position: absolute;
 		right: 0;
@@ -771,12 +771,12 @@ a.iconn
 		background-color: #f9a618;
 	}
 	.topnav.responsive .navDrop {float: none;}
-	.topnav.responsive .navDropContent 
+	.topnav.responsive .navDropContent
 	{
 		position: relative;
 		/*width: 650px;*/
 	}
-	.topnav.responsive .navDropContent a 
+	.topnav.responsive .navDropContent a
 	{
 		background-color: #F7BB4F;
 	}
